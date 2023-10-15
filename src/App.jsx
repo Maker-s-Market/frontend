@@ -3,7 +3,7 @@ function App() {
 
   return (
     <>
-      <h1>Maker's Market</h1>
+      <h1 className="text-4xl font-bold">Maker&apos;s Market</h1>
     </>
   )
 }
