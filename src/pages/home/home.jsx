@@ -1,3 +1,3 @@
 export const Home = (props) => {
-  return <div>Homepage</div>;
+  return <div className={"text-4xl text-white font-bold"}>Homepage</div>;
 };
