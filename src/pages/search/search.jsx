@@ -46,7 +46,7 @@ export const Search = (props) => {
                                     return (<div key={index} className="badge badge-outline">{category}</div>)
                                 })}
                             </div>
-                            <button className="btn btn-primary">Buy Now!</button>
+                            <button className="btn btn-accent">Buy Now!</button>
                         </div>
                     </div>
                 </div>

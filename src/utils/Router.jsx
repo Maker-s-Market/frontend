@@ -1,9 +1,9 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Base} from "../layouts/base";
 import {Home} from "../pages/home";
-import { ViewProduct } from "../pages/viewProduct/viewProduct";
+import {ViewProduct} from "../pages/viewProduct/viewProduct";
 import {Search} from "../pages/search/index.js";
-
+import {ProductForm} from "../pages/productForm/index.js";
 
 
 export default function Router() {
@@ -12,12 +12,18 @@ export default function Router() {
         {
             path: "/", element: <Base/>, children: [
                 {path: "/", element: <Home/>},
-                {path: "/product", element: <ViewProduct />},
-                {path: "/search", element:<Search/>}
+                {
+                    path: "/product", children: [
+                        {index: true, element: <ViewProduct/>},
+                        {path: "add", element: <ProductForm/>}
+                    ]
+                },
+                {path: "/search", element: <Search/>},
+
             ]
         }
     ])
 
-    return <RouterProvider router={router} />
-    
+    return <RouterProvider router={router}/>
+
 }
