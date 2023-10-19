@@ -84,7 +84,7 @@ export const ProductForm = (props) => {
                     <div className={"flex flex-row space-x-2 mt-2"}>
 
                         {selectedCategories.map((item, index) => {
-                            return <div key={index} className="badge badge-accent gap-2">
+                            return <div key={index} className="badge badge-accent badge-lg gap-2">
                                 <AiOutlineClose onClick={() => removeCategory(item)}/>
                                 {item}
                             </div>
