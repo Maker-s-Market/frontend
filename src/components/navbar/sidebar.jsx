@@ -1,9 +1,8 @@
-import { Outlet } from "react-router-dom";
 import { Profile } from "./profile/profile";
 import { Menu } from "./menu/menu";
 import {Categories} from "./categories/categories";
 
-export const Navbar = (props) => {
+export const Sidebar = ({children}) => {
 
   const isLoggedIn = true;
 
@@ -13,9 +12,7 @@ export const Navbar = (props) => {
       <label htmlFor="my-drawer-2" className="btn btn-square btn-ghost drawer-button lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </label>
-
-      <Outlet />
-
+      {children}
     </div>
     <div className="drawer-side">
       <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>

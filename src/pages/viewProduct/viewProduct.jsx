@@ -1,5 +1,4 @@
-import { Profile } from "../../components/navbar/profile/profile";
-import { Hero } from "../../components/home/hero/hero"
+  import { Profile } from "../../components/navbar/profile/profile";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 export const ViewProduct = (props) => {
@@ -18,7 +17,6 @@ export const ViewProduct = (props) => {
   }
 
   return <div>
-    <Hero />
     <div className="flex flex-row m-8 space-x-4">
       <div id="item-info" className="space-y-2 p-5 grow-0 shrink-0 basis-3/4 grid bg-stone-200 rounded-lg">
         <h1 className="text-3xl font-bold">{mockProduct.title}</h1>
@@ -29,8 +27,8 @@ export const ViewProduct = (props) => {
         </div>
 
         <div id="item-categories" className="flex flex-row space-x-2">
-          {mockProduct.categories.map((item, index) => {
-            return <div className="badge badge-secondary badge-outline">{item}</div>
+          {mockProduct.categories.map((item) => {
+            return <div key={mockProduct.title} className="badge badge-secondary badge-outline">{item}</div>
           })}
         </div>
 

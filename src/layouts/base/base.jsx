@@ -1,8 +1,12 @@
+import { Sidebar } from "../../components/navbar/sidebar.jsx";
+import {Hero} from "../../components/home/hero/index.js";
 import {Outlet} from "react-router-dom";
-import { Navbar } from "../../components/navbar/navbar";
 
-export const Base = (props) => {
+export const Base = () => {
     return <div>
-        <Navbar/>
+        <Sidebar>
+            <Hero/>
+            <Outlet />
+        </Sidebar>
     </div>;
 };
