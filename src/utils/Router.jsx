@@ -1,7 +1,7 @@
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {Base} from "../layouts/base";
 import {Home} from "../pages/home";
-import {ViewProduct} from "../pages/viewProduct/viewProduct";
+import {ViewProduct} from "../pages/viewProduct";
 import {Search} from "../pages/search/index.js";
 import {ProductForm} from "../pages/productForm/index.js";
 import {CategoryProducts} from "../pages/categoryProducts/index.js";
