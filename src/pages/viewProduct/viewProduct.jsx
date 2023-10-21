@@ -1,4 +1,4 @@
-import {Profile} from "../../components/navbar/profile/profile";
+import {Profile} from "../../components/sidebar/profile/profile";
 import {FaMapMarkerAlt} from "react-icons/fa";
 import {Hero} from "../../components/home/hero/index.js";
 import {useQuery} from "react-query";

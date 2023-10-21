@@ -1,4 +1,4 @@
-import { Sidebar } from "../../components/navbar/sidebar.jsx";
+import { Sidebar } from "../../components/sidebar/sidebar.jsx";
 import {Outlet} from "react-router-dom";
 
 export const Base = () => {
