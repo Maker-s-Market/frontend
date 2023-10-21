@@ -17,7 +17,7 @@ export const ViewProduct = (props) => {
         isLoading,
         isError,
         isSuccess
-    } = useQuery('product', ()=>fetchProductById(id))
+    } = useQuery(['product',id], ()=>fetchProductById(id))
 
     const mockSeller = {
         name: "Name LastName",
