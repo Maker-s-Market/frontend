@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 
 export const Sidebar = ({children}) => {
 
-    const isLoggedIn = true;
 
     return <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle"/>
@@ -29,9 +28,9 @@ export const Sidebar = ({children}) => {
                 </Link>
                 <div className="divider"></div>
 
-                <Profile isLoggedIn={isLoggedIn}/>
+                <Profile/>
 
-                <Menu isLoggedIn={isLoggedIn}/>
+                <Menu/>
 
                 <div className="divider"></div>
 
