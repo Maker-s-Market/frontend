@@ -2,10 +2,11 @@ import {fetchTopProducts} from "../../../api/fetchProducts.js";
 import {useQuery} from "react-query";
 import {Loading} from "../../common/loading/index.js";
 import {ErrorMessage} from "../../common/error/index.js";
+import {Link} from "react-router-dom";
 
 export const Highlights = (props) => {
 
-    const {data: higlightedProducts, isLoading, isError,isSuccess} = useQuery('higlightedProducts', fetchTopProducts)
+    const {data: higlightedProducts, isLoading, isError, isSuccess} = useQuery('higlightedProducts', fetchTopProducts)
 
     return <>
         <h1 className={"text-5xl font-bold text-center py-12"}>Highlighted Products</h1>
@@ -13,20 +14,23 @@ export const Highlights = (props) => {
         <div
             className={"grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-4 gap-4 w-3/4 mx-auto"}>
             {isSuccess && higlightedProducts.map((item, index) => {
-                return <div key={item.id} className="card bg-base-100 shadow-xl">
-                    <figure><img src={"https://picsum.photos/200"} alt="Shoes"/></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">
-                            {item.name}
-                        </h2>
-                        <p>{item.description}</p>
-                        <div className="card-actions justify-end">
-                            {item.categories.map((category, index) => {
-                                return (<div key={category.id} className="badge badge-outline">{category.name}</div>)
-                            })}
+                return <Link key={item.id} to={`/product/${item.id}`}>
+                    <div  className="card bg-base-100 shadow-xl">
+                        <figure><img src={"https://picsum.photos/200"} alt="Shoes"/></figure>
+                        <div className="card-body">
+                            <h2 className="card-title">
+                                {item.name}
+                            </h2>
+                            <p>{item.description}</p>
+                            <div className="card-actions justify-end">
+                                {item.categories.map((category, index) => {
+                                    return (
+                                        <div key={category.id} className="badge badge-outline">{category.name}</div>)
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             })}
         </div>
         {isError && <ErrorMessage/>}

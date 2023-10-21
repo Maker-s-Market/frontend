@@ -14,7 +14,8 @@ export default function Router() {
                 {path: "/", element: <Home/>},
                 {
                     path: "/product", children: [
-                        {index: true, element: <ViewProduct/>},
+                        {index: true, element: <Home/>},
+                        {path: ":id", element: <ViewProduct/>},
                         {path: "add", element: <ProductForm/>}
                     ]
                 },

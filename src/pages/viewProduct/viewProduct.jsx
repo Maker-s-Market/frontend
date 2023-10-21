@@ -6,14 +6,18 @@ import {fetchProductById} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
+import {useParams} from "react-router-dom";
 
 export const ViewProduct = (props) => {
+
+    const {id} = useParams();
+
     const {
         data: product,
         isLoading,
         isError,
         isSuccess
-    } = useQuery('product', ()=>fetchProductById("c93a8d25-8bf2-4adf-96ad-07251d629c38"))
+    } = useQuery('product', ()=>fetchProductById(id))
 
     const mockSeller = {
         name: "Name LastName",
