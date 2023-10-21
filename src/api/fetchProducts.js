@@ -17,3 +17,11 @@ export const fetchTopProducts = async () => {
     }
     return response.data;
 }
+
+export const fetchProductsByCategory = async (category) => {
+    const response = await api.get("/category/" + category);
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
