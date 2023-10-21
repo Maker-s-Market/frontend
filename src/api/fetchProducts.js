@@ -1,7 +1,7 @@
 import {api} from "./axios.js";
 
-export default async function fetchTodos() {
-    const response = await api.get("/todos");
+export const fetchTopProducts = async () => {
+    const response = await api.get("/top/products");
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
