@@ -1,31 +1,27 @@
-import { FaOtter } from "react-icons/fa";
+import {FaOtter} from "react-icons/fa";
+import {useQuery} from "react-query";
+import {fetchCategories} from "../../../api/fetchCategories.js";
+import {Loading} from "../../common/loading/index.js";
+import {ErrorMessage} from "../../common/error/index.js";
+import {Link} from "react-router-dom";
 
 export const Categories = (props) => {
 
-  const mockCategories = [{
-    title: "Comida", icon: ""
-  },
-  { title: "Azulejos", icon: "" },
-  { title: "Jardinagem", icon: "" },
-  { title: "Joelheria", icon: "" },
-  { title: "Calçado", icon: "" },
-  { title: "Literatura", icon: "" },
-  { title: "Utensílios", icon: "" },
-  { title: "Serviços", icon: "" }]
+    const {data: categories, isLoading, isError, isSuccess} = useQuery('categories', fetchCategories);
 
-  return <div id="drawer-categories" className="overscroll-contain">
-    <h1 className="text-start font-semibold">Categorias</h1>
-    {mockCategories.map((object, index) => {
-      return <li key={index} className="justify-center p-2">
-        <a>
-          <div className="rounded-full bg-gray-500 p-2">
-            <FaOtter />
-          </div>
-          <h2 className="grow">{object.title}</h2>
-        </a>
-      </li>
-    })}
-  </div>
-
-    ;
+    return <div id="drawer-categories" className="overscroll-contain flex-1">
+        <h1 className="text-start font-semibold">Categorias</h1>
+        {isLoading && <Loading/>}
+        {isSuccess && categories.map((category) => {
+            return <li key={category.id} className="justify-center p-2">
+                <Link key={category.id} to={`/category/${category.id}`}>
+                    <div className="rounded-full bg-gray-500 p-2">
+                        <FaOtter/>
+                    </div>
+                    <h2 className="grow">{category.name}</h2>
+                </Link>
+            </li>
+        })}
+        {isError && <ErrorMessage/>}
+    </div>
 };
