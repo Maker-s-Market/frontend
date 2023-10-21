@@ -11,7 +11,7 @@ export const fetchProductById = async (id) => {
 
 
 export const fetchTopProducts = async () => {
-    const response = await api.get("/top/products");
+    const response = await api.get("/top/product");
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
@@ -20,6 +20,19 @@ export const fetchTopProducts = async () => {
 
 export const fetchProductsByCategory = async (category) => {
     const response = await api.get("/category/" + category);
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const searchProducts = async (query,categoryId) => {
+    const response = await api.get("/products/", {
+        params: {
+            q: query,
+            category_id: categoryId
+        }
+    });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }

@@ -7,6 +7,7 @@ import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
 import {useParams} from "react-router-dom";
+import {CommingSoon} from "../../components/common/commingSoon/index.js";
 
 export const ViewProduct = (props) => {
 
@@ -55,7 +56,7 @@ export const ViewProduct = (props) => {
                 <div className="divider"></div>
                 <div id="item-stats-info" className="flex flex-row justify-between">
                     <h4>Cliques: {product.number_views}</h4>
-                    <h4 className="text-red-400 font-bold">Reportar</h4>
+                    <h4 className="text-red-400 font-bold">Reportar<CommingSoon/></h4>
                 </div>
                 <div id="product-rating">
 
@@ -65,7 +66,7 @@ export const ViewProduct = (props) => {
                 <div id="seller-specific" className="grid border-4 border-stone-500 rounded-lg p-3">
                     <h3 className="text-lg font-bold">Vendedor</h3>
                     <Profile isLoggedIn={true}/>
-                    <button className="btn btn-neutral items-center">Enviar mensagem</button>
+                    <button className="btn btn-neutral items-center">Enviar mensagem<CommingSoon/></button>
                 </div>
 
                 <div id="seller-rating" className="border-4 border-stone-500 rounded-lg p-3">
