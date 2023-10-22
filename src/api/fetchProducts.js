@@ -8,8 +8,6 @@ export const fetchProductById = async (id) => {
     return response.data;
 }
 
-
-
 export const fetchTopProducts = async () => {
     const response = await api.get("/top/product");
     if (response.status !== 200) {
@@ -26,14 +24,24 @@ export const fetchProductsByCategory = async (category) => {
     return response.data;
 }
 
-export const searchProducts = async (query,categoryId) => {
+export const searchProducts = async (query,categoryId,sort) => {
     const response = await api.get("/products/", {
         params: {
             q: query,
-            category_id: categoryId
+            // category_id: categoryId,
+            // sort: sort
         }
     });
     if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const addProduct = async (product) => {
+    console.log(product);
+    const response = await api.post("/product", product);
+    if (response.status !== 201) {
         throw new Error("Something went wrong!");
     }
     return response.data;
