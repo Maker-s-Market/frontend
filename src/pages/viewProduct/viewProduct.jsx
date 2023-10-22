@@ -51,7 +51,7 @@ export const ViewProduct = (props) => {
                 <div className="flex flex-row w-full space-x-2 justify-between">
                     <h1 className="text-3xl font-bold">{product.name}</h1>
                     <div className={"space-x-2"}>
-                        <Link replace to={"product/edit/" + id} className={"btn btn-accent"} onClick={handleDelete} >Edit
+                        <Link replace={true}  to={"/product/edit/" + id} className={"btn btn-accent"}>Edit
                             Product</Link>
                         <button className={"btn btn-error"} onClick={handleDelete}>Delete Product</button>
                     </div>
