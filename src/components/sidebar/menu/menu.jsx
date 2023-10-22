@@ -10,10 +10,10 @@ export const Menu = (props) => {
     return <>
         <li className="font-bold"><Link to={"/search"}><BsSearch/>Search</Link></li>
         {isLogged() ? <>
-            <li className={"font-bold"}><Link to={"/product/add"}><BsFillPlusCircleFill/>Anunciar Produto</Link></li>
+            <li className={"font-bold"}><Link to={"/product/add"}><BsFillPlusCircleFill/>Announce Product</Link></li>
             <li className="font-bold"><a><BsFillChatFill/>Chat<CommingSoon/></a></li>
 
-            <li className="font-bold"><a><IoMdSettings/>Definições<CommingSoon/></a></li>
+            <li className="font-bold"><a><IoMdSettings/>Settings<CommingSoon/></a></li>
 
             <li className="font-bold"><a><BiSolidExit/>Sign Out</a></li>
         </> : <>

@@ -10,7 +10,7 @@ export const Categories = (props) => {
     const {data: categories, isLoading, isError, isSuccess} = useQuery('categories', fetchCategories);
 
     return <div id="drawer-categories" className="overscroll-contain flex-1">
-        <h1 className="text-start font-semibold">Categorias</h1>
+        <h1 className="text-start font-semibold">Categories</h1>
         {isLoading && <Loading/>}
         {isSuccess && categories.map((category) => {
             return <li key={category.id} className="justify-center p-2">
