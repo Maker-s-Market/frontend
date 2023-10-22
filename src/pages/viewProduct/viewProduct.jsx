@@ -59,7 +59,7 @@ export const ViewProduct = (props) => {
 
 
                 <div className="justify-self-center m-3 w-80">
-                    <img src="https://picsum.photos/1048/720" alt={product.name}/>
+                    <img src={product.image} alt={product.name}/>
                 </div>
 
                 <div id="item-categories" className="flex flex-row space-x-2">
