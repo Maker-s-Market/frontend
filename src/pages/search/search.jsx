@@ -6,7 +6,6 @@ import {searchProducts} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {fetchCategories} from "../../api/fetchCategories.js";
 import {Link} from "react-router-dom";
-import {Field} from "formik";
 
 export const Search = (props) => {
 
