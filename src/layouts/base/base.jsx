@@ -1,9 +1,10 @@
-import {Navbar} from "../../components/navbar/index.js";
+import { Sidebar } from "../../components/sidebar/sidebar.jsx";
 import {Outlet} from "react-router-dom";
 
-export const Base = (props) => {
-    return <div className={"bg-primary h-screen"}>
-        <Navbar/>
-        <Outlet/>
+export const Base = () => {
+    return <div>
+        <Sidebar>
+            <Outlet />
+        </Sidebar>
     </div>;
 };
