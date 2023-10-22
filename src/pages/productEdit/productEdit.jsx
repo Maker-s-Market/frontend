@@ -1,49 +1,44 @@
-import {Hero} from "../../components/home/hero/index.js";
-import {useState} from "react";
-import {AiOutlineClose} from "react-icons/ai";
+import {editProduct, fetchProductById} from "../../api/fetchProducts.js";
+import {useNavigate, useParams} from "react-router-dom";
 import {useMutation, useQuery} from "react-query";
+import {useState} from "react";
+import {Hero} from "../../components/home/hero/index.js";
+import {Field, Form, Formik} from "formik";
+import {AiOutlineClose} from "react-icons/ai";
 import {fetchCategories} from "../../api/fetchCategories.js";
 import * as Yup from "yup";
-import {Field, Form, Formik} from "formik";
-import {addProduct} from "../../api/fetchProducts.js";
-import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 
-export const ProductForm = (props) => {
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [categoryOption, setCategoryOption] = useState("");
-    const navigate = useNavigate();
+export const ProductEdit = (props) => {
+
+    const {id} = useParams()
     const notification = useNotification()
+    const navigate = useNavigate()
+    const [categoryOption, setCategoryOption] = useState("");
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const {
-        data: categories,
-        isLoading: categoriesIsLoading,
-        isSuccess: categoriesIsSuccess,
-        isError: categoriesIsError
-    } = useQuery("categories", fetchCategories);
-
-    const addCategory = (e) => {
-        e.preventDefault();
-        setSelectedCategories((prevState) => {
-            if (!prevState.some(category => category === categoryOption) && categoryOption !== "") return [...prevState, categoryOption]
-            return prevState
-        })
-
-    }
-
-    const removeCategory = (category) => setSelectedCategories((prevState) => {
-        return prevState.filter(item => item !== category)
+        data: productData, isLoading: productIsLoading, isSuccess: productIsSuccess, isError: productIsError
+    } = useQuery(["product", id], () => fetchProductById(id), {
+        refetchOnWindowFocus: false,
+        enabled: id !== undefined, onSuccess: (data) => setSelectedCategories(data.categories.map((item) => item.id))
     })
+
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Required"),
         price: Yup.number().required("Required"),
         discount: Yup.number().required("Required"),
         description: Yup.string().required("Required"),
-        image: Yup.string().required("Required"),
+        image: Yup.string(),
         categories: Yup.array().required("Required"),
         stockable: Yup.boolean().required("Required"),
     })
+
+    const {
+        data: categories, isLoading: categoriesIsLoading, isSuccess: categoriesIsSuccess, isError: categoriesIsError
+    } = useQuery("categories", fetchCategories);
+
 
     const jsonizeCategories = (categories) => {
         return categories.map((item) => {
@@ -51,39 +46,61 @@ export const ProductForm = (props) => {
         })
     }
 
-    const findCategory = (id) => categories.find((item) => item.id === id).name
-
-    const addProductMutation = useMutation({
-        mutationFn: ({name, price, discount, description, image, categories,stockable, stock}) => addProduct({name, price, discount, description, image:"https://picsum.photos/200", categories:jsonizeCategories(selectedCategories),stockable,stock}),
-        onSuccess: () => {
-            notification.info("Product Added")
+    const editProductMutation = useMutation({
+        mutationFn: ({name, price, discount, description, image, categories, stockable, stock}) => editProduct(id,{
+            name,
+            price,
+            discount,
+            description,
+            image: "https://picsum.photos/200",
+            categories: jsonizeCategories(selectedCategories),
+            stockable,
+            stock
+        }), onSuccess: () => {
+            notification.info("Product Edited")
             navigate("/")
-        },
-        onError: () => {
-            notification.info("Error")
+        }, onError: () => {
+            notification.error("Error")
         }
     })
 
-    const handleSubmit = (values) => addProductMutation.mutate(values)
 
+    const findCategory = (id) => categories.find((item) => item.id === id).name
+
+
+    const addCategory = (e) => {
+        e.preventDefault();
+        setSelectedCategories((prevState) => {
+            if (!prevState.some(category => category === categoryOption) && categoryOption !== "") return [...prevState, categoryOption]
+            return prevState
+        })
+    }
+
+    const handleSubmit = (values) => editProductMutation.mutate(values)
+    const removeCategory = (category) => setSelectedCategories((prevState) => {
+        return prevState.filter(item => item !== category)
+    })
 
     return <div>
         <Hero/>
         <div className="flex flex-col m-8 space-y-4 max-w-2xl mx-auto">
 
             <h1 className={"text-4xl font-bold"}>Announce Product</h1>
-            <Formik initialValues={{
-                name: "",
-                price: "",
-                discount: "",
-                description: "",
+
+            {productIsSuccess && <Formik initialValues={{
+                name: productData.name,
+                price: productData.price,
+                discount: productData.discount,
+                description: productData.description,
                 image: "",
-                categories: [],
-                stockable: false,
-                stock: 0
+                categories: productData.categories,
+                stockable: productData.stockable,
+                stock: productData.stock
             }}
-                    validationSchema={validationSchema}
-                    onSubmit={(values) => handleSubmit(values)}
+                                         validationSchema={validationSchema}
+                                         onSubmit={(values) => {
+                                             handleSubmit(values)
+                                         }}
             >
                 <Form>
                     <div className="form-control w-full">
@@ -149,7 +166,7 @@ export const ProductForm = (props) => {
                         <button type={"submit"} className="btn btn-accent btn-block mt-2">Submit!</button>
                     </div>
                 </Form>
-            </Formik>
+            </Formik>}
         </div>
-    </div>
+    </div>;
 };
