@@ -5,17 +5,26 @@ import {useRef} from "react";
 import {searchProducts} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {fetchCategories} from "../../api/fetchCategories.js";
+import {Link} from "react-router-dom";
+import {Field} from "formik";
 
 export const Search = (props) => {
 
     const queryRef = useRef(null);
     const categoryRef = useRef(null);
+    const priceRef = useRef(null);
+    const discountRef = useRef(null);
     const searchMutation = useMutation({
-        mutationFn: ({query,categoryId}) => searchProducts(query, categoryId),
+        mutationFn: ({query, categoryId, sort, discount}) => searchProducts(query, categoryId, sort,discount),
     })
 
     const handleSearch = () => {
-        searchMutation.mutate({query: queryRef.current.value, categoryId: categoryRef.current.value})
+        searchMutation.mutate({
+            query: queryRef.current.value,
+            categoryId: categoryRef.current.value,
+            sort: priceRef.current.value,
+            discount: discountRef.current.checked
+        })
     }
 
     const {
@@ -45,52 +54,42 @@ export const Search = (props) => {
                         <span className="label-text">Categories</span>
                     </label>
                     <select className="select select-bordered" ref={categoryRef}>
-                        <option disabled selected>Pick one</option>
+                        <option defaultChecked value={""}>Categories</option>
                         {categoriesIsLoading && <Loading/>}
                         {categoriesIsSuccess && categories.map((category) => {
                                 return <option key={category.id} value={category.id}>{category.name}</option>
                             }
                         )}
-
                     </select>
                 </div>
 
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">District</span>
+                        <span className="label-text">Sort</span>
                     </label>
-                    <select className="select select-bordered select-accent">
-                        <option disabled selected>Pick one</option>
-                        <option>Porto</option>
-                        <option>Aveiro</option>
-                        <option>Braga</option>
-                        <option>Vila Real</option>
-                        <option>Porto</option>
+                    <select className="select select-bordered select-accent" ref={priceRef}>
+                        <option value={"price_desc"}>Desc</option>
+                        <option value={"price_asc"}>Asc</option>
+                        <option value={"newest"}>Newest</option>
+                        <option value={"oldest"}>Oldest</option>
+                        <option value={"relevance"}>Relevance</option>
                     </select>
                 </div>
 
-
                 <div className="form-control w-full max-w-xs">
-                    <label className="label">
-                        <span className="label-text">Price Range</span>
+                    <label className="label cursor-pointer max-w-fit">
+                        <span className="label-text pr-2">Discount</span>
+                        <input name={"discount"} type={"checkbox"} className={"toggle toggle-accent"} ref={discountRef}/>
                     </label>
-                    <input type="range" min="0" max="100" className="range range-accent" step="25"/>
-                    <div className="w-full flex justify-between text-xs px-2">
-                        <span>0€</span>
-                        <span>100€</span>
-                        <span>200€</span>
-                        <span>300€</span>
-                        <span>400€</span>
-                    </div>
                 </div>
-
             </div>
         </div>
         <div className="flex flex-col m-8 space-y-4">
             <h1 className={"text-4xl font-bold"}>Search Results</h1>
             {searchMutation.isLoading && <Loading/>}
             {searchMutation.isSuccess && searchMutation.data.map((item) => {
-                return <div key={item.id} className="card lg:card-side bg-base-100 shadow-xl">
+                return <Link to={"/product/" + item.id} key={item.id}
+                             className="card lg:card-side bg-base-100 shadow-xl">
                     <figure><img src={"https://picsum.photos/200"} alt={item.name}/></figure>
                     <div className="card-body">
                         <h2 className="card-title">{item.name}</h2>
@@ -105,7 +104,7 @@ export const Search = (props) => {
                             <button className="btn btn-accent">Buy Now!</button>
                         </div>
                     </div>
-                </div>
+                </Link>
             })}
         </div>
     </div>

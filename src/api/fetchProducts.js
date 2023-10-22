@@ -24,12 +24,13 @@ export const fetchProductsByCategory = async (category) => {
     return response.data;
 }
 
-export const searchProducts = async (query,categoryId,sort) => {
+export const searchProducts = async (query,categoryId,sort,discount) => {
     const response = await api.get("/products/", {
         params: {
             q: query,
-            // category_id: categoryId,
-            // sort: sort
+            category_id: categoryId,
+            sort: sort,
+            discount: discount
         }
     });
     if (response.status !== 200) {
