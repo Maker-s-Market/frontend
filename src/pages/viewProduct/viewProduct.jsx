@@ -1,24 +1,41 @@
 import {Profile} from "../../components/sidebar/profile/profile";
 import {FaMapMarkerAlt} from "react-icons/fa";
 import {Hero} from "../../components/home/hero/index.js";
-import {useQuery} from "react-query";
-import {fetchProductById} from "../../api/fetchProducts.js";
+import {useMutation, useQuery, useQueryClient} from "react-query";
+import {deleteProduct, fetchProductById} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {CommingSoon} from "../../components/common/commingSoon/index.js";
+import {useNotification} from "../../hooks/useNotification.js";
 
 export const ViewProduct = (props) => {
 
     const {id} = useParams();
+    const navigate = useNavigate();
+    const notification = useNotification();
+    const queryClient = useQueryClient();
 
     const {
         data: product,
         isLoading,
         isError,
         isSuccess
-    } = useQuery(['product',id], ()=>fetchProductById(id))
+    } = useQuery(['product', id], () => fetchProductById(id))
+
+    const deleteProductMutation = useMutation((id) => deleteProduct(id), {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['product', id])
+            notification.info("Product deleted")
+            navigate('/')
+        },
+        onError: () => {
+            notification.error("Error deleting product")
+        }
+    })
+
+    const handleDelete = () => deleteProductMutation.mutate(id)
 
     const mockSeller = {
         name: "Name LastName",
@@ -32,6 +49,7 @@ export const ViewProduct = (props) => {
         {isSuccess && <div className="flex flex-row m-8 space-x-4">
             <div id="item-info" className="space-y-2 p-5 grow-0 shrink-0 basis-3/4 grid bg-stone-200 rounded-lg">
                 <h1 className="text-3xl font-bold">{product.name}</h1>
+                <button className={"btn btn-error"} onClick={handleDelete}>Delete Product</button>
 
 
                 <div className="justify-self-center m-3 w-80">

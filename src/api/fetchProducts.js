@@ -47,3 +47,11 @@ export const addProduct = async (product) => {
     }
     return response.data;
 }
+
+export const deleteProduct = async (id) => {
+    const response = await api.delete("/product/" + id);
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
