@@ -1,6 +1,7 @@
 import Router from './utils/Router'
 import {QueryClient, QueryClientProvider} from "react-query";
 import {AuthProvider} from "./contexts/auth.jsx";
+import {NotificationProvider} from "./contexts/notification.jsx";
 
 function App() {
     const queryClient = new QueryClient()
@@ -8,7 +9,9 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
-                <Router/>
+                <NotificationProvider>
+                    <Router/>
+                </NotificationProvider>
             </AuthProvider>
         </QueryClientProvider>
     )
