@@ -16,7 +16,7 @@ export const Highlights = (props) => {
             {isSuccess && higlightedProducts.map((item, index) => {
                 return <Link key={item.id} to={`/product/${item.id}`}>
                     <div  className="card bg-base-100 shadow-xl">
-                        <figure><img src={"https://picsum.photos/200"} alt="Shoes"/></figure>
+                        <figure><img src={item.image} alt="Shoes"/></figure>
                         <div className="card-body">
                             <h2 className="card-title">
                                 {item.name}

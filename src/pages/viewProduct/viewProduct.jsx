@@ -6,7 +6,7 @@ import {deleteProduct, fetchProductById} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {CommingSoon} from "../../components/common/commingSoon/index.js";
 import {useNotification} from "../../hooks/useNotification.js";
 
@@ -48,8 +48,14 @@ export const ViewProduct = (props) => {
 
         {isSuccess && <div className="flex flex-row m-8 space-x-4">
             <div id="item-info" className="space-y-2 p-5 grow-0 shrink-0 basis-3/4 grid bg-stone-200 rounded-lg">
-                <h1 className="text-3xl font-bold">{product.name}</h1>
-                <button className={"btn btn-error"} onClick={handleDelete}>Delete Product</button>
+                <div className="flex flex-row w-full space-x-2 justify-between">
+                    <h1 className="text-3xl font-bold">{product.name}</h1>
+                    <div className={"space-x-2"}>
+                        <Link replace to={"product/edit/" + id} className={"btn btn-accent"} onClick={handleDelete} >Edit
+                            Product</Link>
+                        <button className={"btn btn-error"} onClick={handleDelete}>Delete Product</button>
+                    </div>
+                </div>
 
 
                 <div className="justify-self-center m-3 w-80">
@@ -64,9 +70,9 @@ export const ViewProduct = (props) => {
 
 
                 <div className="inline-flex justify-between">
-                    <h3 className="text-lg font-bold">Descrição</h3>
+                    <h3 className="text-lg font-bold">Description</h3>
                     <div>
-                        <h3 className="text-lg font-bold">Classificação</h3>
+                        <h3 className="text-lg font-bold">Classification</h3>
                         <Rating/>
                     </div>
                 </div>
@@ -74,7 +80,7 @@ export const ViewProduct = (props) => {
                 <div className="divider"></div>
                 <div id="item-stats-info" className="flex flex-row justify-between">
                     <h4>Cliques: {product.number_views}</h4>
-                    <h4 className="text-red-400 font-bold">Reportar<CommingSoon/></h4>
+                    <h4 className="text-red-400 font-bold">Report<CommingSoon/></h4>
                 </div>
                 <div id="product-rating">
 
@@ -82,13 +88,13 @@ export const ViewProduct = (props) => {
             </div>
             <div id="seller-info" className="space-y-3 p-3">
                 <div id="seller-specific" className="grid border-4 border-stone-500 rounded-lg p-3">
-                    <h3 className="text-lg font-bold">Vendedor</h3>
+                    <h3 className="text-lg font-bold">Seller</h3>
                     <Profile isLoggedIn={true}/>
-                    <button className="btn btn-neutral items-center">Enviar mensagem<CommingSoon/></button>
+                    <button className="btn btn-neutral items-center">Send Message<CommingSoon/></button>
                 </div>
 
                 <div id="seller-rating" className="border-4 border-stone-500 rounded-lg p-3">
-                    <h3 className="text-lg font-bold">Localização</h3>
+                    <h3 className="text-lg font-bold">Location</h3>
                     <div className="inline-flex">
                         <FaMapMarkerAlt/>
                         <h5 className="text-md">{mockSeller.location}</h5>

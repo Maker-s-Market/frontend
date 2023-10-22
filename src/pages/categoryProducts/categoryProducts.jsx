@@ -24,7 +24,7 @@ export const CategoryProducts = (props) => {
                 {category.products.map((item) => {
                     return <Link key={item.id} to={`/product/${item.id}`}
                                  className="card lg:card-side bg-base-100 shadow-xl">
-                        <figure><img src={"https://picsum.photos/200"} alt={item.name}/></figure>
+                        <figure><img src={item.image} alt={item.name}/></figure>
                         <div className="card-body">
                             <h2 className="card-title">{item.name}</h2>
                             <p>{item.description}</p>

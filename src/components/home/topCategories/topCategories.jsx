@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 export const TopCategories = (props) => {
 
 
-    const {data: topCategories, error, isLoading, isSuccess} = useQuery("categories", fetchTopCategories)
+    const {data: topCategories, error, isLoading, isSuccess} = useQuery("topCategories", fetchTopCategories)
 
     return <>
         <h1 className={"text-5xl font-bold text-center py-12"}>Top Categories</h1>
@@ -18,7 +18,7 @@ export const TopCategories = (props) => {
                     <div key={item.id} className={"w-full md:w-48 flex flex-col place-items-center space-y-4"}>
                         <div className="avatar">
                             <div className="w-40 rounded-full">
-                                <img src={"https://picsum.photos/200"} alt={"Temp"}/>
+                                <img src={item.image} alt={"Temp"}/>
                             </div>
                         </div>
                         <p className={"text-3xl font-semibold"}>{item.name}</p>
