@@ -23,7 +23,7 @@ export const Sidebar = ({children}) => {
             <ul className="menu p-5 w-80 space-y-3 min-h-full bg-base-200 text-base-content text-center">
                 <Link to={"/"}>
                     <div id="drawer-logo" className="flex justify-center">
-                        <img src="/public/logo.png" alt="logo"/>
+                        <img src="/logo.png" alt="logo"/>
                     </div>
                 </Link>
                 <div className="divider"></div>
