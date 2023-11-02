@@ -31,7 +31,7 @@ jobs:
         firefox --version
         
     - name: Download GeckoDriver
-      run: curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o /geckodriver.tar.gz
+      run: pwd && curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o ./geckodriver.tar.gz
     - name: Extract GeckoDriver
       run: tar -xvzf /geckodriver.tar.gz
     - name: Export to path
