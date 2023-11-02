@@ -25,7 +25,7 @@ jobs:
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v1
       with:
-        chrome-version: latest
+        chrome-version: '121.0.6103.0'
       id: setup-chrome
     - run: |
         echo Installed chromium version: ${{ steps.setup-chrome.outputs.chrome-version }}
@@ -35,7 +35,7 @@ jobs:
       uses: nanasess/setup-chromedriver@v2
       with:
         # Optional: do not specify to match Chrome's version
-        chromedriver-version: '119.0.6045.106'
+        chromedriver-version: '121.0.6103.0'
     - run: |
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &
