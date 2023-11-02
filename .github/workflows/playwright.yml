@@ -19,13 +19,15 @@ jobs:
       run: npm ci
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: npx playwright install --with-deps chromium
 
     - name: Run tests
       run: npm run test
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: /home/runner/work/frontend/frontend
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
