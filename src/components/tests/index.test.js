@@ -1,18 +1,17 @@
 const { Builder, By, Key, until } = require('selenium-webdriver')
 var webdriver = require('selenium-webdriver');
-const firefox = require('selenium-webdriver/firefox');
-const geckodriver = require('geckodriver');
+const chrome = require('selenium-webdriver/chrome');
+const chromedriver = require('chromedriver');
 const assert = require('assert')
 
 
 
-// firefox.setDefaultService(new firefox.ServiceBuilder(geckodriver.path).build());
+chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build());
 
-//new firefox.ServiceBuilder("C:\\Users\\Mateus\\geckodriver.exe").build();
 
 
 var driver = new webdriver.Builder()
-                 .withCapabilities(webdriver.Capabilities.firefox())
+                 .withCapabilities(webdriver.Capabilities.chrome())
                  .build();
 
 beforeEach(async function() {
