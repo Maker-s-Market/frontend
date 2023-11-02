@@ -22,7 +22,7 @@ jobs:
     steps:
 
     - name: Setup Chrome
-    - uses: browser-actions/setup-chrome@v1
+      uses: browser-actions/setup-chrome@v1
       with:
         chrome-version: latest
       id: setup-chrome
@@ -33,7 +33,7 @@ jobs:
     - name: Download GeckoDriver
       run: curl -L https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chromedriver-linux64.zip -o /home/runner/work/frontend/frontend/chromedriver-linux64.zip
     - name: Extract ChromeDriver
-    - uses: montudor/action-zip@v1
+      uses: montudor/action-zip@v1
       with:
         args: unzip -qq /home/runner/work/frontend/frontend/chromedriver-linux64.zip -d /home/runner/work/frontend/frontend/chromedriver
     - name: Export to path
