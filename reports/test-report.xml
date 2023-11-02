@@ -1,20 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-    <file path="C:\Users\Mateus\Desktop\uni\ES\frontend\src\components\tests\index.test.js">
-        <testCase name="search button check search button check" duration="7144">
-            <failure message="Error: thrown: &quot;Exceeded timeout of 5000 ms for a test."><![CDATA[Error: thrown: "Exceeded timeout of 5000 ms for a test.
-Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout."
-    at it (C:\Users\Mateus\Desktop\uni\ES\frontend\src\components\tests\index.test.js:28:3)
-    at _dispatchDescribe (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-circus\build\index.js:91:26)
-    at describe (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-circus\build\index.js:55:5)
-    at Object.describe (C:\Users\Mateus\Desktop\uni\ES\frontend\src\components\tests\index.test.js:26:1)
-    at Runtime._execModule (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-runtime\build\index.js:1439:24)
-    at Runtime._loadModule (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-runtime\build\index.js:1022:12)
-    at Runtime.requireModule (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-runtime\build\index.js:882:12)
-    at jestAdapter (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:77:13)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at runTestInternal (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\Mateus\Desktop\uni\ES\frontend\node_modules\jest-runner\build\runTest.js:444:34)]]></failure>
-        </testCase>
-    </file>
+<file path="C:\Users\Mateus\Desktop\uni\ES\frontend\src\components\tests\example.spec.js">
+<testCase name="should work" duration="1330" />
+</file>
 </testExecutions>
