@@ -20,7 +20,8 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-
+    - uses: actions/checkout@v3
+    
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v1
       with:
@@ -37,9 +38,9 @@ jobs:
       with:
         args: unzip -qq chromedriver.zip 
     - name: Export to path
-      run: ls && export PATH="$PATH:/home/runner/work/frontend/frontend/chromedriver/chromedriver"
+      run: ls && export PATH="$PATH:/home/runner/work/frontend/frontend/chromedriver-linux64/chromedriver"
       
-    - uses: actions/checkout@v3
+    
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
