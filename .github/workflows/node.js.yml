@@ -20,13 +20,16 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    
-    - name: SetUP firefox with geckodriver
-    - run: apt install firefox
-    - run: curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o /geckodriver.tar.gz
-    - run: tar -xvzf /geckodriver.tar.gz
-    - run: export PATH="$PATH:/geckodriver"
-    
+        
+    - name: install firefox
+      run: apt install firefox
+    - name: Download GeckoDriver
+      run: curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o /geckodriver.tar.gz
+    - name: Extract GeckoDriver
+      run: tar -xvzf /geckodriver.tar.gz
+    - name: Export to path
+      run: export PATH="$PATH:/geckodriver"
+      
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
