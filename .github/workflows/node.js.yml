@@ -31,7 +31,7 @@ jobs:
         ${{ steps.setup-chrome.outputs.chrome-path }} --version
         
     - name: Download GeckoDriver
-      run: curl -L https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chromedriver-linux64.zip -o /home/runner/work/frontend/frontend/chromedriver-linux64.zip
+      run: pwd && curl -L https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/119.0.6045.105/linux64/chromedriver-linux64.zip -o /home/runner/work/frontend/frontend/chromedriver-linux64.zip
     - name: Extract ChromeDriver
       uses: montudor/action-zip@v1
       with:
