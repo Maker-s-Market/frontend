@@ -24,10 +24,14 @@ jobs:
     - name: Run tests
       run: npm run test
 
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      with:
-        projectBaseDir: /home/runner/work/frontend/frontend
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
+    - name: SonarCloudScan NPM
+      run: npm install -g sonarqube-scanner
+    - run: sonar-scanner -Dsonar.token=${{ secrets.SONARCLOUD_TOKEN }}
+
+    # - name: SonarCloud Scan
+    #   uses: SonarSource/sonarcloud-github-action@master
+    #   with:
+    #     projectBaseDir: /home/runner/work/frontend/frontend
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+    #     SONAR_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}
