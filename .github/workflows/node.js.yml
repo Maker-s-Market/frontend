@@ -31,11 +31,11 @@ jobs:
         firefox --version
         
     - name: Download GeckoDriver
-      run: pwd && curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o ./geckodriver.tar.gz
+      run: curl -L https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz -o /home/runner/work/frontend/frontend/geckodriver.tar.gz
     - name: Extract GeckoDriver
-      run: tar -xvzf /geckodriver.tar.gz
+      run: tar -xvzf /home/runner/work/frontend/frontend/geckodriver.tar.gz
     - name: Export to path
-      run: export PATH="$PATH:/geckodriver"
+      run: export PATH="$PATH:/home/runner/work/frontend/frontend/geckodriver"
       
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
