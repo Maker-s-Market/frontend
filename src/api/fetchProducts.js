@@ -9,7 +9,7 @@ export const fetchProductById = async (id) => {
 }
 
 export const fetchTopProducts = async () => {
-    const response = await api.get("/top/product");
+    const response = await api.get("/product/top");
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
