@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 export const TopCategories = (props) => {
 
 
-    const {data: topCategories, error, isLoading, isSuccess} = useQuery("topCategories", fetchTopCategories)
+    const {data: topCategories, error, isLoading, isSuccess} = useQuery("topCategories", ()=>fetchTopCategories(4))
 
     return <>
         <h1 className={"text-5xl font-bold text-center py-12"}>Top Categories</h1>

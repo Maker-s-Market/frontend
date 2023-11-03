@@ -1,7 +1,7 @@
 import {api} from "./axios.js";
 
 export const fetchCategories = async () => {
-    const response = await api.get("/categories");
+    const response = await api.get("/category");
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
@@ -9,8 +9,8 @@ export const fetchCategories = async () => {
 }
 
 
-export const fetchTopCategories = async () => {
-    const response = await api.get("/category/top");
+export const fetchTopCategories = async (limit) => {
+    const response = await api.get("/category/top/"+ limit);
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
