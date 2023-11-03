@@ -6,6 +6,7 @@ import {Search} from "../pages/search/index.js";
 import {ProductForm} from "../pages/productForm/index.js";
 import {CategoryProducts} from "../pages/categoryProducts/index.js";
 import {ProductEdit} from "../pages/productEdit/index.js";
+import {SignIn} from "../pages/signIn/index.js";
 
 
 export default function Router() {
@@ -29,7 +30,8 @@ export default function Router() {
                     ]},
 
             ]
-        }
+        },
+        {path :"/signIn", element: <SignIn/>}
     ])
 
     return <RouterProvider router={router}/>
