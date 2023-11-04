@@ -2,7 +2,7 @@ import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {useMutation, useQuery} from "react-query";
 import {doSignIn, fetchUser} from "../../api/fetchAuth.js";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
 
@@ -64,7 +64,9 @@ export const SignIn = (props) => {
                                    className={"input input-bordered"}/>
 
                             <button type={"submit"} className={"btn btn-accent"}>Sign In</button>
+                            <span className={"mx-auto"}>Don&apos;t have an acount? <Link to={"/signup"}  className={"text-accent hover:underline"}>Create an Account</Link></span>
                             <span className={"mx-auto hover:underline"}>Forgot Password?</span>
+
                         </div>
                     </Form>
                 </Formik>

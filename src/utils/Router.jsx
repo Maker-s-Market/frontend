@@ -7,6 +7,8 @@ import {ProductForm} from "../pages/productForm/index.js";
 import {CategoryProducts} from "../pages/categoryProducts/index.js";
 import {ProductEdit} from "../pages/productEdit/index.js";
 import {SignIn} from "../pages/signIn/index.js";
+import {SignUp} from "../pages/signUp/index.js";
+import {Confirmation} from "../pages/confirmation/index.js";
 
 
 export default function Router() {
@@ -31,7 +33,10 @@ export default function Router() {
 
             ]
         },
-        {path :"/signIn", element: <SignIn/>}
+        {path :"/signIn", element: <SignIn/>},
+        {path: "/signUp", element: <SignUp/>},
+        {path: "/confirmEmail", element: <Confirmation/>},
+        {path: "*", element: <Navigate to={"/"}/>}
     ])
 
     return <RouterProvider router={router}/>
