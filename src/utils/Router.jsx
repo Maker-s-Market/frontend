@@ -9,6 +9,7 @@ import {ProductEdit} from "../pages/productEdit/index.js";
 import {SignIn} from "../pages/signIn/index.js";
 import {SignUp} from "../pages/signUp/index.js";
 import {Confirmation} from "../pages/confirmation/index.js";
+import {ForgotPassword} from "../pages/forgotPassword/index.js";
 
 
 export default function Router() {
@@ -36,6 +37,7 @@ export default function Router() {
         {path :"/signIn", element: <SignIn/>},
         {path: "/signUp", element: <SignUp/>},
         {path: "/confirmEmail", element: <Confirmation/>},
+        {path: "/forgotPassword", element: <ForgotPassword/>},
         {path: "*", element: <Navigate to={"/"}/>}
     ])
 

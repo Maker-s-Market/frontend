@@ -13,7 +13,7 @@ export const doSignIn = async (user) => {
 export const doSignUp = async (user) => {
     const response = await api.post("/auth/sign-up", user);
 
-    if (response.status !== 200) {
+    if (response.status !== 201) {
         throw new Error("Something went wrong!");
     }
     return response.data;
@@ -51,4 +51,28 @@ export const fetchUser = async (token) => {
     }
     return response.data;
 
+}
+
+export const recoverPasswordEmail = async (email) => {
+    const response = await api.post("/auth/forgot-password", {
+        identifier: email
+    });
+
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const recoverPassword = async (email, code, password) => {
+    const response = await api.post("/auth/confirm-forgot-password", {
+        identifier: email,
+        code: code,
+        password: password
+    });
+
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
 }

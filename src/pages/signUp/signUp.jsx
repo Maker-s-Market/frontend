@@ -20,15 +20,13 @@ export const SignUp = (props) => {
     const navigate = useNavigate();
     const notification = useNotification()
     const [identifier, setIdentifier] = useState("")
+    const [email, setEmail] = useState("")
 
     const signUpMutation = useMutation({
-        mutationFn: ({name, username, email, password, city, region,photo}) => {
-            doSignUp({name, username, email, password, city, region,photo})
-            setIdentifier(username)
-        },
-        onSuccess: (data) => {
+        mutationFn: ({name, username, email, password, city, region,photo}) => doSignUp({name, username, email, password, city, region,photo}),
+        onSuccess: () => {
             notification.info("Success")
-            navigate("/confirmEmail?username="+identifier+"&email="+data.email)
+            navigate("/confirmEmail?username="+identifier+"&email="+email)
         },
         onError: () => {
             notification.info("Failed to sign up")
@@ -44,7 +42,10 @@ export const SignUp = (props) => {
                 <h2 className="text-4xl font-bold">Sign Up</h2>
                 <Formik initialValues={{
                     name: "", username: "", email: "", password: "", city: "", region: "", photo: "",
-                }} onSubmit={(values) => handleSubmit(values)} validationSchema={signUpSchema}>
+                }} onSubmit={(values) => {
+                    handleSubmit(values)
+
+                }} validationSchema={signUpSchema}>
                     <Form>
                         <div className={"form-control space-y-2"}>
                             <label className={"label"}>
@@ -56,11 +57,14 @@ export const SignUp = (props) => {
                                 <span className={"label-text"}>Username</span>
                             </label>
                             <Field type="text" placeholder={"Username"} name={"username"}
-                                   className={"input input-bordered"}/>
+                                   className={"input input-bordered"}
+                                      onKeyUp={(e)=>setIdentifier(e.target.value)}
+                            />
                             <label className={"label"}>
                                 <span className={"label-text"}>Email</span>
                             </label>
                             <Field type="text" placeholder={"Email"} name={"email"}
+                                    onKeyUp={(e)=>setEmail(e.target.value)}
                                    className={"input input-bordered"}/>
                             <label className={"label"}>
                                 <span className={"label-text"}>Password</span>

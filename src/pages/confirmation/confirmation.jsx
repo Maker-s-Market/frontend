@@ -1,6 +1,6 @@
 import {useMutation} from "react-query";
 import {useNotification} from "../../hooks/useNotification.js";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {confirmCode, resendCode} from "../../api/fetchAuth.js";
 import {useState} from "react";
 
@@ -22,7 +22,7 @@ export const Confirmation = (props) => {
         mutationFn: ({username, confirmationCode}) => confirmCode(username, confirmationCode),
         onSuccess: (data) => {
             notification.info("Success")
-            // navigate("/signIn")
+            navigate("/signIn")
         },
         onError: (error) => {
             console.log(error)
@@ -32,9 +32,8 @@ export const Confirmation = (props) => {
 
     const resendCodeMutation = useMutation({
         mutationFn: ({email}) => resendCode(email),
-        onSuccess: (data) => {
+        onSuccess: () => {
             notification.info("Email Sent. Please check your email")
-            navigate("/signIn")
         },
         onError: () => {
             notification.info("Failed to sign up")

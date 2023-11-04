@@ -65,8 +65,7 @@ export const SignIn = (props) => {
 
                             <button type={"submit"} className={"btn btn-accent"}>Sign In</button>
                             <span className={"mx-auto"}>Don&apos;t have an acount? <Link to={"/signup"}  className={"text-accent hover:underline"}>Create an Account</Link></span>
-                            <span className={"mx-auto hover:underline"}>Forgot Password?</span>
-
+                            <Link to={"/forgotPassword"} className={"mx-auto hover:underline"}>Forgot Password?</Link>
                         </div>
                     </Form>
                 </Formik>
