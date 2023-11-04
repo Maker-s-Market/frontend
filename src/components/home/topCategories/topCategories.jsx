@@ -18,9 +18,10 @@ export const TopCategories = (props) => {
                     <div key={item.id} className={"w-full md:w-48 flex flex-col place-items-center space-y-4"}>
                         <div className="avatar">
                             <div className="w-40 rounded-full">
-                                <img src={item.image} alt={"Temp"}/>
+                                {/*<FontAwesomeIcon icon={item.icon}/>*/}
                             </div>
                         </div>
+
                         <p className={"text-3xl font-semibold"}>{item.name}</p>
                     </div>
                 </Link>)
