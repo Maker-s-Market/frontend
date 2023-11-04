@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 export const Highlights = (props) => {
 
-    const {data: higlightedProducts, isLoading, isError, isSuccess} = useQuery('higlightedProducts', fetchTopProducts)
+    const {data: higlightedProducts, isLoading, isError, isSuccess} = useQuery('higlightedProducts', ()=>fetchTopProducts(4))
 
     return <>
         <h1 className={"text-5xl font-bold text-center py-12"}>Highlighted Products</h1>

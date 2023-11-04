@@ -19,8 +19,8 @@ export const useAuth = () => {
     }
 
     const isLogged = () => {
-        return true
+        return user !== null && token !== null;
     }
 
-    return {user, login, logout, isLogged};
+    return {login,user, logout, isLogged, token,setToken,setUser};
 };
