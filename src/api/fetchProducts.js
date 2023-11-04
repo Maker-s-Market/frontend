@@ -25,7 +25,7 @@ export const fetchProductsByCategory = async (category) => {
 }
 
 export const searchProducts = async (query, categoryId, sort, discount) => {
-    const response = await api.get("/products/", {
+    const response = await api.get("/product", {
         params: {
             q: query,
             category_id: categoryId,
