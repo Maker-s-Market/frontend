@@ -1,13 +1,15 @@
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import {useMutation} from "react-query";
-import {doSignIn} from "../../api/fetchAuth.js";
+import {useMutation, useQuery} from "react-query";
+import {doSignIn, fetchUser} from "../../api/fetchAuth.js";
 import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
+import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const SignIn = (props) => {
     const navigate = useNavigate();
     const notification = useNotification()
+    const {setToken,token,login} = useAuthContext()
 
     const loginSchema = Yup.object().shape({
         identifier: Yup.string().email().required(),
@@ -16,9 +18,21 @@ export const SignIn = (props) => {
 
     const signInMutation = useMutation({
         mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
-        onSuccess: () => {
-            notification.info("Signed In")
+        onSuccess: (data) => {
+            setToken(()=> data.token)
+        },
+        onError: () => {
+            notification.info("Failed to sign in. Invalid credentials")
+        }
+    })
+
+    const userData = useQuery("user",
+        ()=>fetchUser(token), {enabled: !!token,
+        onSuccess: (data) => {
+            login(data,token)
+            notification.info("Welcome")
             navigate("/")
+
         },
         onError: () => {
             notification.info("Error")
@@ -54,7 +68,6 @@ export const SignIn = (props) => {
                         </div>
                     </Form>
                 </Formik>
-
             </div>
         </div>
 
