@@ -36,7 +36,7 @@ export const NotificationProvider = ({ children }) => {
     dispatch({ type: "DELETE_NOTIFICATION", payload: id });
   };
 
-  const ctx = {success,warning: accent,info,error,remove}
+  const ctx = {success, accent,info,error,remove}
   return (
       <NotificationContext.Provider value={ctx}>
         {children}
