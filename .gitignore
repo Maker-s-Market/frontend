@@ -11,6 +11,12 @@ node_modules
 dist
 dist-ssr
 *.local
+/reports/
+/reports/*
+/coverage/
+/coverage/*
+
+*.patch
 
 # Editor directories and files
 .vscode/*
