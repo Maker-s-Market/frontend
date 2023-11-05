@@ -12,7 +12,7 @@ export const SellerInformation = ({seller}) => {
                 <h1 className="text-lg font-bold">{seller.name}</h1>
                 <h3 className="text-md">@{seller.username}</h3>
             </div>
-            <button className="btn btn-neutral items-center" disabled>Send Message</button>
+            <button className="btn btn-neutral btn-block items-center" disabled>Send Message</button>
         </div>
 
         <div id="seller-rating" className="border-4 border-stone-500 rounded-lg p-3">
