@@ -25,7 +25,6 @@ export const Confirmation = (props) => {
             navigate("/signIn")
         },
         onError: (error) => {
-            console.log(error)
             notification.info("Failed to confirm")
         }
     })

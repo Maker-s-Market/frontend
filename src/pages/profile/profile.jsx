@@ -1,17 +1,12 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {Hero} from "../../components/home/hero/index.js";
-import {useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import moment from "moment";
 
 export const Profile = (props) => {
 
     const {user, isLogged} = useAuthContext();
     const {id} = useParams()
-
-    useEffect(() => {
-        console.log(user);
-    }, []);
 
     return <div>
         <Hero/>
@@ -32,6 +27,9 @@ export const Profile = (props) => {
                 className={"font-light text-xl"}> {user.city}, {user.region}</span></text>
             <text><span className={"font-semibold text-2xl"}>Member Since: </span><span
                 className={"font-light text-xl"}>{moment(user.created_at).format('MMMM Do YYYY')}</span></text>
+
+            {id === user.id && <Link to={"/profile/edit"} className={"btn btn-accent"}>Edit Profile</Link>}
+
         </div> : <p>Error Profile not found</p>}
     </div>;
 };

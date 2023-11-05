@@ -12,7 +12,7 @@ export const SignIn = (props) => {
     const {setToken,token,login} = useAuthContext()
 
     const loginSchema = Yup.object().shape({
-        identifier: Yup.string().email().required(),
+        identifier: Yup.string().required(),
         password: Yup.string().required(),
     });
 
