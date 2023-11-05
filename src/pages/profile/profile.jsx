@@ -2,6 +2,7 @@ import {useAuthContext} from "../../contexts/auth.jsx";
 import {Hero} from "../../components/home/hero/index.js";
 import {useEffect} from "react";
 import {useParams} from "react-router-dom";
+import moment from "moment";
 
 export const Profile = (props) => {
 
@@ -30,7 +31,7 @@ export const Profile = (props) => {
             <text><span className={"font-semibold text-2xl"}>Location: </span><span
                 className={"font-light text-xl"}> {user.city}, {user.region}</span></text>
             <text><span className={"font-semibold text-2xl"}>Member Since: </span><span
-                className={"font-light text-xl"}> {user.created_at}</span></text>
+                className={"font-light text-xl"}>{moment(user.created_at).format('MMMM Do YYYY')}</span></text>
         </div> : <p>Error Profile not found</p>}
     </div>;
 };
