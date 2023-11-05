@@ -20,10 +20,9 @@ export const doSignUp = async (user) => {
 
 }
 
-export const confirmCode = async (username,code) => {
+export const confirmCode = async (username, code) => {
     const response = await api.post("/auth/verify-email", {
-        username: username,
-        code: code
+        username: username, code: code
     });
 
     if (response.status !== 200) {
@@ -43,9 +42,7 @@ export const resendCode = async (email) => {
     return response.data;
 }
 export const fetchUser = async (token) => {
-    const response = await api.get("/auth/current-user",
-        {headers: {Authorization: `Bearer ${token}`}}
-    );
+    const response = await api.get("/auth/current-user", {headers: {Authorization: `Bearer ${token}`}});
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
@@ -66,9 +63,21 @@ export const recoverPasswordEmail = async (email) => {
 
 export const recoverPassword = async (email, code, password) => {
     const response = await api.post("/auth/confirm-forgot-password", {
-        identifier: email,
-        code: code,
-        password: password
+        identifier: email, code: code, password: password
+    });
+
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const editProfile = async (token, id, name, username, email, city, region, photo) => {
+
+    const response = await api.put("/user", {
+        id: id, name: name, username: username, email: email, city: city, region: region, photo: photo
+    }, {
+        headers: {Authorization: `Bearer ${token}`}
     });
 
     if (response.status !== 200) {
