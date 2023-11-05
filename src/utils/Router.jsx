@@ -11,6 +11,7 @@ import {SignUp} from "../pages/signUp/index.js";
 import {Confirmation} from "../pages/confirmation/index.js";
 import {ForgotPassword} from "../pages/forgotPassword/index.js";
 import {Profile} from "../pages/profile/index.js";
+import {EditProfile} from "../pages/editProfile/index.js";
 
 
 export default function Router() {
@@ -33,7 +34,8 @@ export default function Router() {
                         {path: ":id", element: <CategoryProducts/>},
                     ]},
                 {path: "/profile/:id", element: <Profile/>},
-
+                {path: "/profile", element: <Navigate to={"/"}/>},
+                {path: "/profile/edit", element: <EditProfile/>}
             ]
         },
         {path :"/signIn", element: <SignIn/>},
