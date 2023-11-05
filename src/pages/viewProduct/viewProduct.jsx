@@ -1,108 +1,94 @@
-import {Profile} from "../../components/sidebar/profile/profile";
-import {FaMapMarkerAlt} from "react-icons/fa";
 import {Hero} from "../../components/home/hero/index.js";
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {deleteProduct, fetchProductById} from "../../api/fetchProducts.js";
+import {fetchProductById} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
-import {Link, useNavigate, useParams} from "react-router-dom";
-import {CommingSoon} from "../../components/common/commingSoon/index.js";
+import {useParams} from "react-router-dom";
+import {useAuthContext} from "../../contexts/auth.jsx";
+import {SellerInformation} from "../../components/product/sellerInformation/index.js";
+import {SellerUtils} from "../../components/product/sellerUtils/index.js";
+import {useRef} from "react";
 import {useNotification} from "../../hooks/useNotification.js";
+import {addReview, fetchReviewsById} from "../../api/fetchReviews.js";
+import {Review} from "../../components/product/review/index.js";
 
 export const ViewProduct = (props) => {
 
     const {id} = useParams();
-    const navigate = useNavigate();
+    const {user, isLogged} = useAuthContext();
+    const reviewRef = useRef();
     const notification = useNotification();
-    const queryClient = useQueryClient();
+    const {token} = useAuthContext();
+    const queryClient = useQueryClient()
+
 
     const {
-        data: product,
-        isLoading,
-        isError,
-        isSuccess
-    } = useQuery(['product', id], () => fetchProductById(id))
+        data: productData, isLoading, isError, isSuccess
+    } = useQuery(['product', id], () => fetchProductById(id), {
+        refetchOnWindowFocus: false
+    })
 
-    const deleteProductMutation = useMutation((id) => deleteProduct(id), {
+    const {data: reviews, isLoading: isLoadingReviews, isError: isErrorReviews, isSuccess: isSuccessReviews} = useQuery(['reviews', id], () => fetchReviewsById(id), {
+        refetchOnWindowFocus: false
+    })
+
+    const addReviewMutation = useMutation(() => addReview(id, reviewRef.current.value,token), {
         onSuccess: () => {
-            queryClient.invalidateQueries(['product', id])
-            notification.info("Product deleted")
-            navigate('/')
-        },
-        onError: () => {
-            notification.error("Error deleting product")
+            reviewRef.current.value = "";
+            notification.info("Review added successfully");
+            queryClient.invalidateQueries(['reviews', id])
         }
     })
 
-    const handleDelete = () => deleteProductMutation.mutate(id)
-
-    const mockSeller = {
-        name: "Name LastName",
-        location: "Aveiro"
-    }
-
+    const handleSubmit = () => addReviewMutation.mutate();
     return <div>
         <Hero/>
         {isLoading && <Loading/>}
 
-        {isSuccess && <div className="flex flex-row m-8 space-x-4">
-            <div id="item-info" className="space-y-2 p-5 grow-0 shrink-0 basis-3/4 grid bg-stone-200 rounded-lg">
-                <div className="flex flex-row w-full space-x-2 justify-between">
-                    <h1 className="text-3xl font-bold">{product.name}</h1>
-                    <div className={"space-x-2"}>
-                        <Link replace={true}  to={"/product/edit/" + id} className={"btn btn-accent"}>Edit
-                            Product</Link>
-                        <button className={"btn btn-error"} onClick={handleDelete}>Delete Product</button>
-                    </div>
+        {isSuccess && <div className="grid grid-cols-1 md:grid-cols-4 m-8 gap-4">
+            <div id="item-info" className="md:col-span-2 lg:col-span-3 bg-stone-200 rounded-lg p-4">
+                <div className={"flex flex-row justify-between items-center"}>
+                    <h1 className="text-4xl font-bold">{productData.product.name}
+                    </h1>
+                    <Rating/>
                 </div>
+                <span>{productData.product.number_views} views</span>
 
+                <img src={productData.product.image} alt={productData.product.name}
+                     className={"mx-auto object-scale-down w-1/2"}
+                />
 
-                <div className="justify-self-center m-3 w-80">
-                    <img src={product.image} alt={product.name}/>
-                </div>
+                <h3 className="text-lg font-bold">Description</h3>
+                <p>{productData.product.description}</p>
 
-                <div id="item-categories" className="flex flex-row space-x-2">
-                    {product.categories.map((item) => {
+                <div id="item-categories" className="flex flex-row space-x-2 pt-2">
+                    {productData.product.categories.map((item) => {
                         return <div key={item.name} className="badge badge-secondary badge-outline">{item.name}</div>
                     })}
                 </div>
-
-
-                <div className="inline-flex justify-between">
-                    <h3 className="text-lg font-bold">Description</h3>
-                    <div>
-                        <h3 className="text-lg font-bold">Classification</h3>
-                        <Rating/>
-                    </div>
-                </div>
-                <p>{product.description}</p>
-                <div className="divider"></div>
-                <div id="item-stats-info" className="flex flex-row justify-between">
-                    <h4>Cliques: {product.number_views}</h4>
-                    <h4 className="text-red-400 font-bold">Report<CommingSoon/></h4>
-                </div>
-                <div id="product-rating">
-
-                </div>
             </div>
-            <div id="seller-info" className="space-y-3 p-3">
-                <div id="seller-specific" className="grid border-4 border-stone-500 rounded-lg p-3">
-                    <h3 className="text-lg font-bold">Seller</h3>
-                    <Profile isLoggedIn={true}/>
-                    <button className="btn btn-neutral items-center">Send Message<CommingSoon/></button>
-                </div>
+            {isLogged() && user.id === productData.user.id ?
+                <SellerUtils/> :
+                <SellerInformation seller={productData.user}/> }
 
-                <div id="seller-rating" className="border-4 border-stone-500 rounded-lg p-3">
-                    <h3 className="text-lg font-bold">Location</h3>
-                    <div className="inline-flex">
-                        <FaMapMarkerAlt/>
-                        <h5 className="text-md">{mockSeller.location}</h5>
-                    </div>
+            <div className={"md:col-span-2 lg:col-span-3 space-y-2"}>
+                <div className={"flex flex-row justify-between items-center bg-stone-200 rounded-lg p-4"}>
+                    <p className={"text-3xl font-bold"}>Reviews</p>
                 </div>
+                {isLogged() && <div className={"join w-full"}>
+                    <textarea placeholder="Enter here your awesome review"
+                              className={"textarea textarea-bordered join-item w-full"} ref={reviewRef}/>
+                    <button className={"btn btn-accent join-item h-24"} onClick={handleSubmit}>Add Review</button>
+                </div>}
+
+                {isLoadingReviews && <Loading/>}
+                {isSuccessReviews && reviews.map((item) => {
+                    return <Review key={item.id} review={item.review} userData={item.user}/>
+                })}
             </div>
-        </div>
-        }
+
+        </div>}
         {isError && <ErrorMessage/>}
     </div>;
 };

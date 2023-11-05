@@ -10,6 +10,7 @@ import {SignIn} from "../pages/signIn/index.js";
 import {SignUp} from "../pages/signUp/index.js";
 import {Confirmation} from "../pages/confirmation/index.js";
 import {ForgotPassword} from "../pages/forgotPassword/index.js";
+import {Profile} from "../pages/profile/index.js";
 
 
 export default function Router() {
@@ -31,6 +32,7 @@ export default function Router() {
                         {index: true, element: <Navigate to={"/"}/>},
                         {path: ":id", element: <CategoryProducts/>},
                     ]},
+                {path: "/profile/:id", element: <Profile/>},
 
             ]
         },

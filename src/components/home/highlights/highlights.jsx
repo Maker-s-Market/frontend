@@ -15,17 +15,17 @@ export const Highlights = (props) => {
             className={"grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-4 gap-4 w-3/4 mx-auto"}>
             {isSuccess && higlightedProducts.map((item, index) => {
                 return <Link key={item.id} to={`/product/${item.id}`}>
-                    <div  className="card bg-base-100 shadow-xl">
-                        <figure><img src={item.image} alt="Shoes"/></figure>
+                    <div  className="card bg-base-100 shadow-xl max-h-96">
+                        <figure><img src={item.image} alt="Shoes" className={"object-cover w-full min-h-32"}/></figure>
                         <div className="card-body">
                             <h2 className="card-title">
                                 {item.name}
                             </h2>
-                            <p>{item.description}</p>
+                            <p className={"line-clamp-5"}>{item.description}</p>
                             <div className="card-actions justify-end">
                                 {item.categories.map((category, index) => {
                                     return (
-                                        <div key={category.id} className="badge badge-outline">{category.name}</div>)
+                                        <div key={category.id} className="badge badge-outline line-clamp-1">{category.name}</div>)
                                 })}
                             </div>
                         </div>

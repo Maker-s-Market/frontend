@@ -13,7 +13,6 @@ export const Menu = (props) => {
             <li className={"font-bold"}><Link to={"/product/add"}><BsFillPlusCircleFill/>Announce Product</Link></li>
             <li className="font-bold"><a><BsFillChatFill/>Chat<CommingSoon/></a></li>
 
-            <li className="font-bold"><a><IoMdSettings/>Settings<CommingSoon/></a></li>
 
             <li className="font-bold"><a onClick={() => logout()}><BiSolidExit/>Sign Out</a></li>
         </> : <li className="font-bold"><Link to={"/signin"}>Sign In</Link></li>
