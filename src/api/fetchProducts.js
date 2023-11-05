@@ -40,7 +40,6 @@ export const searchProducts = async (query, categoryId, sort, discount) => {
 }
 
 export const addProduct = async (product) => {
-    console.log(product);
     const response = await api.post("/product", product);
     if (response.status !== 201) {
         throw new Error("Something went wrong!");
