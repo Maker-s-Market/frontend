@@ -21,7 +21,9 @@ export const ProductEdit = (props) => {
         data: productData, isLoading: productIsLoading, isSuccess: productIsSuccess, isError: productIsError
     } = useQuery(["product", id], () => fetchProductById(id), {
         refetchOnWindowFocus: false,
-        enabled: id !== undefined, onSuccess: (data) => setSelectedCategories(data.categories.map((item) => item.id))
+        enabled: id !== undefined, onSuccess: (data) => {
+            setSelectedCategories(data.product.categories.map((item) => item.id))
+        }
     })
 
 
@@ -47,7 +49,7 @@ export const ProductEdit = (props) => {
     }
 
     const editProductMutation = useMutation({
-        mutationFn: ({name, price, discount, description, image, categories, stockable, stock}) => editProduct(id,{
+        mutationFn: ({name, price, discount, description, image, categories, stockable, stock}) => editProduct(id, {
             name,
             price,
             discount,
@@ -88,14 +90,14 @@ export const ProductEdit = (props) => {
             <h1 className={"text-4xl font-bold"}>Announce Product</h1>
 
             {productIsSuccess && <Formik initialValues={{
-                name: productData.name,
-                price: productData.price,
-                discount: productData.discount,
-                description: productData.description,
+                name: productData.product.name,
+                price: productData.product.price,
+                discount: productData.product.discount,
+                description: productData.product.description,
                 image: "",
-                categories: productData.categories,
-                stockable: productData.stockable,
-                stock: productData.stock
+                categories: productData.product.categories,
+                stockable: productData.product.stockable,
+                stock: productData.product.stock
             }}
                                          validationSchema={validationSchema}
                                          onSubmit={(values) => {
