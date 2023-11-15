@@ -12,6 +12,8 @@ import {useRef} from "react";
 import {useNotification} from "../../hooks/useNotification.js";
 import {addReview, fetchReviewsById} from "../../api/fetchReviews.js";
 import {Review} from "../../components/product/review/index.js";
+import {useShopping} from "../../hooks/useShopping.js";
+import {useShoppingContext} from "../../contexts/shopping.jsx";
 
 export const ViewProduct = (props) => {
 
@@ -21,6 +23,7 @@ export const ViewProduct = (props) => {
     const notification = useNotification();
     const {token} = useAuthContext();
     const queryClient = useQueryClient()
+    const {cart, addToCart, removeFromCart} = useShoppingContext();
 
 
     const {
@@ -29,11 +32,16 @@ export const ViewProduct = (props) => {
         refetchOnWindowFocus: false
     })
 
-    const {data: reviews, isLoading: isLoadingReviews, isError: isErrorReviews, isSuccess: isSuccessReviews} = useQuery(['reviews', id], () => fetchReviewsById(id), {
+    const {
+        data: reviews,
+        isLoading: isLoadingReviews,
+        isError: isErrorReviews,
+        isSuccess: isSuccessReviews
+    } = useQuery(['reviews', id], () => fetchReviewsById(id), {
         refetchOnWindowFocus: false
     })
 
-    const addReviewMutation = useMutation(() => addReview(id, reviewRef.current.value,token), {
+    const addReviewMutation = useMutation(() => addReview(id, reviewRef.current.value, token), {
         onSuccess: () => {
             reviewRef.current.value = "";
             notification.info("Review added successfully");
@@ -51,7 +59,7 @@ export const ViewProduct = (props) => {
                 <div className={"flex flex-row justify-between items-center"}>
                     <h1 className="text-4xl font-bold">{productData.product.name}
                     </h1>
-                    <Rating/>
+                    <Rating rating={productData.product.avg_rating}/>
                 </div>
                 <span>{productData.product.number_views} views</span>
 
@@ -67,10 +75,14 @@ export const ViewProduct = (props) => {
                         return <div key={item.name} className="badge badge-secondary badge-outline">{item.name}</div>
                     })}
                 </div>
+                {isLogged() && user.id !== productData.user.id &&
+                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product)}>Add to
+                        cart</button>
+                }
             </div>
             {isLogged() && user.id === productData.user.id ?
                 <SellerUtils/> :
-                <SellerInformation seller={productData.user}/> }
+                <SellerInformation seller={productData.user}/>}
 
             <div className={"md:col-span-2 lg:col-span-3 space-y-2"}>
                 <div className={"flex flex-row justify-between items-center bg-stone-200 rounded-lg p-4"}>
