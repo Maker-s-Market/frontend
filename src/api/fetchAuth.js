@@ -42,7 +42,7 @@ export const resendCode = async (email) => {
     return response.data;
 }
 export const fetchUser = async (token) => {
-    const response = await api.get("/auth/current-user", {headers: {Authorization: `Bearer ${token}`}});
+    const response = await api.get("/auth/me", {headers: {Authorization: `Bearer ${token}`}});
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
