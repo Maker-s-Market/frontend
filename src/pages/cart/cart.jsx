@@ -1,10 +1,12 @@
 import {Hero} from "../../components/home/hero/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
 import {useEffect} from "react";
+import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const Cart = (props) => {
 
     const {cart, removeFromCart} = useShoppingContext();
+    const {user} = useAuthContext();
 
     return <div>
         <Hero/>
@@ -23,7 +25,7 @@ export const Cart = (props) => {
                                 </div>
                             </div>
                             <div className="flex flex-col">
-                                <button onClick={() => removeFromCart(item.product)}
+                                <button onClick={() => removeFromCart(item.product, user.id)}
                                         className="bg-red-500 text-white rounded-lg p-2">Remove
                                 </button>
                             </div>

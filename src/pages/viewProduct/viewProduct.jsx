@@ -23,7 +23,7 @@ export const ViewProduct = (props) => {
     const notification = useNotification();
     const {token} = useAuthContext();
     const queryClient = useQueryClient()
-    const {cart, addToCart, removeFromCart} = useShoppingContext();
+    const {addToCart} = useShoppingContext();
 
 
     const {
@@ -76,7 +76,7 @@ export const ViewProduct = (props) => {
                     })}
                 </div>
                 {isLogged() && user.id !== productData.user.id &&
-                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product)}>Add to
+                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product,user.id)}>Add to
                         cart</button>
                 }
             </div>
