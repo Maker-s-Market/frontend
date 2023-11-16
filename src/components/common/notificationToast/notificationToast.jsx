@@ -10,7 +10,7 @@ export const NotificationToast = ({message, type, id}) => {
         return () => clearTimeout(timer);
     }, []);
 
-    return <div className={`alert alert-${type}`}>
+    return <div className={`alert ${type}`}>
         <span>{message}</span>
     </div>
 };

@@ -15,7 +15,7 @@ export const Highlights = (props) => {
             className={"grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-4 gap-4 w-3/4 mx-auto"}>
             {isSuccess && higlightedProducts.map((item, index) => {
                 return <Link key={item.id} to={`/product/${item.id}`}>
-                    <div  className="card bg-base-100 shadow-xl max-h-96">
+                    <div  className="card bg-base-100 shadow-xl max-h-96  hover:shadow-2xl">
                         <figure><img src={item.image} alt="Shoes" className={"object-cover w-full min-h-32"}/></figure>
                         <div className="card-body">
                             <h2 className="card-title">

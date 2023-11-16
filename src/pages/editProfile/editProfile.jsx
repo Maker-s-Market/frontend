@@ -1,11 +1,12 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
 import * as Yup from "yup";
 import {Hero} from "../../components/home/hero/index.js";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useMutation} from "react-query";
 import {editProfile} from "../../api/fetchAuth.js";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useNavigate} from "react-router-dom";
+import {FormError} from "../../components/common/formError/index.js";
 
 export const EditProfile = (props) => {
 
@@ -53,35 +54,55 @@ export const EditProfile = (props) => {
             >
                 <Form>
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <ErrorMessage component={FormError}  name={"name"} />
+                        </div>
                         <Field type="text" name="name" placeholder="Name" className="input input-bordered"/>
                     </div>
+
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Username</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Username</span>
+                            </label>
+                            <ErrorMessage component={FormError}  name={"username"} />
+                        </div>
                         <Field type="text" name="username" placeholder="Username" className="input input-bordered"/>
                     </div>
+
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Email</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <ErrorMessage component={FormError}  name={"email"} />
+                        </div>
                         <Field type="text" name="email" placeholder="Email" className="input input-bordered"/>
                     </div>
+
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">City</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">City</span>
+                            </label>
+                            <ErrorMessage component={FormError}  name={"city"} />
+                        </div>
                         <Field type="text" name="city" placeholder="City" className="input input-bordered"/>
                     </div>
+
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Region</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Region</span>
+                            </label>
+                            <ErrorMessage component={FormError}  name={"region"} />
+                        </div>
                         <Field type="text" name="region" placeholder="Region" className="input input-bordered"/>
                     </div>
+
                     <button type="submit" className="btn btn-accent btn-block mt-2">Submit</button>
                 </Form>
             </Formik>

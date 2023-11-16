@@ -1,10 +1,11 @@
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {useMutation, useQuery} from "react-query";
 import {doSignIn, fetchUser} from "../../api/fetchAuth.js";
 import {Link, useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
+import {FormError} from "../../components/common/formError/index.js";
 
 export const SignIn = (props) => {
     const navigate = useNavigate();
@@ -51,15 +52,21 @@ export const SignIn = (props) => {
                 }} onSubmit={(values) => handleSubmit(values)} validationSchema={loginSchema}>
                     <Form>
                         <div className={"form-control space-y-2"}>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Email or Username</span>
-                            </label>
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Email or Username</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"identifier"} />
+                            </div>
                             <Field type="text" placeholder={"Email or Username"} name={"identifier"}
                                    className={"input input-bordered"}/>
 
-                            <label className={"label"}>
-                                <span className={"label-text"}>Password</span>
-                            </label>
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Password</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"password"} />
+                            </div>
                             <Field type="password" placeholder={"Password"} name={"password"}
                                    className={"input input-bordered"}/>
 
