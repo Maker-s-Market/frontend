@@ -1,7 +1,6 @@
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {Base} from "../layouts/base";
 import {Home} from "../pages/home";
-import {ViewProduct} from "../pages/viewProduct";
 import {Search} from "../pages/search/index.js";
 import {ProductForm} from "../pages/productForm/index.js";
 import {CategoryProducts} from "../pages/categoryProducts/index.js";
@@ -14,6 +13,7 @@ import {Profile} from "../pages/profile/index.js";
 import {EditProfile} from "../pages/editProfile/index.js";
 import {Cart} from "../pages/cart/index.js";
 import {PrivateRoute} from "./PrivateRoute.jsx";
+import {ViewProduct} from "../pages/viewProduct/index.js";
 
 
 export default function Router() {
