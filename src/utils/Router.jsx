@@ -13,6 +13,7 @@ import {ForgotPassword} from "../pages/forgotPassword/index.js";
 import {Profile} from "../pages/profile/index.js";
 import {EditProfile} from "../pages/editProfile/index.js";
 import {Cart} from "../pages/cart/index.js";
+import {PrivateRoute} from "./PrivateRoute.jsx";
 
 
 export default function Router() {
@@ -25,8 +26,8 @@ export default function Router() {
                     path: "/product", children: [
                         {index: true, element: <Navigate to={"/"}/>},
                         {path: ":id", element: <ViewProduct/>},
-                        {path: "add", element: <ProductForm/>},
-                        {path: "edit/:id", element: <ProductEdit/>},
+                        {path: "add", element: <PrivateRoute component={ProductForm}/>},
+                        {path: "edit/:id", element: <PrivateRoute component={ProductEdit}/>},
                     ]
                 },
                 {path: "/search", element: <Search/>},
@@ -36,8 +37,8 @@ export default function Router() {
                     ]},
                 {path: "/profile/:id", element: <Profile/>},
                 {path: "/profile", element: <Navigate to={"/"}/>},
-                {path: "/profile/edit", element: <EditProfile/>},
-                {path:"/cart", element: <Cart/>},
+                {path: "/profile/edit", element: <PrivateRoute component={EditProfile}/>},
+                {path:"/cart", element: <PrivateRoute component={Cart}/>},
             ]
         },
         {path :"/signIn", element: <SignIn/>},
