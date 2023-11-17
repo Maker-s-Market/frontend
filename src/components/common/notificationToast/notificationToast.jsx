@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useNotification} from "../../../hooks/useNotification.js";
 
-const notificationColorDict = {
+export const notificationColorDict = {
     "info": "alert-info",
     "error" : "alert-error",
     "success" : "alert-success",
@@ -15,6 +15,8 @@ export const NotificationToast = ({message, type, id}) => {
         }, 3000);
         return () => clearTimeout(timer);
     }, []);
+
+    console.log(type)
 
     return <div className={`alert ${notificationColorDict[type]}`}>
         <span>{message}</span>
