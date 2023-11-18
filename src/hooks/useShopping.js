@@ -2,6 +2,7 @@ import {useState} from 'react';
 
 export const useShopping = () => {
     const [cart, setCart] = useState([]);
+    const [wishlist, setWishlist] = useState([]);
 
     const addToCart = (productToAdd) => {
         let newCart = [...cart]
@@ -43,5 +44,9 @@ export const useShopping = () => {
         setCart([]);
     };
 
-    return {cart, addToCart, removeFromCart, clearCart, setCart};
+    const isProductInWishlist = (productId) => {
+        return wishlist.findIndex(item => item.id === productId) !== -1;
+    };
+
+    return {cart, addToCart, removeFromCart, clearCart, setCart, wishlist, setWishlist, isProductInWishlist};
 };

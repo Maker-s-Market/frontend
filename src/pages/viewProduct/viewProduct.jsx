@@ -12,8 +12,8 @@ import {useRef} from "react";
 import {useNotification} from "../../hooks/useNotification.js";
 import {addReview, fetchReviewsById} from "../../api/fetchReviews.js";
 import {Review} from "../../components/product/review/index.js";
-import {useShopping} from "../../hooks/useShopping.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
+import {WishlistButton} from "../../components/product/wishlistButton/index.js";
 
 export const ViewProduct = (props) => {
 
@@ -58,6 +58,7 @@ export const ViewProduct = (props) => {
             <div id="item-info" className="md:col-span-2 lg:col-span-3 bg-stone-200 rounded-lg p-4">
                 <div className={"flex flex-row justify-between items-center"}>
                     <h1 className="text-4xl font-bold">{productData.product.name}
+                        {isLogged() && user.id !== productData.user.id && <WishlistButton/>}
                     </h1>
                     <Rating rating={productData.product.avg_rating}/>
                 </div>
@@ -76,7 +77,7 @@ export const ViewProduct = (props) => {
                     })}
                 </div>
                 {isLogged() && user.id !== productData.user.id &&
-                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product,user.id)}>Add to
+                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product, user.id)}>Add to
                         cart</button>
                 }
             </div>
