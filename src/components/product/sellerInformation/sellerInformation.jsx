@@ -20,7 +20,7 @@ export const SellerInformation = ({seller}) => {
                     <h3 className="text-md">@{seller.username}</h3>
                 </div>
             </Link>
-            {isLogged() && <FollowFollowingButton sellerId={seller.id}/>}
+            {isLogged() && <FollowFollowingButton userId={seller.id}/>}
         </div>
 
         <div id="seller-rating" className="border-4 border-stone-500 rounded-lg p-3">

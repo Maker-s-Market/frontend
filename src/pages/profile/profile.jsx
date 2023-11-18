@@ -5,6 +5,7 @@ import moment from "moment";
 import {fetchUserById} from "../../api/fetchAuth.js";
 import {useQuery} from "react-query";
 import {Loading} from "../../components/common/loading/index.js";
+import {FollowFollowingButton} from "../../components/product/followFollowingButton/index.js";
 
 export const Profile = (props) => {
 
@@ -34,12 +35,28 @@ export const Profile = (props) => {
             <p><span className={"font-semibold text-2xl"}>Member Since: </span><span
                 className={"font-light text-xl"}>{moment(profile.created_at).format('MMMM Do YYYY')}</span></p>
 
+            <p className={"text-4xl font-bold"}>Followers</p>
+            <div className={"grid grid-cols-3 gap-4"}>
+                {profile.followed.map((follower) => {
+                    return <Link to={`/profile/${follower.id}`} key={follower.id}>
+                        <div className="card bg-base-100 shadow-xl">
+                            <figure><img src={follower.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                                 alt="profile picture"
+                                 className={"rounded-full w-24 h-24 mx-auto"}
+                            /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title">{follower.name}</h2>
+                                <p> {profile.city}, {profile.region}</p>
+                            </div>
+                        </div>
+                    </Link>
+                })}
+            </div>
+
+
             {isLogged() && <>
-                {id === user.id ?
-                    <Link to={"/profile/edit"} className={"btn btn-accent"}>Edit Profile</Link>
-                    :
-                    <p>asdsa</p>
-                }
+                {id === user.id ? <Link to={"/profile/edit"} className={"btn btn-accent"}>Edit Profile</Link> :
+                    <FollowFollowingButton userId={id}/>}
             </>}
 
         </div> : <p>Error Profile not found</p>}

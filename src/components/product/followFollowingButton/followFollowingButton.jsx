@@ -1,11 +1,11 @@
 import {useAuthContext} from "../../../contexts/auth.jsx";
 
-export const FollowFollowingButton = ({sellerId}) => {
+export const FollowFollowingButton = ({userId}) => {
 
     const {following, followMutation, unfollowMutation} = useAuthContext()
-    const isFollowing = following.find(follow => follow.id === sellerId)
-    const handleFollow = () => followMutation.mutate(sellerId)
-    const handleUnfollow = () => unfollowMutation.mutate(sellerId)
+    const isFollowing = following.find(follow => follow.id === userId)
+    const handleFollow = () => followMutation.mutate(userId)
+    const handleUnfollow = () => unfollowMutation.mutate(userId)
     return <div>
         {isFollowing ?
             <button className={"btn btn-accent btn-block"}
