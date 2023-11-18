@@ -27,7 +27,7 @@ export const ShoppingProvider = ({children}) => {
     }, [isLogged])
 
 
-    const {data} = useQuery(["wishlist"], () => fetchWishlist(token), {
+    useQuery(["wishlist"], () => fetchWishlist(token), {
         refetchOnWindowFocus: false,enabled:isLogged(), onSuccess: (data) => {
             setWishlist(() => data.products)
         }
