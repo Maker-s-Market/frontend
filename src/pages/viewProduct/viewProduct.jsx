@@ -58,7 +58,7 @@ export const ViewProduct = (props) => {
             <div id="item-info" className="md:col-span-2 lg:col-span-3 bg-stone-200 rounded-lg p-4">
                 <div className={"flex flex-row justify-between items-center"}>
                     <h1 className="text-4xl font-bold">{productData.product.name}
-                        {isLogged() && user.id !== productData.user.id && <WishlistButton/>}
+                        {isLogged() && user.id !== productData.user.id && <WishlistButton productId={id}/>}
                     </h1>
                     <Rating rating={productData.product.avg_rating}/>
                 </div>
@@ -71,15 +71,19 @@ export const ViewProduct = (props) => {
                 <h3 className="text-lg font-bold">Description</h3>
                 <p>{productData.product.description}</p>
 
-                <div id="item-categories" className="flex flex-row space-x-2 pt-2">
-                    {productData.product.categories.map((item) => {
-                        return <div key={item.name} className="badge badge-secondary badge-outline">{item.name}</div>
-                    })}
+                <div className={"flex flex-row items-center"}>
+                    <div id="item-categories" className="flex flex-row space-x-2 pt-2 flex-1">
+                        {productData.product.categories.map((item) => {
+                            return <div key={item.name}
+                                        className="badge badge-secondary badge-outline">{item.name}</div>
+                        })}
+                    </div>
+                    {isLogged() && user.id !== productData.user.id &&
+                        <button className={"btn btn-accent"} onClick={() => addToCart(productData.product, user.id)}>Add
+                            to
+                            cart</button>
+                    }
                 </div>
-                {isLogged() && user.id !== productData.user.id &&
-                    <button className={"btn btn-accent"} onClick={() => addToCart(productData.product, user.id)}>Add to
-                        cart</button>
-                }
             </div>
             {isLogged() && user.id === productData.user.id ?
                 <SellerUtils/> :
