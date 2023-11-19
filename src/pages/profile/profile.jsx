@@ -6,6 +6,7 @@ import {fetchUserById} from "../../api/fetchAuth.js";
 import {useQuery} from "react-query";
 import {Loading} from "../../components/common/loading/index.js";
 import {FollowFollowingButton} from "../../components/product/followFollowingButton/index.js";
+import {Rating} from "../../components/profile/rating/index.js";
 
 export const Profile = (props) => {
 
@@ -27,16 +28,18 @@ export const Profile = (props) => {
             <p><span className={"font-semibold text-2xl"}>Name: </span><span
                 className={"font-light text-xl"}>{profile.name}</span></p>
             <p><span className={"font-semibold text-2xl"}>Email: </span> <span
-                className={"font-light text-xl"}>{profile.name}</span></p>
+                className={"font-light text-xl"}>{profile.email}</span></p>
             <p><span className={"font-semibold text-2xl"}>Username: </span><span
                 className={"font-light text-xl"}> @{profile.username}</span></p>
             <p><span className={"font-semibold text-2xl"}>Location: </span><span
                 className={"font-light text-xl"}> {profile.city}, {profile.region}</span></p>
             <p><span className={"font-semibold text-2xl"}>Member Since: </span><span
                 className={"font-light text-xl"}>{moment(profile.created_at).format('MMMM Do YYYY')}</span></p>
+            <div className={"flex flex-row items-center gap-2"}><span className={"font-semibold text-2xl"}>Rating: </span><span
+                className={"font-light text-xl"}><Rating avgRating={profile.average_rating}/></span></div>
 
             <p className={"text-4xl font-bold"}>Followers</p>
-            <div className={"grid grid-cols-3 gap-4"}>
+            <div className={"grid grid-cols-6 gap-4"}>
                 {profile.followed.map((follower) => {
                     return <Link to={`/profile/${follower.id}`} key={follower.id}>
                         <div className="card bg-base-100 shadow-xl">
