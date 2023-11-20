@@ -49,6 +49,10 @@ export const ViewProduct = (props) => {
         }
     })
 
+    const calculatePrice = (price, discount) => {
+        return price - (price * discount / 100)
+    }
+
     const handleSubmit = () => addReviewMutation.mutate();
     return <div>
         <Hero/>
@@ -62,6 +66,10 @@ export const ViewProduct = (props) => {
                     </h1>
                     <Rating rating={productData.product.avg_rating}/>
                 </div>
+                <p className={"text-3xl"}>{calculatePrice(productData.product.price, productData.product.discount)}€
+                    {productData.product.discount > 0 &&
+                    <span className={"text-sm text-gray-500 line-through"}>{productData.product.price}€</span>}
+                </p>
                 <span>{productData.product.number_views} views</span>
 
                 <img src={productData.product.image} alt={productData.product.name}
