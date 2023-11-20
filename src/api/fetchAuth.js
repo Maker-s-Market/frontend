@@ -113,3 +113,23 @@ export const unfollow = async (token, id) => {
     }
     return response.data;
 }
+
+export const fetchFollowersById = async (token) => {
+    const response = await api.get(`/user/followers`, {
+        headers: {Authorization: `Bearer ${token}`}
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const fetchFollowingById = async (token) => {
+    const response = await api.get(`/user/following`,{
+        headers: {Authorization: `Bearer ${token}`}
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
