@@ -42,7 +42,7 @@ export const resendCode = async (email) => {
     return response.data;
 }
 export const fetchUser = async (token) => {
-    const response = await api.get("/auth/current-user", {headers: {Authorization: `Bearer ${token}`}});
+    const response = await api.get("/auth/me", {headers: {Authorization: `Bearer ${token}`}});
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
@@ -80,6 +80,56 @@ export const editProfile = async (token, id, name, username, email, city, region
         headers: {Authorization: `Bearer ${token}`}
     });
 
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const fetchUserById = async (id) => {
+    const response = await api.get(`/user/${id}`);
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const follow = async (token, id) => {
+    const response = await api.post("/user/follow-seller/" + id, {}, {
+        headers: {Authorization: `Bearer ${token}`}
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const unfollow = async (token, id) => {
+    const response = await api.delete("/user/remove-following/" + id, {
+        headers: {Authorization: `Bearer ${token}`}
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const fetchFollowersById = async (token,sort) => {
+    const response = await api.get(`/user/followers`, {
+        headers: {Authorization: `Bearer ${token}`},
+        params: {sort: sort}
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const fetchFollowingById = async (token,sort) => {
+    const response = await api.get(`/user/following`,{
+        headers: {Authorization: `Bearer ${token}`},
+        params: {sort: sort}
+    });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }

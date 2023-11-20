@@ -1,7 +1,6 @@
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import {Base} from "../layouts/base";
 import {Home} from "../pages/home";
-import {ViewProduct} from "../pages/viewProduct";
 import {Search} from "../pages/search/index.js";
 import {ProductForm} from "../pages/productForm/index.js";
 import {CategoryProducts} from "../pages/categoryProducts/index.js";
@@ -12,6 +11,10 @@ import {Confirmation} from "../pages/confirmation/index.js";
 import {ForgotPassword} from "../pages/forgotPassword/index.js";
 import {Profile} from "../pages/profile/index.js";
 import {EditProfile} from "../pages/editProfile/index.js";
+import {Cart} from "../pages/cart/index.js";
+import {PrivateRoute} from "./PrivateRoute.jsx";
+import {ViewProduct} from "../pages/viewProduct/index.js";
+import {Wishlist} from "../pages/wishlist/index.js";
 
 
 export default function Router() {
@@ -24,8 +27,8 @@ export default function Router() {
                     path: "/product", children: [
                         {index: true, element: <Navigate to={"/"}/>},
                         {path: ":id", element: <ViewProduct/>},
-                        {path: "add", element: <ProductForm/>},
-                        {path: "edit/:id", element: <ProductEdit/>},
+                        {path: "add", element: <PrivateRoute component={ProductForm}/>},
+                        {path: "edit/:id", element: <PrivateRoute component={ProductEdit}/>},
                     ]
                 },
                 {path: "/search", element: <Search/>},
@@ -35,7 +38,9 @@ export default function Router() {
                     ]},
                 {path: "/profile/:id", element: <Profile/>},
                 {path: "/profile", element: <Navigate to={"/"}/>},
-                {path: "/profile/edit", element: <EditProfile/>}
+                {path: "/profile/edit", element: <PrivateRoute component={EditProfile}/>},
+                {path:"/cart", element: <PrivateRoute component={Cart}/>},
+                {path: "/wishlist", element: <PrivateRoute component={Wishlist}/>}
             ]
         },
         {path :"/signIn", element: <SignIn/>},
