@@ -2,6 +2,7 @@ import {fetchTopCategories} from "../../../api/fetchCategories.js";
 import {useQuery} from "react-query";
 import {Loading} from "../../common/loading/index.js";
 import {ErrorMessage} from "../../common/error/index.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom";
 
 export const TopCategories = (props) => {
@@ -14,11 +15,11 @@ export const TopCategories = (props) => {
         {isLoading && <Loading/>}
         <div className={"grid grid-cols-2  lg:grid-cols-4 place-items-center gap-y-4 md:mx-auto md:w-3/4"}>
             {isSuccess && topCategories.map((item) => {
-                return (<Link to={`/category/${item.id}`} key={item.id}>
+                return (<Link className={"hover:bg-gray-400 rounded-lg text-center p-3"} to={`/category/${item.id}`} key={item.id}>
                     <div key={item.id} className={"w-full md:w-48 flex flex-col place-items-center space-y-4"}>
                         <div className="avatar">
-                            <div className="w-40 rounded-full">
-                                {/*<FontAwesomeIcon icon={item.icon}/>*/}
+                            <div className="p-2">
+                                <FontAwesomeIcon icon={item.icon}/>
                             </div>
                         </div>
 

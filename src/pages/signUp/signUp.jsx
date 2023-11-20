@@ -1,10 +1,11 @@
 import * as Yup from "yup";
-import {Field, Form, Formik} from "formik";
+import {Field, Form, Formik, ErrorMessage} from "formik";
 import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useMutation} from "react-query";
 import {doSignUp} from "../../api/fetchAuth.js";
 import {useState} from "react";
+import {FormError} from "../../components/common/formError/index.js";
 
 export const SignUp = (props) => {
 
@@ -48,44 +49,72 @@ export const SignUp = (props) => {
                 }} validationSchema={signUpSchema}>
                     <Form>
                         <div className={"form-control space-y-2"}>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Name</span>
-                            </label>
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Name</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"name"} />
+                            </div>
                             <Field type="text" placeholder={"Name"} name={"name"}
                                    className={"input input-bordered"}/>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Username</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Username</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"username"} />
+                            </div>
                             <Field type="text" placeholder={"Username"} name={"username"}
                                    className={"input input-bordered"}
                                       onKeyUp={(e)=>setIdentifier(e.target.value)}
                             />
-                            <label className={"label"}>
-                                <span className={"label-text"}>Email</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Email</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"email"} />
+                            </div>
                             <Field type="text" placeholder={"Email"} name={"email"}
                                     onKeyUp={(e)=>setEmail(e.target.value)}
                                    className={"input input-bordered"}/>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Password</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Password</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"password"} />
+                            </div>
                             <Field type="password" placeholder={"Password"} name={"password"}
                                    className={"input input-bordered"}/>
-                            <label className={"label"}>
-                                <span className={"label-text"}>City</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>City</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"city"} />
+                            </div>
                             <Field type="text" placeholder={"City"} name={"city"}
                                    className={"input input-bordered"}/>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Region</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Region</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"region"} />
+                            </div>
                             <Field type="text" placeholder={"Region"} name={"region"}
                                    className={"input input-bordered"}/>
-                            <label className={"label"}>
-                                <span className={"label-text"}>Photo</span>
-                            </label>
+
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Photo</span>
+                                </label>
+                                <ErrorMessage component={FormError}  name={"photo"} />
+                            </div>
                             <Field name={"photo"} type={"file"}
                                    className={"file-input file-input-bordered file-input-accent w-full max-w-xs"}/>
+
                             <button type={"submit"} className={"btn btn-accent"}>Sign Up</button>
                         </div>
 

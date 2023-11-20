@@ -4,10 +4,11 @@ import {AiOutlineClose} from "react-icons/ai";
 import {useMutation, useQuery} from "react-query";
 import {fetchCategories} from "../../api/fetchCategories.js";
 import * as Yup from "yup";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {addProduct} from "../../api/fetchProducts.js";
 import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
+import {FormError} from "../../components/common/formError/index.js";
 
 export const ProductForm = (props) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -87,31 +88,47 @@ export const ProductForm = (props) => {
             >
                 <Form>
                     <div className="form-control w-full">
-                        <label className="label">
-                            <span className="label-text">Name</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <ErrorMessage name={"name"} component={FormError}/>
+                        </div>
                         <Field name={"name"} type={"text"} placeholder={"Majestic Unicorn"}
                                className={"input input-bordered input-accent w-full max-w-md"}/>
 
-                        <label className="label">
-                            <span className="label-text">Price</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Price</span>
+                            </label>
+                            <ErrorMessage name={"price"} component={FormError} />
+                        </div>
                         <Field name={"price"} type={"number"} placeholder={"00.00€"}
                                className={"input input-bordered input-accent w-full max-w-fit"}/>
 
-                        <label className="label">
-                            <span className="label-text">Discount</span>
-                        </label>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Discount</span>
+                            </label>
+                            <ErrorMessage name={"discount"} component={FormError}/>
+                        </div>
                         <Field name={"discount"} type={"number"} placeholder={"00.00€"}
                                className={"input input-bordered input-accent w-full max-w-fit"}/>
-                        <label className="label cursor-pointer max-w-fit">
-                            <span className="label-text pr-2">Stockable</span>
-                            <Field name={"stockable"} type={"checkbox"} className={"toggle toggle-accent"}/>
-                        </label>
 
-                        <label className="label">
-                            <span className="label-text">Description</span>
-                        </label>
+                        <div>
+                            <label className="label cursor-pointer max-w-fit">
+                                <span className="label-text pr-2">Stockable</span>
+                                <Field name={"stockable"} type={"checkbox"} className={"toggle toggle-accent"}/>
+                            </label>
+                            <ErrorMessage name={"stockable"} component={FormError}/>
+                        </div>
+
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Description</span>
+                            </label>
+                            <ErrorMessage name={"description"} component={FormError}/>
+                        </div>
 
                         <Field as={"textarea"} name={"description"}
                                placeholder={"Give us a majestic descrition about your wonderfult product"}

@@ -1,6 +1,5 @@
 import {Hero} from "../../components/home/hero/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
-import {useEffect} from "react";
 import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const Cart = (props) => {

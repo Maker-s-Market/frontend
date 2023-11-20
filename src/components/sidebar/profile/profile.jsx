@@ -6,7 +6,7 @@ export const Profile = (props) => {
     return <div>
 
         {isLogged() && <Link to={`/profile/${user.id}`}>
-            <div className="p-3 flex space-x-4">
+            <div className="p-3 flex space-x-4 hover:bg-gray-300 rounded-md">
 
                 <div className="avatar ">
                     <div className="w-24 rounded-full ">
