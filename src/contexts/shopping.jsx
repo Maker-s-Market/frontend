@@ -5,6 +5,7 @@ import {setLocalStorage} from "../utils/localStorage.js";
 import {useAuthContext} from "./auth.jsx";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {addToWishlist, deleteFromWishlist, fetchWishlist} from "../api/fetchWishlist.js";
+import {placeOrder} from "../api/fetchOrder.js";
 
 export const ShoppingContext = createContext({});
 
@@ -61,6 +62,18 @@ export const ShoppingProvider = ({children}) => {
         }
     })
 
+    const placeOrderMutation = useMutation((order) => placeOrder(token,order), {
+        onSuccess: (data) => {
+            notification.info("Order placed successfully");
+            setCart((prevState)=> [])
+            localStorage.setItem(`${user.id}_cart`, JSON.stringify([]))
+        },
+        onError: (error) => {
+            notification.error(error.response.data.message);
+        }
+    })
+
+
     const shoppingCtx = {
         cart,
         addToCart: addToCartShopping,
@@ -70,7 +83,8 @@ export const ShoppingProvider = ({children}) => {
         setWishlist,
         isProductInWishlist,
         addToWishlistMutation,
-        removeFromWishlistMutation
+        removeFromWishlistMutation,
+        placeOrderMutation
     }
 
     return (

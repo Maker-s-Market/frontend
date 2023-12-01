@@ -4,8 +4,15 @@ import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const Cart = (props) => {
 
-    const {cart, removeFromCart} = useShoppingContext();
+    const {cart, removeFromCart,placeOrderMutation} = useShoppingContext();
     const {user} = useAuthContext();
+
+    const handleCheckout = () => {
+        const orders = cart.map((item) => {
+            return {product_id: item.product.id, quantity: item.quantity}
+        })
+        placeOrderMutation.mutate(orders)
+    }
 
     return <div>
         <Hero/>
@@ -36,7 +43,7 @@ export const Cart = (props) => {
             <div className={"md:col-span-2 lg:col-span-1 bg-stone-200 rounded-lg p-4"}>
                 <h1 className="text-4xl font-bold">Total</h1>
                 <p className="text-lg">Total price: {cart.reduce((acc, item) => acc + item.product.price, 0)}€</p>
-                <button className="btn btn-accent btn-block">Checkout</button>
+                <button className="btn btn-accent btn-block" onClick={handleCheckout}>Checkout</button>
             </div>
         </div>
     </div>;
