@@ -38,7 +38,7 @@ export const editRating = async (rating, product, token) => {
 }
 
 export const fetchUserRatingById = async (id, token) => {
-    const response = await api.get("/rating-seller/" + id,
+    const response = await api.get("/rating-user/" + id,
         {headers: {Authorization: `Bearer ${token}`}});
 
     if (response.status === 204) {
@@ -53,7 +53,7 @@ export const fetchUserRatingById = async (id, token) => {
 }
 
 export const addUserRating = async (rating, seller, token) => {
-    const response = await api.post("/rating-seller", {
+    const response = await api.post("/rating-user", {
         rating: rating,
         seller_id: seller
     }, {headers: {Authorization: `Bearer ${token}`}});
@@ -64,7 +64,7 @@ export const addUserRating = async (rating, seller, token) => {
 }
 
 export const editUserRating = async (rating, seller, token) => {
-    const response = await api.put("/rating-seller", {
+    const response = await api.put("/rating-user", {
         rating: rating,
         id: seller
     }, {headers: {Authorization: `Bearer ${token}`}});

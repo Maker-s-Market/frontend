@@ -95,7 +95,7 @@ export const fetchUserById = async (id) => {
 }
 
 export const follow = async (token, id) => {
-    const response = await api.post("/user/follow-seller/" + id, {}, {
+    const response = await api.post("/user/follow-user/" + id, {}, {
         headers: {Authorization: `Bearer ${token}`}
     });
     if (response.status !== 200) {
