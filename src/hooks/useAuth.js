@@ -10,7 +10,7 @@ export const useAuth = () => {
 
     const login = (user,token) => {
         setUser(user);
-        setFollowing(user.followed)
+        setFollowing(user.following)
         setToken(token);
     }
 
