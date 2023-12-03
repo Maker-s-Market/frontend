@@ -39,8 +39,14 @@ export const searchProducts = async (query, categoryId, sort, discount) => {
     return response.data;
 }
 
-export const addProduct = async (product) => {
-    const response = await api.post("/product", product);
+export const addProduct = async (token,product) => {
+    const response = await api.post("/product", product,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+
+        });
     if (response.status !== 201) {
         throw new Error("Something went wrong!");
     }
