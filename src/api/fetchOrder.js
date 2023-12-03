@@ -27,7 +27,7 @@ export const placeOrder = async (token, order) => {
 }
 
 export const getPaymentIntent = async (token, amount) => {
-    const response = await api.post("/process-payment", amount,
+    const response = await api.post(`/payment/process-payment?amount=${amount}`, {},
         {
             headers: {
                 Authorization: `Bearer ${token}`

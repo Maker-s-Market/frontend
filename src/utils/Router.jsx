@@ -16,6 +16,7 @@ import {PrivateRoute} from "./PrivateRoute.jsx";
 import {ViewProduct} from "../pages/viewProduct/index.js";
 import {Wishlist} from "../pages/wishlist/index.js";
 import {Orders} from "../pages/orders/index.js";
+import {PremiumCheckout} from "../pages/premium/index.js";
 import {Stripe} from "../components/stripe/index.js";
 import {Adverts} from "../pages/adverts/index.js";
 import {Stats} from "../pages/stats/index.js";
@@ -45,6 +46,7 @@ export default function Router() {
                 {path: "/profile/edit", element: <PrivateRoute component={EditProfile}/>},
                 {path:"/cart", element: <PrivateRoute component={Cart}/>},
                 {path:"/checkout", element: <PrivateRoute component={Stripe}/>},
+                {path:"/premium", element: <PrivateRoute component={PremiumCheckout}/>},
                 {path: "/wishlist", element: <PrivateRoute component={Wishlist}/>},
                 {path: "/orders", element: <PrivateRoute component={Orders}/>},
                 {path: "/adverts", element: <PrivateRoute component={Adverts}/>},
