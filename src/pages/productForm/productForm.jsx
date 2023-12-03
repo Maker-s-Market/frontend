@@ -9,10 +9,12 @@ import {addProduct} from "../../api/fetchProducts.js";
 import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {FormError} from "../../components/common/formError/index.js";
+import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const ProductForm = (props) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [categoryOption, setCategoryOption] = useState("");
+    const {token} = useAuthContext();
     const navigate = useNavigate();
     const notification = useNotification()
 
@@ -55,13 +57,14 @@ export const ProductForm = (props) => {
     const findCategory = (id) => categories.find((item) => item.id === id).name
 
     const addProductMutation = useMutation({
-        mutationFn: ({name, price, discount, description, image, categories,stockable, stock}) => addProduct({name, price, discount, description, image:"https://picsum.photos/200", categories:jsonizeCategories(selectedCategories),stockable,stock}),
+        mutationFn: ({name, price, discount, description, image, categories,stockable, stock}) => addProduct(token,{name, price, discount, description, image:"https://picsum.photos/200", categories:jsonizeCategories(selectedCategories),stockable,stock}),
         onSuccess: () => {
             notification.info("Product Added")
             navigate("/")
         },
-        onError: () => {
-            notification.info("Error")
+        onError: (data) => {
+            console.log(data)
+            notification.error(data.response.data.detail)
         }
     })
 

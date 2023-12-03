@@ -17,6 +17,7 @@ export const Profile = (props) => {
                 <div className="flex flex-col justify-center">
                     <h1 className="text-lg">{user.name}</h1>
                     <h3 className="text-md">@{user.username}</h3>
+                    {user.role === "Premium" &&<div className={"badge badge-lg badge-accent badge-outline mt-2"}>Premium</div>}
                 </div>
             </div>
         </Link>

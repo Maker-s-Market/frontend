@@ -94,7 +94,7 @@ export const ViewProduct = (props) => {
                 </div>
             </div>
             {isLogged() && user.id === productData.user.id ?
-                <SellerUtils/> :
+                <SellerUtils isProductAvailable={productData.product.available}/> :
                 <SellerInformation seller={productData.user}/>}
 
             <div className={"md:col-span-2 lg:col-span-3 space-y-2"}>

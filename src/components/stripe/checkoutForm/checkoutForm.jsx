@@ -67,7 +67,7 @@ export const CheckoutForm = ({amount, handleSucessfulCheckout}) => {
 
             if (paymentMethodReq.error) {
                 console.log(paymentMethodReq.error.message)
-                notification.error("Ocorreu um erro na transação.")
+                notification.error("Error processing payment.")
                 setProcessingTo(false);
                 return;
             }
@@ -78,13 +78,13 @@ export const CheckoutForm = ({amount, handleSucessfulCheckout}) => {
 
             if (error) {
                 console.log(paymentMethodReq.error.message)
-                notification.error("Ocorreu um erro na transação.")
+                notification.error("Error processing payment.")
                 setProcessingTo(false);
                 return;
             }
 
             handleSucessfulCheckout()
-            notification.success("Pagamento bem sucedido.")
+            notification.success("Your order was successfully placed!")
             setProcessingTo(false)
             navigate("/")
         } catch (error) {

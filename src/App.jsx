@@ -11,8 +11,9 @@ import {ReactQueryDevtools} from "react-query/devtools";
 
 library.add(fab, fas);
 
+const queryClient = new QueryClient()
 function App() {
-    const queryClient = new QueryClient()
+
 
     return (<QueryClientProvider client={queryClient}>
         <NotificationProvider>
@@ -22,7 +23,6 @@ function App() {
                 </ShoppingProvider>
             </AuthProvider>
         </NotificationProvider>
-        <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>)
 }
 
