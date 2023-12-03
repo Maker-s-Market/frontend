@@ -2,7 +2,7 @@ import {
     BsBagFill,
     BsBarChartFill,
     BsBox2Fill,
-    BsCartFill,
+    BsCartFill, BsCurrencyEuro,
     BsFillHeartFill,
     BsFillPlusCircleFill,
     BsSearch
@@ -22,8 +22,7 @@ export const Menu = (props) => {
             <li className="font-bold"><Link to={"/wishlist"}><BsFillHeartFill/>Wishlist</Link></li>
             <li className="font-bold"><Link to={"/adverts"}><BsBagFill/>My Products</Link></li>
             {user.role === "Premium" && <li className="font-bold"><Link to={"/stats"}><BsBarChartFill/>Analytics</Link></li>}
-
-
+            {user.role !== "Premium" && <li className="font-bold"><Link to={"/premium"}><BsCurrencyEuro/>Buy Premium</Link></li>}
             <li className="font-bold"><a onClick={() => logout()}><BiSolidExit/>Sign Out</a></li>
         </> : <li className="font-bold"><Link to={"/signin"}>Sign In</Link></li>
         }
