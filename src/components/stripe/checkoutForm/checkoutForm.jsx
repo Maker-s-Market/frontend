@@ -35,7 +35,7 @@ export const CheckoutForm = ({amount, handleSucessfulCheckout}) => {
 
 
     const handleCardDetailsChange = ev => {
-        ev.error ? console.log("error") : console.log("error");
+
     };
 
     const handleSubmit = async (values) => {
