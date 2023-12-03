@@ -11,7 +11,7 @@ import {getPaymentIntent} from "../../api/fetchOrder.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {Hero} from "../../components/home/hero/index.js";
 import {useNotification} from "../../hooks/useNotification.js";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {FormError} from "../../components/common/formError/index.js";
 
 export const CheckoutForm = () => {
@@ -23,7 +23,7 @@ export const CheckoutForm = () => {
 
     const [isProcessing, setProcessingTo] = useState(false);
 
-    const {cart} = useShoppingContext();
+    const {cart, placeOrderMutation} = useShoppingContext();
 
     const initialValues = {
         name: "",
@@ -42,7 +42,14 @@ export const CheckoutForm = () => {
     });
 
     // TO-DO: get cart value
-    const amount = 1;
+    const amount = cart.reduce((acc, item) => acc + item.product.price, 0);
+
+    const handleSucessfulCheckout = () => {
+        const orders = cart.map((item) => {
+            return {product_id: item.product.id, quantity: item.quantity}
+        })
+        placeOrderMutation.mutate(orders)
+    }
 
     const handleSubmit = async (values) => {
 
@@ -87,10 +94,13 @@ export const CheckoutForm = () => {
                 return;
             }
 
+            handleSucessfulCheckout()
             notification.success("Pagamento bem sucedido.")
+            setProcessingTo(false)
             navigate("/")
         } catch (error) {
             notification.error(error.message)
+            setProcessingTo(false)
         }
     };
 
@@ -207,7 +217,7 @@ export const CheckoutForm = () => {
                 )}
                     <div className={"md:col-span-2 lg:col-span-1 bg-stone-200 rounded-lg p-4"}>
                         <h1 className="text-4xl font-bold">Total</h1>
-                        <p className="text-lg">Total price: {cart.reduce((acc, item) => acc + item.product.price, 0)}€</p>
+                        <p className="text-lg">Total price: {amount}€</p>
                     </div>
                 </div>
             </div>

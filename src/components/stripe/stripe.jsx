@@ -1,13 +1,12 @@
 import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 import {CheckoutForm} from "../../pages/checkoutForm/index.js";
-import {useAuthContext} from "../../contexts/auth.jsx";
 
 
 export const Stripe = () => {
 
     const stripePromise = loadStripe(
-        "pk_test_51OIqpEH77Yi7PjLJXyx4jzRsQ2geagYHw92MLeiWLJlxTuLuelEYzeHX8sMtB993kYpJ1IBNa5yhoCoxmsg4lN4A00CWDHUzXV"
+        "pk_test_51OIyIFFzcOhoVJrZQMUYqI90GBxj5IRQv3Z1zBOHFnuZ80F8mwjso6MKPrr2dowyjX5YLtz31WsBCkf6L5Hq8svh00ZYTaMBpA"
     );
     return(
         <Elements stripe={stripePromise}>
