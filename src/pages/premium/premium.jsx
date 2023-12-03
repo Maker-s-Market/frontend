@@ -11,8 +11,6 @@ export const PremiumCheckout = () => {
 
     const handleSucessfulCheckout = async () => {
         const response = await changeRoleStatus(token, "Premium");
-
-        console.log(response)
     }
 
     return (

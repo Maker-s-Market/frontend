@@ -137,9 +137,8 @@ export const fetchFollowingById = async (token,sort) => {
 }
 
 export const changeRoleStatus = async (token, role) => {
-    const response = await api.put(`/user/role`, {
-        role: role
-    }, {
+    const response = await api.put(`/user/role/${role}`, {},
+        {
         headers: {Authorization: `Bearer ${token}`}
     });
 
