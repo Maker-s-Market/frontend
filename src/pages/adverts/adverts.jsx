@@ -7,7 +7,7 @@ import {Loading} from "../../components/common/loading/index.js";
 
 export const Adverts = (props) => {
 
-    const {user, token,setUser} = useAuthContext()
+    const {token} = useAuthContext()
     const notification = useNotification()
     const queryClient = useQueryClient()
 

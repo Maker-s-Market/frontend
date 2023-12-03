@@ -23,7 +23,6 @@ function App() {
                 </ShoppingProvider>
             </AuthProvider>
         </NotificationProvider>
-        <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>)
 }
 
