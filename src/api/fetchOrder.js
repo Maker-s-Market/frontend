@@ -25,3 +25,17 @@ export const placeOrder = async (token, order) => {
     }
     return response.data;
 }
+
+export const getPaymentIntent = async (token, amount) => {
+    const response = await api.post("/process-payment", amount,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    if(response.status !== 201){
+        throw new Error("Something went wrong!");
+    }
+
+    return response.data;
+}
