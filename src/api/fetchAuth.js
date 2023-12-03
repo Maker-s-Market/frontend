@@ -95,7 +95,7 @@ export const fetchUserById = async (id) => {
 }
 
 export const follow = async (token, id) => {
-    const response = await api.post("/user/follow-seller/" + id, {}, {
+    const response = await api.post("/user/follow-user/" + id, {}, {
         headers: {Authorization: `Bearer ${token}`}
     });
     if (response.status !== 200) {
@@ -130,6 +130,18 @@ export const fetchFollowingById = async (token,sort) => {
         headers: {Authorization: `Bearer ${token}`},
         params: {sort: sort}
     });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const changeRoleStatus = async (token, role) => {
+    const response = await api.put(`/user/role/${role}`, {},
+        {
+        headers: {Authorization: `Bearer ${token}`}
+    });
+
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }

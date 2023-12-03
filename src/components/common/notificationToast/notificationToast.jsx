@@ -1,13 +1,16 @@
 import {useEffect} from "react";
 import {useNotification} from "../../../hooks/useNotification.js";
 
-export const notificationColorDict = {
-    "info": "alert-info",
-    "error" : "alert-error",
-    "success" : "alert-success",
-    "warning" : "alert-warning"
-}
 export const NotificationToast = ({message, type, id}) => {
+
+    const notificationColors = {
+        "info": "alert-info",
+        "error" : "alert-error",
+        "success" : "alert-success",
+        "warning" : "alert-warning"
+    }
+
+
     const notification = useNotification()
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -16,9 +19,7 @@ export const NotificationToast = ({message, type, id}) => {
         return () => clearTimeout(timer);
     }, []);
 
-    console.log(type)
-
-    return <div className={`alert ${notificationColorDict[type]}`}>
+    return <div className={`alert ${notificationColors[type]}`}>
         <span>{message}</span>
     </div>
 };

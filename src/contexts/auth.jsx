@@ -24,14 +24,14 @@ export const AuthProvider = ({children}) => {
 
     const followMutation = useMutation((id) => follow(token,id), {
         onSuccess: (data) => {
-            setFollowing((prevState) => data.followed ? data.followed : [])
+            setFollowing((prevState) => data.following ? data.following : [])
             notification.info("Followed successfully")
         }
     })
 
     const unfollowMutation = useMutation((id) => unfollow(token,id), {
         onSuccess: (data) => {
-            setFollowing((prevState) => data.followed ? data.followed : [])
+            setFollowing((prevState) => data.following ? data.following : [])
             notification.info("Unfollowed successfully")
         }
     })

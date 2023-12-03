@@ -3,6 +3,7 @@ import {useState} from 'react';
 export const useShopping = () => {
     const [cart, setCart] = useState([]);
     const [wishlist, setWishlist] = useState([]);
+    const [orders, setOrders] = useState([]);
 
     const addToCart = (productToAdd) => {
         let newCart = [...cart]
@@ -48,5 +49,5 @@ export const useShopping = () => {
         return wishlist.findIndex(item => item.id === productId) !== -1;
     };
 
-    return {cart, addToCart, removeFromCart, clearCart, setCart, wishlist, setWishlist, isProductInWishlist};
+    return {cart, addToCart, removeFromCart, clearCart, setCart, wishlist, setWishlist, isProductInWishlist, orders,setOrders};
 };

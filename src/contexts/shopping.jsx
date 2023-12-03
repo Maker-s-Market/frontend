@@ -5,13 +5,14 @@ import {setLocalStorage} from "../utils/localStorage.js";
 import {useAuthContext} from "./auth.jsx";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {addToWishlist, deleteFromWishlist, fetchWishlist} from "../api/fetchWishlist.js";
+import {fetchOrder, placeOrder} from "../api/fetchOrder.js";
 
 export const ShoppingContext = createContext({});
 
 
 export const ShoppingProvider = ({children}) => {
 
-    const {cart, addToCart, removeFromCart, clearCart,setCart, wishlist,setWishlist,isProductInWishlist} = useShopping();
+    const {cart, addToCart, removeFromCart, clearCart,setCart, wishlist,setWishlist,isProductInWishlist,orders,setOrders} = useShopping();
     const notification = useNotification();
     const {user, isLogged,token} = useAuthContext();
     const queryClient = useQueryClient()
@@ -32,6 +33,13 @@ export const ShoppingProvider = ({children}) => {
             setWishlist(() => data.products)
         }
     })
+
+    useQuery(["orders"], () => fetchOrder(token), {
+        refetchOnWindowFocus: false,enabled:isLogged(), onSuccess: (data) => {
+            setOrders(() => data)
+        }
+    })
+
 
     const addToCartShopping = (product,user) => {
         const newCart = addToCart(product);
@@ -61,6 +69,19 @@ export const ShoppingProvider = ({children}) => {
         }
     })
 
+    const placeOrderMutation = useMutation((order) => placeOrder(token,order), {
+        onSuccess: (data) => {
+            notification.info("Order placed successfully");
+            setCart((prevState)=> [])
+            localStorage.setItem(`${user.id}_cart`, JSON.stringify([]))
+            queryClient.invalidateQueries(['orders'])
+        },
+        onError: (error) => {
+            notification.error(error.response.data.message);
+        }
+    })
+
+
     const shoppingCtx = {
         cart,
         addToCart: addToCartShopping,
@@ -70,7 +91,9 @@ export const ShoppingProvider = ({children}) => {
         setWishlist,
         isProductInWishlist,
         addToWishlistMutation,
-        removeFromWishlistMutation
+        removeFromWishlistMutation,
+        placeOrderMutation,
+        orders
     }
 
     return (
