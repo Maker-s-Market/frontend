@@ -42,7 +42,7 @@ export const Cart = (props) => {
                         Checkout
                     </button>
                 ) : (
-                    <Link to="/premium" className="btn btn-accent btn-block">
+                    <Link to="/checkout" className="btn btn-accent btn-block">
                         Checkout
                     </Link>
                 )}
