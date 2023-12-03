@@ -9,7 +9,7 @@ export const fetchProductById = async (id) => {
 }
 
 export const fetchTopProducts = async (limit) => {
-    const response = await api.get("/product/top/"+limit);
+    const response = await api.get("/product/top/" + limit);
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
@@ -27,10 +27,7 @@ export const fetchProductsByCategory = async (category) => {
 export const searchProducts = async (query, categoryId, sort, discount) => {
     const response = await api.get("/product", {
         params: {
-            q: query,
-            category_id: categoryId,
-            sort: sort,
-            discount: discount
+            q: query, category_id: categoryId, sort: sort, discount: discount
         }
     });
     if (response.status !== 200) {
@@ -39,14 +36,13 @@ export const searchProducts = async (query, categoryId, sort, discount) => {
     return response.data;
 }
 
-export const addProduct = async (token,product) => {
-    const response = await api.post("/product", product,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+export const addProduct = async (token, product) => {
+    const response = await api.post("/product", product, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
 
-        });
+    });
     if (response.status !== 201) {
         throw new Error("Something went wrong!");
     }
@@ -63,6 +59,18 @@ export const deleteProduct = async (id) => {
 
 export const editProduct = async (id, product) => {
     const response = await api.put("/product/" + id, product);
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
+
+export const editProductAvailability = async (token, id, availability) => {
+    const response = await api.put("/products/" + id + "/available?available=" + availability, {}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
     }
