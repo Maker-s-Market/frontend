@@ -1,7 +1,6 @@
 import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
-import {CheckoutForm} from "../../pages/checkoutForm/index.js";
-
+import {CheckoutForm} from "./checkoutForm/index.js";
 
 export const Stripe = () => {
 
