@@ -76,3 +76,15 @@ export const editProductAvailability = async (token, id, availability) => {
     }
     return response.data;
 }
+
+export const fetchUserProducts = async (token) => {
+    const response = await api.get("/user/products", {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
