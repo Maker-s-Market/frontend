@@ -135,3 +135,16 @@ export const fetchFollowingById = async (token,sort) => {
     }
     return response.data;
 }
+
+export const changeRoleStatus = async (token, role) => {
+    const response = await api.put(`/user/role`, {
+        role: role
+    }, {
+        headers: {Authorization: `Bearer ${token}`}
+    });
+
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}

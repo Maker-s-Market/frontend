@@ -37,7 +37,15 @@ export const Cart = (props) => {
             <div className={"md:col-span-2 lg:col-span-1 bg-stone-200 rounded-lg p-4"}>
                 <h1 className="text-4xl font-bold">Total</h1>
                 <p className="text-lg">Total price: {cart.reduce((acc, item) => acc + item.product.price, 0)}€</p>
-                <Link to={"/checkout"} className="btn btn-accent btn-block">Checkout</Link>
+                {cart.length === 0 ? (
+                    <button className="btn btn-disabled btn-block" disabled>
+                        Checkout
+                    </button>
+                ) : (
+                    <Link to="/premium" className="btn btn-accent btn-block">
+                        Checkout
+                    </Link>
+                )}
             </div>
         </div>
     </div>;
