@@ -33,7 +33,6 @@ export const AuthProvider = ({children}) => {
         ()=>fetchUser(token), {enabled: !!token,
             onSuccess: (data) => {
                 login(data,token)
-                notification.info("Welcome")
             },
             onError: () => {
                 notification.info("Error")
@@ -60,6 +59,7 @@ export const AuthProvider = ({children}) => {
     const signInMutation = useMutation({
         mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
         onSuccess: (data) => {
+            notification.info("Welcome")
             setToken(() => data.token)
             localStorage.setItem("token", data.token)
         },
