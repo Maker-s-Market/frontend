@@ -10,24 +10,14 @@ import {FormError} from "../../components/common/formError/index.js";
 export const SignIn = (props) => {
     const navigate = useNavigate();
     const notification = useNotification()
-    const {setToken,token,login} = useAuthContext()
+    const {setToken,token,login,signInMutation} = useAuthContext()
 
     const loginSchema = Yup.object().shape({
         identifier: Yup.string().required(),
         password: Yup.string().required(),
     });
 
-    const signInMutation = useMutation({
-        mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
-        onSuccess: (data) => {
-            setToken(()=> data.token)
-        },
-        onError: () => {
-            notification.info("Failed to sign in. Invalid credentials")
-        }
-    })
-
-    const userData = useQuery("user",
+    useQuery("user",
         ()=>fetchUser(token), {enabled: !!token,
         onSuccess: (data) => {
             login(data,token)
