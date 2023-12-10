@@ -6,29 +6,22 @@ import {Link, useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {FormError} from "../../components/common/formError/index.js";
+import {useEffect} from "react";
 
 export const SignIn = (props) => {
     const navigate = useNavigate();
-    const notification = useNotification()
-    const {setToken,token,login,signInMutation} = useAuthContext()
+    const {user,token, signInMutation} = useAuthContext()
 
     const loginSchema = Yup.object().shape({
         identifier: Yup.string().required(),
         password: Yup.string().required(),
     });
 
-    useQuery("user",
-        ()=>fetchUser(token), {enabled: !!token,
-        onSuccess: (data) => {
-            login(data,token)
-            notification.info("Welcome")
+    useEffect(() => {
+        if(token){
             navigate("/")
-
-        },
-        onError: () => {
-            notification.info("Error")
         }
-    })
+    }, [token,user])
 
     const handleSubmit = (values) => signInMutation.mutate(values)
 

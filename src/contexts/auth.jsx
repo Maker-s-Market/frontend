@@ -1,7 +1,7 @@
-import React, {createContext, useMemo} from "react";
+import React, {createContext, useEffect, useMemo} from "react";
 import {useAuth} from "../hooks/useAuth.js";
-import {useMutation} from "react-query";
-import {doSignIn, follow, unfollow} from "../api/fetchAuth.js";
+import {useMutation, useQuery} from "react-query";
+import {doSignIn, fetchUser, follow, unfollow} from "../api/fetchAuth.js";
 import {useNotification} from "../hooks/useNotification.js";
 
 
@@ -19,6 +19,26 @@ export const AuthProvider = ({children}) => {
         setFollowing,
         following
     } = useAuth();
+
+    //Do login if token is present in the localStorage
+    useEffect(() => {
+        const tkn = localStorage.getItem("token")
+        if (tkn) {
+            setToken(tkn)
+        }
+
+    }, [])
+
+    useQuery("user",
+        ()=>fetchUser(token), {enabled: !!token,
+            onSuccess: (data) => {
+                login(data,token)
+                notification.info("Welcome")
+            },
+            onError: () => {
+                notification.info("Error")
+            }
+        })
 
     const notification = useNotification();
 
@@ -41,6 +61,7 @@ export const AuthProvider = ({children}) => {
         mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
         onSuccess: (data) => {
             setToken(() => data.token)
+            localStorage.setItem("token", data.token)
         },
         onError: () => {
             notification.info("Failed to sign in. Invalid credentials")
