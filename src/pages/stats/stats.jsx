@@ -17,7 +17,7 @@ export const Stats = (props) => {
     } = useQuery("seller-stats", () => fetchSellerStats(token))
 
     return <div>
-        <Hero/>
+        
         <div className="flex flex-col m-8 gap-4">
             <div id="item-info" className="col-span-4 bg-stone-200 rounded-lg p-4">
                 <h1 className="text-4xl font-bold">Stats</h1>

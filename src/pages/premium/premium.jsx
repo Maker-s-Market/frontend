@@ -20,7 +20,7 @@ export const PremiumCheckout = () => {
     return (
         <Stripe>
             <div>
-                <Hero/>
+                
                 <h1 className="text-4xl font-bold">Checkout</h1>
                 <div className={"flex flex-row "}>
                     <CheckoutForm amount={amount} handleSucessfulCheckout={handleSucessfulCheckout}/>

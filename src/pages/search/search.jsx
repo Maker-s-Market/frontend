@@ -35,7 +35,7 @@ export const Search = (props) => {
 
 
     return <div>
-        <Hero/>
+        
         <div className={"flex flex-col w-3/4 mx-auto"}>
             <div className={"join mx-auto mt-3"}>
                 <input type="text" placeholder="What will you buy today?"

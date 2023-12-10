@@ -50,7 +50,7 @@ export const Profile = (props) => {
         }, [])
 
         return <div>
-            <Hero/>
+            
             {isLoading && <Loading/>}
             {isSuccess ? <div className="flex flex-col m-8 space-y-4">
                 <img src={profile.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
