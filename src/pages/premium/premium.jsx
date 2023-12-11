@@ -3,20 +3,24 @@ import {Hero} from "../../components/home/hero/index.js";
 import {CheckoutForm} from "../../components/stripe/checkoutForm/index.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {changeRoleStatus} from "../../api/fetchAuth.js";
+import {useQueryClient} from "react-query";
 
 export const PremiumCheckout = () => {
-    const {token} = useAuthContext();
+    const {token,setUser} = useAuthContext();
+    const queryClient = useQueryClient();
     // TO-DO: get cart value
     const amount = 199.99;
 
     const handleSucessfulCheckout = async () => {
         const response = await changeRoleStatus(token, "Premium");
+        await queryClient.refetchQueries(["user"],{inactive: true})
+        setUser((prevState) => (queryClient.getQueryData(["user"])))
     }
 
     return (
         <Stripe>
             <div>
-                <Hero/>
+                
                 <h1 className="text-4xl font-bold">Checkout</h1>
                 <div className={"flex flex-row "}>
                     <CheckoutForm amount={amount} handleSucessfulCheckout={handleSucessfulCheckout}/>

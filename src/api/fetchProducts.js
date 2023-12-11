@@ -66,7 +66,7 @@ export const editProduct = async (id, product) => {
 }
 
 export const editProductAvailability = async (token, id, availability) => {
-    const response = await api.put("/products/" + id + "/available?available=" + availability, {}, {
+    const response = await api.put("/product/" + id + "/available?available=" + availability, {}, {
         headers: {
             Authorization: `Bearer ${token}`
         }

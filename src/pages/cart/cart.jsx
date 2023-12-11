@@ -9,7 +9,7 @@ export const Cart = (props) => {
     const {user} = useAuthContext();
 
     return <div>
-        <Hero/>
+        
         <div className="grid grid-cols-1 md:grid-cols-4 m-8 gap-4">
             <div id="item-info" className="md:col-span-2 lg:col-span-3 bg-stone-200 rounded-lg p-4">
                 <h1 className="text-4xl font-bold">Cart</h1>

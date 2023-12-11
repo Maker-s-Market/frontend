@@ -55,7 +55,7 @@ export const ViewProduct = (props) => {
 
     const handleSubmit = () => addReviewMutation.mutate();
     return <div>
-        <Hero/>
+        
         {isLoading && <Loading/>}
 
         {isSuccess && <div className="grid grid-cols-1 md:grid-cols-4 m-8 gap-4">

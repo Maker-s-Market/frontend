@@ -1,7 +1,7 @@
-import React, {createContext, useMemo} from "react";
+import React, {createContext, useEffect, useMemo} from "react";
 import {useAuth} from "../hooks/useAuth.js";
-import {useMutation} from "react-query";
-import {follow, unfollow} from "../api/fetchAuth.js";
+import {useMutation, useQuery} from "react-query";
+import {doSignIn, fetchUser, follow, unfollow} from "../api/fetchAuth.js";
 import {useNotification} from "../hooks/useNotification.js";
 
 
@@ -20,22 +20,53 @@ export const AuthProvider = ({children}) => {
         following
     } = useAuth();
 
+    //Do login if token is present in the localStorage
+    useEffect(() => {
+        const tkn = localStorage.getItem("token")
+        if (tkn) {
+            setToken(tkn)
+        }
+
+    }, [])
+
+    useQuery("user",
+        ()=>fetchUser(token), {enabled: !!token,
+            onSuccess: (data) => {
+                login(data,token)
+            },
+            onError: () => {
+                notification.info("Error")
+            }
+        })
+
     const notification = useNotification();
 
-    const followMutation = useMutation((id) => follow(token,id), {
+    const followMutation = useMutation((id) => follow(token, id), {
         onSuccess: (data) => {
             setFollowing((prevState) => data.following ? data.following : [])
             notification.info("Followed successfully")
         }
     })
 
-    const unfollowMutation = useMutation((id) => unfollow(token,id), {
+    const unfollowMutation = useMutation((id) => unfollow(token, id), {
         onSuccess: (data) => {
             setFollowing((prevState) => data.following ? data.following : [])
             notification.info("Unfollowed successfully")
         }
     })
 
+
+    const signInMutation = useMutation({
+        mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
+        onSuccess: (data) => {
+            notification.info("Welcome")
+            setToken(() => data.token)
+            localStorage.setItem("token", data.token)
+        },
+        onError: () => {
+            notification.info("Failed to sign in. Invalid credentials")
+        }
+    })
 
     const authCtx = useMemo(() => {
         return {
@@ -49,9 +80,10 @@ export const AuthProvider = ({children}) => {
             unfollowMutation,
             followMutation,
             following,
-            setFollowing
+            setFollowing,
+            signInMutation
         }
-    }, [user,token,following])
+    }, [user, token, following])
 
     return (<AuthContext.Provider value={authCtx}>
         {children}

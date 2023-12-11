@@ -10,7 +10,7 @@ export const Orders = (props) => {
         console.log(orders)
     }, []);
     return <div>
-        <Hero/>
+        
 
         <div className="flex flex-col m-8 gap-4">
             <div id="item-info" className="col-span-4 bg-stone-200 rounded-lg p-4">

@@ -20,6 +20,7 @@ import {PremiumCheckout} from "../pages/premium/index.js";
 import {Adverts} from "../pages/adverts/index.js";
 import {Stats} from "../pages/stats/index.js";
 import {Checkout} from "../pages/checkout/index.js";
+import {AuthLayout} from "../layouts/authLayout/index.js";
 import {ProductReviews} from "../pages/productReviews/index.js";
 
 
@@ -38,27 +39,34 @@ export default function Router() {
                     ]
                 },
                 {path: "/search", element: <Search/>},
-                {path: "category", children: [
+                {
+                    path: "category", children: [
                         {index: true, element: <Navigate to={"/"}/>},
                         {path: ":id", element: <CategoryProducts/>},
-                    ]},
+                    ]
+                },
                 {path: "/profile/:id", element: <Profile/>},
                 {path: "/profile", element: <Navigate to={"/"}/>},
                 {path: "/profile/edit", element: <PrivateRoute component={EditProfile}/>},
                 {path: "/profile/reviews", element: <PrivateRoute component={ProductReviews}/>},
-                {path:"/cart", element: <PrivateRoute component={Cart}/>},
-                {path:"/checkout", element: <PrivateRoute component={Checkout}/>},
-                {path:"/premium", element: <PrivateRoute component={PremiumCheckout}/>},
+                {path: "/cart", element: <PrivateRoute component={Cart}/>},
+                {path: "/checkout", element: <PrivateRoute component={Checkout}/>},
+                {path: "/premium", element: <PrivateRoute component={PremiumCheckout}/>},
                 {path: "/wishlist", element: <PrivateRoute component={Wishlist}/>},
                 {path: "/orders", element: <PrivateRoute component={Orders}/>},
                 {path: "/adverts", element: <PrivateRoute component={Adverts}/>},
                 {path: "/stats", element: <PrivateRoute component={Stats}/>},
             ]
         },
-        {path :"/signIn", element: <SignIn/>},
-        {path: "/signUp", element: <SignUp/>},
-        {path: "/confirmEmail", element: <Confirmation/>},
-        {path: "/forgotPassword", element: <ForgotPassword/>},
+        {
+            path: "/", element: <AuthLayout/>, children: [
+                {path: "/signIn", element: <SignIn/>},
+                {path: "/signUp", element: <SignUp/>},
+                {path: "/confirmEmail", element: <Confirmation/>},
+                {path: "/forgotPassword", element: <ForgotPassword/>},
+
+            ]
+        },
         {path: "*", element: <Navigate to={"/"}/>}
     ])
 
