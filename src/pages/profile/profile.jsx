@@ -91,8 +91,8 @@ export const Profile = (props) => {
 
                 {isLogged() && <div className={"flex-1 space-y-3"}>
                     <div className="join">
-                        <button className="btn join-item" onClick={() => handleToggleFollow(false)}>Following</button>
-                        <button className="btn join-item" onClick={() => handleToggleFollow(true)}>Followers</button>
+                        <button className={`btn join-item ${toggleFollow? "" : "btn-accent"}`} onClick={() => handleToggleFollow(false)}>Following</button>
+                        <button className={`btn join-item ${toggleFollow ? "btn-accent": ""}`} onClick={() => handleToggleFollow(true)}>Followers</button>
                     </div>
                     {toggleFollow ?
                         <>
