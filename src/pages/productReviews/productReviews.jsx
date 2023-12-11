@@ -2,7 +2,7 @@ import {useAuthContext} from "../../contexts/auth.jsx";
 import {Loading} from "../../components/common/loading/index.js";
 import {useParams} from "react-router-dom";
 import {useRef} from "react";
-import {useQuery} from "react-query";
+import {useMutation, useQuery} from "react-query";
 import {fetchUserById} from "../../api/fetchAuth.js";
 
 
@@ -14,9 +14,19 @@ export const ProductReviews = () => {
         enabled: !!id,
     })
 
+    const {
+        mutate: mutateProductReviews,
+        data: productReviews,
+        isError: errorReviews,
+        isLoading: loadingReviews,
+        isSuccess: successReviews
+    } = useMutation()
+
     return (<div>
         {isLoading && <Loading/>}
-        {isSuccess ? <div></div>
+        {isSuccess ? <div>
+
+            </div>
             : <p>Product Reviews not found</p>}
 
 
