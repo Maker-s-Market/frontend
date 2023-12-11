@@ -19,6 +19,7 @@ export const useAuth = () => {
         setFollowing([]);
         setToken(null);
         queryClient.clear();
+        localStorage.removeItem("token");
     }
 
     const isLogged = () => {
