@@ -36,7 +36,7 @@ export const EditProfile = (props) => {
         },
         onSuccess: (data) => {
             console.log(data)
-            //setUser(()=>data)
+            setUser(()=>data)
             notification.info("Profile Updated")
             navigate("/profile/"+user.id)
         }

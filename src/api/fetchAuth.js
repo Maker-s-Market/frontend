@@ -80,8 +80,6 @@ export const editProfile = async (token, id, name, username, email, city, region
         }
     });
 
-    console.log(photoResponse)
-
     if (photoResponse.status !== 201) {
         throw new Error("Something went wrong!");
     }
