@@ -72,10 +72,22 @@ export const recoverPassword = async (email, code, password) => {
     return response.data;
 }
 
-export const editProfile = async (token, id, name, username, email, city, region, photo) => {
+export const editProfile = async (token, id, name, username, email, city, region, formData) => {
+
+    const photoResponse = await api.post("/uploadfile", formData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    console.log(photoResponse)
+
+    if (photoResponse.status !== 201) {
+        throw new Error("Something went wrong!");
+    }
 
     const response = await api.put("/user", {
-        id: id, name: name, username: username, email: email, city: city, region: region, photo: photo
+        id: id, name: name, username: username, email: email, city: city, region: region, photo: photoResponse.data.url
     }, {
         headers: {Authorization: `Bearer ${token}`}
     });

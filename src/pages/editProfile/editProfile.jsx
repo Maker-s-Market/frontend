@@ -7,9 +7,10 @@ import {editProfile} from "../../api/fetchAuth.js";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useNavigate} from "react-router-dom";
 import {FormError} from "../../components/common/formError/index.js";
+import {useState} from "react";
 
 export const EditProfile = (props) => {
-
+    const [photo, setPhoto] = useState("");
     const {user,token,setUser} = useAuthContext();
     const notification = useNotification()
     const navigate = useNavigate()
@@ -19,13 +20,23 @@ export const EditProfile = (props) => {
         username: Yup.string().required("Required"),
         email: Yup.string().required("Required"),
         city: Yup.string().required("Required"),
-        region: Yup.string().required("Required")
+        region: Yup.string().required("Required"),
+        photo: Yup.mixed(),
     })
 
     const editProfileMutation = useMutation({
-        mutationFn: ({name, username, email, city, region}) => editProfile(token, user.id,name, username, email, city, region,user.photo),
+        mutationFn: ({name, username, email, city, region}) => {
+            const formData = new FormData();
+            console.log(photo)
+            if(photo !== null){
+                formData.append('file', photo)
+            }
+
+            editProfile(token, user.id, name, username, email, city, region, formData)
+        },
         onSuccess: (data) => {
-            setUser(()=>data)
+            console.log(data)
+            //setUser(()=>data)
             notification.info("Profile Updated")
             navigate("/profile/"+user.id)
         }
@@ -101,6 +112,18 @@ export const EditProfile = (props) => {
                             <ErrorMessage component={FormError}  name={"region"} />
                         </div>
                         <Field type="text" name="region" placeholder="Region" className="input input-bordered"/>
+                    </div>
+
+                    <div className="form-control w-full">
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Profile Photo</span>
+                            </label>
+                            <ErrorMessage component={FormError} name={"photo"} />
+                        </div>
+                        <input id="photo" name="photo" type="file" onChange={(event) => {
+                            setPhoto(event.currentTarget.files[0]);
+                        }} />
                     </div>
 
                     <button type="submit" className="btn btn-accent btn-block mt-2">Submit</button>
