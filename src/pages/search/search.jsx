@@ -47,7 +47,7 @@ export const Search = (props) => {
                 >Search <FaSearch size={"20"}/></button>
             </div>
 
-            <div className={"flex flex-row justify-between align-middle"}>
+            <div className={"flex flex-col lg:flex-row gap-2 justify-around align-middle mx-auto lg:mx-0"}>
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
                         <span className="label-text">Categories</span>
@@ -75,8 +75,8 @@ export const Search = (props) => {
                     </select>
                 </div>
 
-                <div className="form-control w-full max-w-xs">
-                    <label className="label cursor-pointer max-w-fit">
+                <div className="form-control w-full max-w-xs justify-end">
+                    <label className="label cursor-pointer max-w-fit ">
                         <span className="label-text pr-2">Discount</span>
                         <input name={"discount"} type={"checkbox"} className={"toggle toggle-accent"} ref={discountRef}/>
                     </label>
