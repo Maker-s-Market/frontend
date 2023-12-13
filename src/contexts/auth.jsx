@@ -36,6 +36,7 @@ export const AuthProvider = ({children}) => {
             },
             onError: () => {
                 notification.info("Error")
+                localStorage.removeItem("token")
             }
         })
 
