@@ -25,18 +25,10 @@ export const EditProfile = (props) => {
     })
 
     const editProfileMutation = useMutation({
-        mutationFn: ({name, username, email, city, region}) => {
-            const formData = new FormData();
-            console.log(photo)
-            if(photo !== null){
-                formData.append('file', photo)
-            }
-
-            editProfile(token, user.id, name, username, email, city, region, formData)
-        },
+        mutationFn: ({name, username, email, city, region}) => editProfile(token, user.id, name, username, email, city, region, photo),
         onSuccess: (data) => {
-            console.log(data)
-            setUser(()=>data)
+            setUser(() => data)
+            //Update user photo field in the useState
             notification.info("Profile Updated")
             navigate("/profile/"+user.id)
         }
@@ -121,7 +113,9 @@ export const EditProfile = (props) => {
                             </label>
                             <ErrorMessage component={FormError} name={"photo"} />
                         </div>
-                        <input id="photo" name="photo" type="file" onChange={(event) => {
+                        <input id="photo" name="photo" type="file"
+                               className={"file-input file-input-bordered file-input-accent w-full"}
+                               onChange={(event) => {
                             setPhoto(event.currentTarget.files[0]);
                         }} />
                     </div>

@@ -72,7 +72,10 @@ export const recoverPassword = async (email, code, password) => {
     return response.data;
 }
 
-export const editProfile = async (token, id, name, username, email, city, region, formData) => {
+export const editProfile = async (token, id, name, username, email, city, region, photo) => {
+
+    const formData = new FormData();
+    if (photo !== null) formData.append('file', photo)
 
     const photoResponse = await api.post("/uploadfile", formData, {
         headers: {
@@ -124,10 +127,9 @@ export const unfollow = async (token, id) => {
     return response.data;
 }
 
-export const fetchFollowersById = async (token,sort) => {
+export const fetchFollowersById = async (token, sort) => {
     const response = await api.get(`/user/followers`, {
-        headers: {Authorization: `Bearer ${token}`},
-        params: {sort: sort}
+        headers: {Authorization: `Bearer ${token}`}, params: {sort: sort}
     });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
@@ -135,10 +137,9 @@ export const fetchFollowersById = async (token,sort) => {
     return response.data;
 }
 
-export const fetchFollowingById = async (token,sort) => {
-    const response = await api.get(`/user/following`,{
-        headers: {Authorization: `Bearer ${token}`},
-        params: {sort: sort}
+export const fetchFollowingById = async (token, sort) => {
+    const response = await api.get(`/user/following`, {
+        headers: {Authorization: `Bearer ${token}`}, params: {sort: sort}
     });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
@@ -147,8 +148,7 @@ export const fetchFollowingById = async (token,sort) => {
 }
 
 export const changeRoleStatus = async (token, role) => {
-    const response = await api.put(`/user/role/${role}`, {},
-        {
+    const response = await api.put(`/user/role/${role}`, {}, {
         headers: {Authorization: `Bearer ${token}`}
     });
 
