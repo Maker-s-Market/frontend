@@ -147,3 +147,14 @@ export const changeRoleStatus = async (token, role) => {
     }
     return response.data;
 }
+
+export const signUpIdp = async (name,username,email,city,region,photo) => {
+    const response = await api.post("/auth/sign-up-idp", {
+        name: name, username: username, email: email, city: city, region: region, photo: photo
+    });
+
+    if (response.status !== 201) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
