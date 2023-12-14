@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {FormError} from "../../components/common/formError/index.js";
 import {useEffect} from "react";
+import {FaGoogle} from "react-icons/fa";
 
 export const SignIn = (props) => {
     const navigate = useNavigate();
@@ -49,6 +50,9 @@ export const SignIn = (props) => {
                            className={"input input-bordered"}/>
 
                     <button type={"submit"} className={"btn btn-accent"}>Sign In</button>
+                    <Link to={import.meta.env.VITE_GOOGLE_AUTH_URL}
+                        className={"btn btn-accent items-center"}
+                    >Sign in with <FaGoogle /> Account</Link>
                     <span className={"mx-auto"}>Don&apos;t have an acount? <Link to={"/signup"}
                                                                                  className={"text-accent hover:underline"}>Create an Account</Link></span>
                     <Link to={"/forgotPassword"} className={"mx-auto hover:underline"}>Forgot Password?</Link>
