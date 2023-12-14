@@ -59,7 +59,7 @@ export const Profile = (props) => {
         return <div>
 
             {isLoading && <Loading/>}
-            {isSuccess ? <div className="flex flex-row m-8 space-y-4">
+            {isSuccess ? <div className="flex flex-col lg:flex-row m-8 space-y-4">
                 <div className={"flex flex-col m-8 space-y-4 flex-1"}>
                     <img src={profile.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
                          alt="profile picture"
@@ -90,7 +90,7 @@ export const Profile = (props) => {
                 </div>
 
                 {isLogged() && <div className={"flex-1 space-y-3"}>
-                    <div className="join">
+                    <div className="join items-center justify-center w-full">
                         <button className={`btn join-item ${toggleFollow? "" : "btn-accent"}`} onClick={() => handleToggleFollow(false)}>Following</button>
                         <button className={`btn join-item ${toggleFollow ? "btn-accent": ""}`} onClick={() => handleToggleFollow(true)}>Followers</button>
                     </div>
@@ -99,7 +99,7 @@ export const Profile = (props) => {
                             {isLoadingFollowers && <Loading/>}
                             <div className={"flex flex-col flex-1"}>
                                 {user.id === id && <>
-                                    <div className={"flex flex-col gap-2"}>
+                                    <div className={"flex flex-col  items-center gap-2"}>
                                         <select className="select select-accent w-full max-w-xs" ref={sortFollowersRef}
                                                 onChange={handleSortFollowers}>
                                             <option value="">Sort</option>
@@ -112,15 +112,14 @@ export const Profile = (props) => {
                                         </select>
                                     </div>
 
-                                    <div className={"grid grid-cols-6 gap-4"}>
-                                        <p className={"text-4xl font-bold"}>Followers</p>
+                                    <div className={"grid grid-cols-2 lg:grid-cols-3 gap-4"}>
                                         {isSuccessFollowers && followers.map((follower) => {
                                                 return <Link to={`/profile/${follower.id}`} key={follower.id}>
                                                     <div className="card bg-base-100 shadow-xl">
                                                         <figure><img
                                                             src={follower.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
                                                             alt="profile picture"
-                                                            className={"rounded-full w-24 h-24 mx-auto"}
+                                                            className={"rounded-full mt-4 w-24 h-24 mx-auto"}
                                                         /></figure>
                                                         <div className="card-body">
                                                             <h2 className="card-title">{follower.name}</h2>
@@ -139,7 +138,7 @@ export const Profile = (props) => {
                             {isLoadingFollowing && <Loading/>}
                             <div className={"flex flex-col flex-1 space-y-2"}>
                                 {user.id === id && <>
-                                    <div className={"flex flex-col gap-2"}>
+                                    <div className={"flex flex-col items-center gap-2"}>
                                         <select className="select select-accent w-full max-w-xs" ref={sortFollowingRef}
                                                 onChange={handleSortFollowing}>
                                             <option value="">Sort</option>
@@ -151,16 +150,14 @@ export const Profile = (props) => {
                                             <option value="desc_num_rating">Number of ratings desc</option>
                                         </select>
                                     </div>
-
-                                    <div className={"grid grid-cols-3 gap-4"}>
+                                    <div className={"grid grid-cols-2 lg:grid-cols-3 md:grid-cols-4 gap-4"}>
                                         {isSuccessFollowing && following.map((follow) => {
                                                 return <Link to={`/profile/${follow.id}`} key={follow.id}>
-                                                    <p className={"text-4xl font-bold"}>Following</p>
                                                     <div className="card bg-base-100 shadow-xl">
                                                         <figure><img
                                                             src={follow.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
                                                             alt="profile picture"
-                                                            className={"rounded-full w-24 h-24 mx-auto"}
+                                                            className={"rounded-full mt-4 w-24 h-24 mx-auto"}
                                                         /></figure>
                                                         <div className="card-body">
                                                             <h2 className="card-title">{follow.name}</h2>
