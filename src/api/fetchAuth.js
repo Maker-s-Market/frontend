@@ -10,8 +10,18 @@ export const doSignIn = async (user) => {
     return response.data;
 }
 
-export const doSignUp = async (user) => {
-    const response = await api.post("/auth/sign-up", user);
+export const doSignUp = async (user,photo) => {
+    const formData = new FormData();
+    if (photo !== null) formData.append('file', photo)
+
+    const photoResponse = await api.post("/uploadfile", formData);
+
+    if (photoResponse.status !== 201) {
+        throw new Error("Something went wrong!");
+    }
+
+
+    const response = await api.post("/auth/sign-up", {...user,photo:photoResponse.data.url});
 
     if (response.status !== 201) {
         throw new Error("Something went wrong!");
@@ -74,8 +84,21 @@ export const recoverPassword = async (email, code, password) => {
 
 export const editProfile = async (token, id, name, username, email, city, region, photo) => {
 
+    const formData = new FormData();
+    if (photo !== null) formData.append('file', photo)
+
+    const photoResponse = await api.post("/uploadfile", formData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (photoResponse.status !== 201) {
+        throw new Error("Something went wrong!");
+    }
+
     const response = await api.put("/user", {
-        id: id, name: name, username: username, email: email, city: city, region: region, photo: photo
+        id: id, name: name, username: username, email: email, city: city, region: region, photo: photoResponse.data.url
     }, {
         headers: {Authorization: `Bearer ${token}`}
     });
@@ -114,10 +137,9 @@ export const unfollow = async (token, id) => {
     return response.data;
 }
 
-export const fetchFollowersById = async (token,sort) => {
+export const fetchFollowersById = async (token, sort) => {
     const response = await api.get(`/user/followers`, {
-        headers: {Authorization: `Bearer ${token}`},
-        params: {sort: sort}
+        headers: {Authorization: `Bearer ${token}`}, params: {sort: sort}
     });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
@@ -125,10 +147,9 @@ export const fetchFollowersById = async (token,sort) => {
     return response.data;
 }
 
-export const fetchFollowingById = async (token,sort) => {
-    const response = await api.get(`/user/following`,{
-        headers: {Authorization: `Bearer ${token}`},
-        params: {sort: sort}
+export const fetchFollowingById = async (token, sort) => {
+    const response = await api.get(`/user/following`, {
+        headers: {Authorization: `Bearer ${token}`}, params: {sort: sort}
     });
     if (response.status !== 200) {
         throw new Error("Something went wrong!");
@@ -137,8 +158,7 @@ export const fetchFollowingById = async (token,sort) => {
 }
 
 export const changeRoleStatus = async (token, role) => {
-    const response = await api.put(`/user/role/${role}`, {},
-        {
+    const response = await api.put(`/user/role/${role}`, {}, {
         headers: {Authorization: `Bearer ${token}`}
     });
 

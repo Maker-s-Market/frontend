@@ -17,6 +17,7 @@ export const ProductForm = (props) => {
     const {token} = useAuthContext();
     const navigate = useNavigate();
     const notification = useNotification()
+    const [photo, setPhoto] = useState("");
 
     const {
         data: categories,
@@ -43,7 +44,7 @@ export const ProductForm = (props) => {
         price: Yup.number().required("Required"),
         discount: Yup.number().required("Required"),
         description: Yup.string().required("Required"),
-        image: Yup.string().required("Required"),
+        image:Yup.mixed(),
         categories: Yup.array().required("Required"),
         stockable: Yup.boolean().required("Required"),
     })
@@ -57,7 +58,7 @@ export const ProductForm = (props) => {
     const findCategory = (id) => categories.find((item) => item.id === id).name
 
     const addProductMutation = useMutation({
-        mutationFn: ({name, price, discount, description, image, categories,stockable, stock}) => addProduct(token,{name, price, discount, description, image:"https://picsum.photos/200", categories:jsonizeCategories(selectedCategories),stockable,stock}),
+        mutationFn: ({name, price, discount, description, image, categories,stockable, stock}) => addProduct(token,{name, price, discount, description, categories:jsonizeCategories(selectedCategories),stockable,stock},photo),
         onSuccess: () => {
             notification.info("Product Added")
             navigate("/")
@@ -104,7 +105,7 @@ export const ProductForm = (props) => {
                             <label className="label">
                                 <span className="label-text">Price</span>
                             </label>
-                            <ErrorMessage name={"price"} component={FormError} />
+                            <ErrorMessage name={"price"} component={FormError}/>
                         </div>
                         <Field name={"price"} type={"number"} placeholder={"00.00€"}
                                className={"input input-bordered input-accent w-full max-w-fit"}/>
@@ -140,9 +141,11 @@ export const ProductForm = (props) => {
                         <label className="label">
                             <span className="label-text">Image</span>
                         </label>
-                        <Field name={"image"} type={"file"}
-                               className={"file-input file-input-bordered file-input-accent w-full max-w-xs"}/>
-
+                        <input id="photo" name="photo" type="file"
+                               className={"file-input file-input-bordered file-input-accent w-full"}
+                               onChange={(event) => {
+                                   setPhoto(event.currentTarget.files[0]);
+                               }}/>
                         <label className="label">
                             <span className="label-text">Categories</span>
                         </label>

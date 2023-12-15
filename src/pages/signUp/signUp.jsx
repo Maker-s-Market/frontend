@@ -16,23 +16,24 @@ export const SignUp = (props) => {
         password: Yup.string().required(),
         city: Yup.string().required(),
         region: Yup.string().required(),
-        photo: Yup.string().required(),
+        image: Yup.mixed(),
     });
     const navigate = useNavigate();
     const notification = useNotification()
     const [identifier, setIdentifier] = useState("")
     const [email, setEmail] = useState("")
+    const [photo, setPhoto] = useState("")
 
     const signUpMutation = useMutation({
-        mutationFn: ({name, username, email, password, city, region, photo}) => doSignUp({
+        mutationFn: ({name, username, email, password, city, region, image}) => doSignUp({
             name,
             username,
             email,
             password,
             city,
             region,
-            photo
-        }),
+            image},photo
+        ),
         onSuccess: () => {
             notification.info("Success")
             navigate("/confirmEmail?username=" + identifier + "&email=" + email)
@@ -64,26 +65,26 @@ export const SignUp = (props) => {
                     <Field type="text" placeholder={"Name"} name={"name"}
                            className={"input input-bordered"}/>
 
-                    <div>
-                        <label className={"label"}>
-                            <span className={"label-text"}>Username</span>
-                        </label>
-                        <ErrorMessage component={FormError} name={"username"}/>
-                    </div>
-                    <Field type="text" placeholder={"Username"} name={"username"}
-                           className={"input input-bordered"}
-                           onKeyUp={(e) => setIdentifier(e.target.value)}
-                    />
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Username</span>
+                                </label>
+                                <ErrorMessage component={FormError} name={"username"}/>
+                            </div>
+                            <Field type="text" placeholder={"Username"} name={"username"}
+                                   className={"input input-bordered"}
+                                   onKeyUp={(e) => setIdentifier(e.target.value)}
+                            />
 
-                    <div>
-                        <label className={"label"}>
-                            <span className={"label-text"}>Email</span>
-                        </label>
-                        <ErrorMessage component={FormError} name={"email"}/>
-                    </div>
-                    <Field type="text" placeholder={"Email"} name={"email"}
-                           onKeyUp={(e) => setEmail(e.target.value)}
-                           className={"input input-bordered"}/>
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Email</span>
+                                </label>
+                                <ErrorMessage component={FormError} name={"email"}/>
+                            </div>
+                            <Field type="text" placeholder={"Email"} name={"email"}
+                                   onKeyUp={(e) => setEmail(e.target.value)}
+                                   className={"input input-bordered"}/>
 
                     <div>
                         <label className={"label"}>
@@ -112,14 +113,17 @@ export const SignUp = (props) => {
                     <Field type="text" placeholder={"Region"} name={"region"}
                            className={"input input-bordered"}/>
 
-                    <div>
-                        <label className={"label"}>
-                            <span className={"label-text"}>Photo</span>
-                        </label>
-                        <ErrorMessage component={FormError} name={"photo"}/>
-                    </div>
-                    <Field name={"photo"} type={"file"}
-                           className={"file-input file-input-bordered file-input-accent w-full max-w-xs"}/>
+                            <div>
+                                <label className={"label"}>
+                                    <span className={"label-text"}>Photo</span>
+                                </label>
+                                <ErrorMessage component={FormError} name={"photo"}/>
+                            </div>
+                            <input id="photo" name="photo" type="file"
+                                   className={"file-input file-input-bordered file-input-accent w-full"}
+                                   onChange={(event) => {
+                                       setPhoto(event.currentTarget.files[0]);
+                                   }}/>
 
                     <button type={"submit"} className={"btn btn-accent"}>Sign Up</button>
                 </div>

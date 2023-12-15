@@ -7,10 +7,11 @@ import {editProfile} from "../../api/fetchAuth.js";
 import {useNotification} from "../../hooks/useNotification.js";
 import {useNavigate} from "react-router-dom";
 import {FormError} from "../../components/common/formError/index.js";
+import {useState} from "react";
 
 export const EditProfile = (props) => {
-
-    const {user,token,setUser} = useAuthContext();
+    const [photo, setPhoto] = useState("");
+    const {user, token, setUser} = useAuthContext();
     const notification = useNotification()
     const navigate = useNavigate()
 
@@ -19,15 +20,23 @@ export const EditProfile = (props) => {
         username: Yup.string().required("Required"),
         email: Yup.string().required("Required"),
         city: Yup.string().required("Required"),
-        region: Yup.string().required("Required")
+        region: Yup.string().required("Required"),
+        photo: Yup.mixed(),
     })
 
     const editProfileMutation = useMutation({
-        mutationFn: ({name, username, email, city, region}) => editProfile(token, user.id,name, username, email, city, region,user.photo),
+        mutationFn: ({
+                         name,
+                         username,
+                         email,
+                         city,
+                         region
+                     }) => editProfile(token, user.id, name, username, email, city, region, photo),
         onSuccess: (data) => {
-            setUser(()=>data)
+            setUser(() => data)
+            //Update user photo field in the useState
             notification.info("Profile Updated")
-            navigate("/profile/"+user.id)
+            navigate("/profile/" + user.id)
         }
     })
 
@@ -54,58 +63,64 @@ export const EditProfile = (props) => {
             >
                 <Form>
                     <div className="form-control w-full">
+
                         <div>
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"name"} />
+                            <ErrorMessage component={FormError} name={"name"}/>
                         </div>
                         <Field type="text" name="name" placeholder="Name" className="input input-bordered"/>
-                    </div>
 
-                    <div className="form-control w-full">
                         <div>
                             <label className="label">
                                 <span className="label-text">Username</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"username"} />
+                            <ErrorMessage component={FormError} name={"username"}/>
                         </div>
                         <Field type="text" name="username" placeholder="Username" className="input input-bordered"/>
-                    </div>
 
-                    <div className="form-control w-full">
                         <div>
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"email"} />
+                            <ErrorMessage component={FormError} name={"email"}/>
                         </div>
                         <Field type="text" name="email" placeholder="Email" className="input input-bordered"/>
-                    </div>
 
-                    <div className="form-control w-full">
                         <div>
                             <label className="label">
                                 <span className="label-text">City</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"city"} />
+                            <ErrorMessage component={FormError} name={"city"}/>
                         </div>
                         <Field type="text" name="city" placeholder="City" className="input input-bordered"/>
-                    </div>
 
-                    <div className="form-control w-full">
                         <div>
                             <label className="label">
                                 <span className="label-text">Region</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"region"} />
+                            <ErrorMessage component={FormError} name={"region"}/>
                         </div>
                         <Field type="text" name="region" placeholder="Region" className="input input-bordered"/>
-                    </div>
 
-                    <button type="submit" className="btn btn-accent btn-block mt-2">Submit</button>
+                        <div>
+                            <label className="label">
+                                <span className="label-text">Profile Photo</span>
+                            </label>
+                            <ErrorMessage component={FormError} name={"photo"}/>
+                        </div>
+                        <input id="photo" name="photo" type="file"
+                               className={"file-input file-input-bordered file-input-accent w-full"}
+                               onChange={(event) => {
+                                   setPhoto(event.currentTarget.files[0]);
+                               }}/>
+
+                        <button type="submit" className="btn btn-accent btn-block mt-2">Submit</button>
+                    </div>
                 </Form>
             </Formik>
         </div>
-    </div>;
+    </div>
+        ;
 };
