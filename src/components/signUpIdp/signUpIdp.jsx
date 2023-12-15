@@ -7,7 +7,13 @@ import {signUpIdp} from "../../api/fetchAuth.js";
 import {FormError} from "../common/formError/index.js";
 import {useNavigate, useParams} from "react-router-dom";
 import {Loading} from "../common/loading/index.js";
-
+/**
+ * SignUpIdp component handles the sign up process for the user.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} A form for the user to fill in missing values to conclude the sign up.
+ */
 export const SignUpIdp = (props) => {
     const [cookies, setCookies, removeCookies] = useCookies(['name','email', 'username', 'picture', 'Authorization']);
     //Get variable from GET url ?

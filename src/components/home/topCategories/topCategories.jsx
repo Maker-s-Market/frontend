@@ -4,7 +4,12 @@ import {Loading} from "../../common/loading/index.js";
 import {ErrorMessage} from "../../common/error/index.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom";
-
+/**
+ * TopCategories component fetches and displays the top categories.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The TopCategories component.
+ */
 export const TopCategories = (props) => {
 
 

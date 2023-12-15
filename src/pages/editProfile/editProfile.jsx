@@ -1,6 +1,5 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
 import * as Yup from "yup";
-import {Hero} from "../../components/home/hero/index.js";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useMutation} from "react-query";
 import {editProfile} from "../../api/fetchAuth.js";
@@ -8,7 +7,13 @@ import {useNotification} from "../../hooks/useNotification.js";
 import {useNavigate} from "react-router-dom";
 import {FormError} from "../../components/common/formError/index.js";
 import {useState} from "react";
-
+/**
+ * EditProfile component is used to handle the user profile editing process.
+ * It uses react-query for server state management, Yup for form validation, and react-router-dom for navigation.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const EditProfile = (props) => {
     const [photo, setPhoto] = useState("");
     const {user, token, setUser} = useAuthContext();

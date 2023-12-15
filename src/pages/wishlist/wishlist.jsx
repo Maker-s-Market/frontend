@@ -1,8 +1,13 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
 import {WishlistButton} from "../../components/product/wishlistButton/index.js";
 import {Link} from "react-router-dom";
-
+/**
+ * Wishlist component is responsible for rendering the wishlist page.
+ * It fetches the wishlist data from the shopping context.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The Wishlist component.
+ */
 export const Wishlist = (props) => {
     const {wishlist} = useShoppingContext();
     return <div>

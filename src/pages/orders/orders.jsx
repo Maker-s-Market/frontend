@@ -1,8 +1,13 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
 import {useEffect} from "react";
 import moment from "moment";
-
+/**
+ * Orders component is used to display the user's orders.
+ * It uses the shopping context to fetch the orders.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const Orders = (props) => {
     const {orders} = useShoppingContext();
 

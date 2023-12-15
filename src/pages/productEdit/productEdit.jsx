@@ -1,8 +1,7 @@
 import {editProduct, fetchProductById} from "../../api/fetchProducts.js";
 import {useNavigate, useParams} from "react-router-dom";
-import {useMutation, useQuery, useQueryClient} from "react-query";
+import {useMutation, useQuery} from "react-query";
 import {useState} from "react";
-import {Hero} from "../../components/home/hero/index.js";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {AiOutlineClose} from "react-icons/ai";
 import {fetchCategories} from "../../api/fetchCategories.js";
@@ -10,7 +9,12 @@ import * as Yup from "yup";
 import {useNotification} from "../../hooks/useNotification.js";
 import {FormError} from "../../components/common/formError/index.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
-
+/**
+ * ProductEdit component.
+ * @module ProductEdit
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} ProductEdit component.
+ */
 export const ProductEdit = (props) => {
 
     const {id} = useParams()

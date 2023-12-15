@@ -10,7 +10,13 @@ import {
 import {BiSolidExit} from "react-icons/bi";
 import {Link} from "react-router-dom";
 import {useAuthContext} from "../../../contexts/auth.jsx";
-
+/**
+ * Menu component that displays different navigation options based on the user's login status and role.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} A list of navigation options.
+ */
 export const Menu = (props) => {
     const {isLogged, logout,user} = useAuthContext();
     return <>

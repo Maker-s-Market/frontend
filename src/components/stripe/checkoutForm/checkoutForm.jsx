@@ -7,7 +7,13 @@ import {useAuthContext} from "../../../contexts/auth.jsx";
 import {useNotification} from "../../../hooks/useNotification.js";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-
+/**
+ * CheckoutForm component handles the checkout process for the user.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including the total amount and a callback function to handle successful checkout.
+ * @returns {JSX.Element} A form for the user to fill in billing and payment details.
+ */
 export const CheckoutForm = ({amount, handleSucessfulCheckout}) => {
     const stripe = useStripe();
     const elements = useElements();

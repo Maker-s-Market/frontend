@@ -3,7 +3,12 @@ import {useQuery} from "react-query";
 import {Loading} from "../../common/loading/index.js";
 import {ErrorMessage} from "../../common/error/index.js";
 import {Link} from "react-router-dom";
-
+/**
+ * Highlights component fetches and displays the top products.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The Highlights component.
+ */
 export const Highlights = (props) => {
 
     const {data: higlightedProducts, isLoading, isError, isSuccess} = useQuery('higlightedProducts', ()=>fetchTopProducts(4))

@@ -7,7 +7,12 @@ import {Loading} from "../../components/common/loading/index.js";
 import {FollowFollowingButton} from "../../components/product/followFollowingButton/index.js";
 import {Rating} from "../../components/profile/rating/index.js";
 import {useEffect, useRef, useState} from "react";
-
+/**
+ * Profile component.
+ * @module Profile
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} Profile component.
+ */
 export const Profile = (props) => {
 
         const {user, isLogged, token} = useAuthContext();

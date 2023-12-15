@@ -1,17 +1,17 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {Loading} from "../../components/common/loading/index.js";
 import {Link, useParams} from "react-router-dom";
-import {useMutation, useQuery} from "react-query";
+import {useQuery} from "react-query";
 import {fetchUserById} from "../../api/fetchAuth.js";
-import {Review} from "../../components/product/review/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import moment from "moment/moment.js";
 import {fetchProductsReviewRatings} from "../../api/fetchProducts.js";
-import {WishlistButton} from "../../components/product/wishlistButton/index.js";
-import {Rating} from "../../components/product/rating/index.js";
-import ReactStars from "react-rating-stars-component";
 
-
+/**
+ * ProductReviews component.
+ * @module ProductReviews
+ * @returns {JSX.Element} ProductReviews component.
+ */
 export const ProductReviews = () => {
     const {isLogged, token} = useAuthContext();
     const {id} = useParams()

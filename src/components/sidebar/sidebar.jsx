@@ -2,7 +2,13 @@ import {Profile} from "./profile/profile";
 import {Menu} from "./menu/menu";
 import {Categories} from "./categories/categories";
 import {Link} from "react-router-dom";
-
+/**
+ * Sidebar component that contains the Profile, Menu, and Categories components.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including children components.
+ * @returns {JSX.Element} A sidebar with various components.
+ */
 export const Sidebar = ({children}) => {
 
 

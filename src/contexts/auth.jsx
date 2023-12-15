@@ -4,7 +4,24 @@ import {useMutation, useQuery} from "react-query";
 import {doSignIn, fetchUser, follow, unfollow} from "../api/fetchAuth.js";
 import {useNotification} from "../hooks/useNotification.js";
 
+/**
+ * @file This file contains the AuthContext and AuthProvider components, and the useAuthContext hook.
+ */
 
+/**
+ * AuthProvider component provides the authentication context to its children.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including children components.
+ * @returns {JSX.Element} AuthContext.Provider wrapping the children components.
+ */
+
+/**
+ * useAuthContext hook is used to access the AuthContext.
+ *
+ * @hook
+ * @returns {Object} The AuthContext.
+ */
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {

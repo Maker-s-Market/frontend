@@ -1,8 +1,13 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {Link} from "react-router-dom";
-
+/**
+ * Cart component is used to display the user's shopping cart.
+ * It uses the shopping context to fetch the cart items.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const Cart = (props) => {
 
     const {cart, removeFromCart} = useShoppingContext();

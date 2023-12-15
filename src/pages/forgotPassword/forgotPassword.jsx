@@ -3,7 +3,13 @@ import {useMutation} from "react-query";
 import {useNotification} from "../../hooks/useNotification.js";
 import {recoverPassword, recoverPasswordEmail} from "../../api/fetchAuth.js";
 import {useNavigate} from "react-router-dom";
-
+/**
+ * ForgotPassword component is used to handle the password recovery process.
+ * It uses react-query for server state management and react-router-dom for navigation.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const ForgotPassword = (props) => {
 
     const [email, setEmail] = useState("")

@@ -5,7 +5,13 @@ import {useAuthContext} from "../../../contexts/auth.jsx";
 import ReactStars from "react-rating-stars-component";
 import {useNotification} from "../../../hooks/useNotification.js";
 import {useState} from "react";
-
+/**
+ * Rating component that allows a user to rate a product.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {number} props.rating - The initial rating of the product.
+ * @returns {JSX.Element} The Rating component.
+ */
 export const Rating = ({rating}) => {
     const {id} = useParams()
     const {isLogged, token} = useAuthContext()

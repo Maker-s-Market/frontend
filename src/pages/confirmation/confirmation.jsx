@@ -3,7 +3,13 @@ import {useNotification} from "../../hooks/useNotification.js";
 import {useLocation, useNavigate} from "react-router-dom";
 import {confirmCode, resendCode} from "../../api/fetchAuth.js";
 import {useState} from "react";
-
+/**
+ * Confirmation component is used to handle the email confirmation process.
+ * It uses react-query for server state management and react-router-dom for navigation.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const Confirmation = (props) => {
 
     const navigate = useNavigate();

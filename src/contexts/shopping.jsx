@@ -6,7 +6,24 @@ import {useAuthContext} from "./auth.jsx";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {addToWishlist, deleteFromWishlist, fetchWishlist} from "../api/fetchWishlist.js";
 import {fetchOrder, placeOrder} from "../api/fetchOrder.js";
+/**
+ * @file This file contains the ShoppingContext and ShoppingProvider components, and the useShoppingContext hook.
+ */
 
+/**
+ * ShoppingProvider component provides the shopping context to its children.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including children components.
+ * @returns {JSX.Element} ShoppingContext.Provider wrapping the children components.
+ */
+
+/**
+ * useShoppingContext hook is used to access the ShoppingContext.
+ *
+ * @hook
+ * @returns {Object} The ShoppingContext.
+ */
 export const ShoppingContext = createContext({});
 
 

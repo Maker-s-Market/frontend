@@ -2,7 +2,13 @@ import {FaMapMarkerAlt} from "react-icons/fa";
 import {Link} from "react-router-dom";
 import {FollowFollowingButton} from "../followFollowingButton/index.js";
 import {useAuthContext} from "../../../contexts/auth.jsx";
-
+/**
+ * SellerInformation component that displays information about the seller.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.seller - The seller object.
+ * @returns {JSX.Element} The SellerInformation component.
+ */
 export const SellerInformation = ({seller}) => {
     const {isLogged} = useAuthContext();
 

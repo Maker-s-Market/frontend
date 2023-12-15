@@ -1,6 +1,10 @@
 import {useState} from "react";
 import {useQueryClient} from "react-query";
-
+/**
+ * useAuth is a custom hook that provides authentication-related data and operations.
+ * @hook
+ * @returns {Object} An object containing user data, token, and authentication-related functions.
+ */
 export const useAuth = () => {
 
     const [user, setUser] = useState(null);

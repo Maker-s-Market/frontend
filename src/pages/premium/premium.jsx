@@ -1,10 +1,13 @@
 import {Stripe} from "../../components/stripe/elementsWrapper/index.js";
-import {Hero} from "../../components/home/hero/index.js";
 import {CheckoutForm} from "../../components/stripe/checkoutForm/index.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {changeRoleStatus} from "../../api/fetchAuth.js";
 import {useQueryClient} from "react-query";
-
+/**
+ * PremiumCheckout component.
+ * @module PremiumCheckout
+ * @returns {JSX.Element} PremiumCheckout component.
+ */
 export const PremiumCheckout = () => {
     const {token,setUser} = useAuthContext();
     const queryClient = useQueryClient();
