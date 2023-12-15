@@ -1,5 +1,4 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
-import {Hero} from "../../components/home/hero/index.js";
 import {Link, useParams} from "react-router-dom";
 import moment from "moment";
 import {fetchFollowersById, fetchFollowingById, fetchUserById} from "../../api/fetchAuth.js";
@@ -45,12 +44,15 @@ export const Profile = (props) => {
             mutateFollowing({sort: sortFollowingRef.current.value})
 
         useEffect(() => {
-            mutateFollowers({sort: ""})
-            mutateFollowing({sort: ""})
+            if (user) {
+                mutateFollowers({sort: ""})
+                mutateFollowing({sort: ""})
+            }
+
         }, [])
 
         return <div>
-            <Hero/>
+
             {isLoading && <Loading/>}
             {isSuccess ? <div className="flex flex-col m-8 space-y-4">
                 <img src={profile.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}

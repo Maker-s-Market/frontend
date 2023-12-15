@@ -26,7 +26,7 @@ export const Adverts = (props) => {
     const {data: products, isLoading: productsIsLoading, isError: productsIsError, isSuccess: productsIsSuccess} = useQuery('user-products', () => fetchUserProducts(token))
 
     return <div>
-        <Hero/>
+        
 
         <div className="grid grid-cols-1 md:grid-cols-4 m-8 gap-4">
             <div id="item-info" className="col-span-4 bg-stone-200 rounded-lg p-4">

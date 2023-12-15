@@ -15,7 +15,7 @@ export const CategoryProducts = (props) => {
     } = useQuery(['productsByCategory',id], () => fetchProductsByCategory(id))
 
     return <div>
-        <Hero/>
+        
         <div className="flex flex-col m-8 space-y-4">
 
             {isLoading && <Loading/>}

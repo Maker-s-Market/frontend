@@ -43,7 +43,7 @@ export const EditProfile = (props) => {
     const handleSubmit = (values) => editProfileMutation.mutate(values)
 
     return <div>
-        <Hero/>
+        
         <div className="flex flex-col m-8 space-y-4">
             <img src={user.photo || "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
                  alt="profile picture"

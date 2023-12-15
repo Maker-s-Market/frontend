@@ -5,7 +5,7 @@ import {useNotification} from "../../hooks/useNotification.js";
 
 export const Home = (props) => {
     return <div>
-        <Hero/>
+        
         <TopCategories/>
         <Highlights/>
     </div>

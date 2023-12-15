@@ -73,7 +73,7 @@ export const ProductForm = (props) => {
 
 
     return <div>
-        <Hero/>
+        
         <div className="flex flex-col m-8 space-y-4 max-w-2xl mx-auto">
 
             <h1 className={"text-4xl font-bold"}>Announce Product</h1>

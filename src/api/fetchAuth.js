@@ -128,7 +128,7 @@ export const follow = async (token, id) => {
 }
 
 export const unfollow = async (token, id) => {
-    const response = await api.delete("/user/remove-following/" + id, {
+    const response = await api.delete("/user/following/" + id, {
         headers: {Authorization: `Bearer ${token}`}
     });
     if (response.status !== 200) {

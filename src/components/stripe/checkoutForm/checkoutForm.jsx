@@ -170,7 +170,7 @@ export const CheckoutForm = ({amount, handleSucessfulCheckout}) => {
                     <div className="divider"></div>
                     <h1 className="text-xl font-bold">Payment details</h1>
                     <CardElement
-                        className={"input input-bordered items-center"}
+                        className={"input input-bordered pt-4"}
                         onChange={handleCardDetailsChange}
                     />
                     <button disabled={isProcessing || !stripe} type={"submit"}
