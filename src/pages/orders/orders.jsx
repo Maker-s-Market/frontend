@@ -37,7 +37,7 @@ export const Orders = (props) => {
                     <div className={"flex flex-col gap-x-3"}>
                         <h1 className="text-3xl font-bold">Order #{index+1}</h1>
 
-                        <p className="text-lg"><span className={"font-bold"}>Total price:</span> {order.total_price}€
+                        <p className="text-lg"><span className={"font-bold"}>Total price:</span> {Number.parseFloat(order.total_price).toFixed(2)}€
                         </p>
                         <p className={"text-lg"}><span
                             className={"font-bold"}>Last Update:</span> {moment(order.updated_at).format("DD/MM/YYYY HH:mm")}
@@ -49,7 +49,7 @@ export const Orders = (props) => {
                                     <img src={item.product.image} alt={item.product.name} className="w-16 h-16"/>
                                     <div className="flex flex-col ml-4">
                                         <h2 className="text-md font-bold">{item.product.name}</h2>
-                                        <p className="text-md">{item.product.price}€</p>
+                                        <p className="text-md">{Number.parseFloat(item.product.price).toFixed(2)}€</p>
                                         <p className="text-md">Quantity: {item.quantity}</p>
                                     </div>
                                 </div>

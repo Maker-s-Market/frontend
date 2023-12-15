@@ -42,7 +42,7 @@ export const PremiumCheckout = () => {
                         </div>
                         <div className={"md:col-span-2 lg:col-span-1 bg-stone-200 rounded-lg p-4"}>
                             <h1 className="text-4xl font-bold">Total</h1>
-                            <p className="text-lg">Total price: {amount}€</p>
+                            <p className="text-lg">Total price: {Number.parseFloat(amount).toFixed(2)}€</p>
                         </div>
                     </div>
                 </div>

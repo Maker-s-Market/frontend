@@ -75,7 +75,7 @@ export const ViewProduct = (props) => {
                 </div>
                 <p className={"text-3xl"}>{calculatePrice(productData.product.price, productData.product.discount)}€
                     {productData.product.discount > 0 &&
-                    <span className={"text-sm text-gray-500 line-through"}>{productData.product.price}€</span>}
+                    <span className={"text-sm text-gray-500 line-through"}>{Number.parseFloat(productData.product.price).toFixed(2)}€</span>}
                 </p>
                 <span>{productData.product.number_views} views</span>
 
