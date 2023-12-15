@@ -21,6 +21,7 @@ import {Adverts} from "../pages/adverts/index.js";
 import {Stats} from "../pages/stats/index.js";
 import {Checkout} from "../pages/checkout/index.js";
 import {AuthLayout} from "../layouts/authLayout/index.js";
+import {SignUpIdp} from "../components/signUpIdp/index.js";
 import {ProductReviews} from "../pages/productReviews/index.js";
 
 
@@ -64,6 +65,7 @@ export default function Router() {
                 {path: "/signUp", element: <SignUp/>},
                 {path: "/confirmEmail", element: <Confirmation/>},
                 {path: "/forgotPassword", element: <ForgotPassword/>},
+                {path: "/sign-up-idp", element: <SignUpIdp/>},
 
             ]
         },
