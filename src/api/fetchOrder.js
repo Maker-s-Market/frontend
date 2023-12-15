@@ -6,7 +6,7 @@ import {api} from "./axios.js";
  * @throws {Error} If the response status is not 200.
  */
 export const fetchOrder = async (token) => {
-    const response = await api.get("/order/",
+    const response = await api.get("/order",
         {
             headers: {
                 Authorization: `Bearer ${token}`
