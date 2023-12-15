@@ -88,3 +88,15 @@ export const fetchUserProducts = async (token) => {
     }
     return response.data;
 }
+
+export const fetchProductsReviewRatings = async (token) => {
+    const response = await api.get("/product/seller/review-ratings", {
+        headers: {Authorization: `Bearer ${token}`},
+    });
+
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+
+    return response.data;
+}

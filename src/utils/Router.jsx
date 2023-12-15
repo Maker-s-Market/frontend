@@ -22,6 +22,7 @@ import {Stats} from "../pages/stats/index.js";
 import {Checkout} from "../pages/checkout/index.js";
 import {AuthLayout} from "../layouts/authLayout/index.js";
 import {SignUpIdp} from "../components/signUpIdp/index.js";
+import {ProductReviews} from "../pages/productReviews/index.js";
 
 
 export default function Router() {
@@ -48,6 +49,7 @@ export default function Router() {
                 {path: "/profile/:id", element: <Profile/>},
                 {path: "/profile", element: <Navigate to={"/"}/>},
                 {path: "/profile/edit", element: <PrivateRoute component={EditProfile}/>},
+                {path: "/profile/reviews", element: <PrivateRoute component={ProductReviews}/>},
                 {path: "/cart", element: <PrivateRoute component={Cart}/>},
                 {path: "/checkout", element: <PrivateRoute component={Checkout}/>},
                 {path: "/premium", element: <PrivateRoute component={PremiumCheckout}/>},
