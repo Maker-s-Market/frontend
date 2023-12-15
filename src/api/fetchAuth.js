@@ -10,8 +10,18 @@ export const doSignIn = async (user) => {
     return response.data;
 }
 
-export const doSignUp = async (user) => {
-    const response = await api.post("/auth/sign-up", user);
+export const doSignUp = async (user,photo) => {
+    const formData = new FormData();
+    if (photo !== null) formData.append('file', photo)
+
+    const photoResponse = await api.post("/uploadfile", formData);
+
+    if (photoResponse.status !== 201) {
+        throw new Error("Something went wrong!");
+    }
+
+
+    const response = await api.post("/auth/sign-up", {...user,photo:photoResponse.data.url});
 
     if (response.status !== 201) {
         throw new Error("Something went wrong!");

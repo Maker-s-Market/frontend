@@ -1,6 +1,6 @@
 import {editProduct, fetchProductById} from "../../api/fetchProducts.js";
 import {useNavigate, useParams} from "react-router-dom";
-import {useMutation, useQuery} from "react-query";
+import {useMutation, useQuery, useQueryClient} from "react-query";
 import {useState} from "react";
 import {Hero} from "../../components/home/hero/index.js";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -9,6 +9,7 @@ import {fetchCategories} from "../../api/fetchCategories.js";
 import * as Yup from "yup";
 import {useNotification} from "../../hooks/useNotification.js";
 import {FormError} from "../../components/common/formError/index.js";
+import {useAuthContext} from "../../contexts/auth.jsx";
 
 export const ProductEdit = (props) => {
 
@@ -17,6 +18,8 @@ export const ProductEdit = (props) => {
     const navigate = useNavigate()
     const [categoryOption, setCategoryOption] = useState("");
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const {token} = useAuthContext();
+    const [photo, setPhoto] = useState("");
 
     const {
         data: productData, isLoading: productIsLoading, isSuccess: productIsSuccess, isError: productIsError
@@ -33,7 +36,7 @@ export const ProductEdit = (props) => {
         price: Yup.number().required("Required"),
         discount: Yup.number().required("Required"),
         description: Yup.string().required("Required"),
-        image: Yup.string(),
+        image: Yup.mixed(),
         categories: Yup.array().required("Required"),
         stockable: Yup.boolean().required("Required"),
     })
@@ -50,7 +53,7 @@ export const ProductEdit = (props) => {
     }
 
     const editProductMutation = useMutation({
-        mutationFn: ({name, price, discount, description, image, categories, stockable, stock}) => editProduct(id, {
+        mutationFn: ({name, price, discount, description, image, categories, stockable, stock}) => editProduct(token,id, {
             name,
             price,
             discount,
@@ -59,7 +62,7 @@ export const ProductEdit = (props) => {
             categories: jsonizeCategories(selectedCategories),
             stockable,
             stock
-        }), onSuccess: () => {
+        },photo), onSuccess: async () => {
             notification.info("Product Edited")
             navigate("/")
         }, onError: () => {
@@ -111,7 +114,7 @@ export const ProductEdit = (props) => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"name"} />
+                            <ErrorMessage component={FormError} name={"name"}/>
                         </div>
                         <Field name={"name"} type={"text"} placeholder={"Majestic Unicorn"}
                                className={"input input-bordered input-accent w-full max-w-md"}/>
@@ -120,7 +123,7 @@ export const ProductEdit = (props) => {
                             <label className="label">
                                 <span className="label-text">Price</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"price"} />
+                            <ErrorMessage component={FormError} name={"price"}/>
                         </div>
                         <Field name={"price"} type={"number"} placeholder={"00.00€"}
                                className={"input input-bordered input-accent w-full max-w-fit"}/>
@@ -129,7 +132,7 @@ export const ProductEdit = (props) => {
                             <label className="label">
                                 <span className="label-text">Discount</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"discount"} />
+                            <ErrorMessage component={FormError} name={"discount"}/>
                         </div>
 
                         <Field name={"discount"} type={"number"} placeholder={"00.00€"}
@@ -144,7 +147,7 @@ export const ProductEdit = (props) => {
                             <label className="label">
                                 <span className="label-text">Description</span>
                             </label>
-                            <ErrorMessage component={FormError}  name={"description"} />
+                            <ErrorMessage component={FormError} name={"description"}/>
                         </div>
 
                         <Field as={"textarea"} name={"description"}
@@ -154,8 +157,11 @@ export const ProductEdit = (props) => {
                         <label className="label">
                             <span className="label-text">Image</span>
                         </label>
-                        <Field name={"image"} type={"file"}
-                               className={"file-input file-input-bordered file-input-accent w-full max-w-xs"}/>
+                        <input id="image" name="image" type="file"
+                               className={"file-input file-input-bordered file-input-accent w-full"}
+                               onChange={(event) => {
+                                   setPhoto(event.currentTarget.files[0]);
+                               }}/>
 
                         <label className="label">
                             <span className="label-text">Categories</span>
