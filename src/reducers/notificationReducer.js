@@ -1,3 +1,10 @@
+/**
+ * notificationReducer is a reducer function for handling notification related actions.
+ *
+ * @param {Object} state - The current state of the application.
+ * @param {Object} action - The action to be handled.
+ * @returns {Object} The new state after applying the action.
+ */
 export const notificationReducer = (state,action) => {
     switch (action.type) {
         case "ADD_NOTIFICATION":

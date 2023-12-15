@@ -5,7 +5,13 @@ import {useParams} from "react-router-dom";
 import {useNotification} from "../../../hooks/useNotification.js";
 import {useState} from "react";
 import { addUserRating, editUserRating, fetchUserRatingById} from "../../../api/fetchRatings.js";
-
+/**
+ * Rating component that allows logged in users to rate and displays the average rating.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including the average rating.
+ * @returns {JSX.Element} A star rating component.
+ */
 export const Rating = ({avgRating}) => {
 
     const {id} = useParams()

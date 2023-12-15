@@ -1,10 +1,15 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useQuery} from "react-query";
 import {fetchBuyerStats, fetchSellerStats} from "../../api/fetchStats.js";
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {useAuthContext} from "../../contexts/auth.jsx";
 import {Loading} from "../../components/common/loading/index.js";
-
+/**
+ * Stats component is responsible for rendering the statistics page.
+ * It fetches the buyer and seller statistics data using react-query.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The Stats component.
+ */
 export const Stats = (props) => {
     const {token} = useAuthContext();
 

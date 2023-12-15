@@ -1,8 +1,13 @@
 import {useShoppingContext} from "../../contexts/shopping.jsx";
-import {Hero} from "../../components/home/hero/index.js";
 import {CheckoutForm} from "../../components/stripe/checkoutForm/index.js";
 import {Stripe} from "../../components/stripe/elementsWrapper/index.js";
-
+/**
+ * Checkout component is used to handle the checkout process.
+ * It uses react-query for server state management, Yup for form validation, and react-router-dom for navigation.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const Checkout = () => {
     const {cart, placeOrderMutation} = useShoppingContext();
 

@@ -1,4 +1,3 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {fetchProductById} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
@@ -15,6 +14,14 @@ import {Review} from "../../components/product/review/index.js";
 import {useShoppingContext} from "../../contexts/shopping.jsx";
 import {WishlistButton} from "../../components/product/wishlistButton/index.js";
 
+/**
+ * ViewProduct component is responsible for rendering the product details page.
+ * It fetches the product data and reviews by product id using react-query.
+ * It also handles adding a review for the product.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The ViewProduct component.
+ */
 export const ViewProduct = (props) => {
 
     const {id} = useParams();

@@ -1,4 +1,3 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {useState} from "react";
 import {AiOutlineClose} from "react-icons/ai";
 import {useMutation, useQuery} from "react-query";
@@ -10,7 +9,12 @@ import {useNavigate} from "react-router-dom";
 import {useNotification} from "../../hooks/useNotification.js";
 import {FormError} from "../../components/common/formError/index.js";
 import {useAuthContext} from "../../contexts/auth.jsx";
-
+/**
+ * ProductForm component.
+ * @module ProductForm
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} ProductForm component.
+ */
 export const ProductForm = (props) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [categoryOption, setCategoryOption] = useState("");

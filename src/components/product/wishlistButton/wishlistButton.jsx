@@ -1,7 +1,13 @@
 import {useShoppingContext} from "../../../contexts/shopping.jsx";
 import {BsFillHeartFill} from "react-icons/bs";
 import {useAuthContext} from "../../../contexts/auth.jsx";
-
+/**
+ * WishlistButton component that allows a user to add or remove a product from their wishlist.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {string} props.productId - The id of the product.
+ * @returns {JSX.Element} The WishlistButton component.
+ */
 export const WishlistButton = ({productId}) => {
 
     const {isProductInWishlist,addToWishlistMutation, removeFromWishlistMutation} = useShoppingContext();

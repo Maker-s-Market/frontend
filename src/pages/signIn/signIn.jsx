@@ -5,7 +5,12 @@ import {useAuthContext} from "../../contexts/auth.jsx";
 import {FormError} from "../../components/common/formError/index.js";
 import {useEffect} from "react";
 import {FaGoogle} from "react-icons/fa";
-
+/**
+ * SignIn component.
+ * @module SignIn
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} SignIn component.
+ */
 export const SignIn = (props) => {
     const navigate = useNavigate();
     const {user, token, signInMutation} = useAuthContext()

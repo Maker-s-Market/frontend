@@ -4,7 +4,13 @@ import {Loading} from "../../common/loading/index.js";
 import {ErrorMessage} from "../../common/error/index.js";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {Link} from "react-router-dom";
-
+/**
+ * Categories component that fetches and displays a list of categories.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} A list of categories or an error message.
+ */
 export const Categories = (props) => {
 
     const {data: categories, isLoading, isError, isSuccess} = useQuery('categories', fetchCategories);

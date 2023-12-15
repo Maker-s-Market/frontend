@@ -1,4 +1,3 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {FaSearch} from "react-icons/fa";
 import {useMutation, useQuery} from "react-query";
 import {useRef} from "react";
@@ -6,7 +5,12 @@ import {searchProducts} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {fetchCategories} from "../../api/fetchCategories.js";
 import {Link} from "react-router-dom";
-
+/**
+ * Search component.
+ * @module Search
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} Search component.
+ */
 export const Search = (props) => {
 
     const queryRef = useRef(null);

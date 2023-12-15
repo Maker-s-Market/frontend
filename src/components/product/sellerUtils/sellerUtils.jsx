@@ -3,7 +3,13 @@ import {useMutation, useQueryClient} from "react-query";
 import {deleteProduct, editProductAvailability} from "../../../api/fetchProducts.js";
 import {useNotification} from "../../../hooks/useNotification.js";
 import {useAuthContext} from "../../../contexts/auth.jsx";
-
+/**
+ * SellerUtils component that provides seller options such as editing and deleting a product.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {boolean} props.isProductAvailable - The availability status of the product.
+ * @returns {JSX.Element} The SellerUtils component.
+ */
 export const SellerUtils = ({isProductAvailable}) => {
     const {id} = useParams();
     const {token} = useAuthContext();

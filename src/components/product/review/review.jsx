@@ -4,6 +4,14 @@ import {deleteReview} from "../../../api/fetchReviews.js";
 import {useParams} from "react-router-dom";
 import {useNotification} from "../../../hooks/useNotification.js";
 import moment from "moment";
+/**
+ * Review component that displays a review and allows deletion if the logged in user is the author of the review.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @param {Object} props.review - The review object.
+ * @param {Object} props.userData - The user data object.
+ * @returns {JSX.Element} The Review component.
+ */
 export const Review = ({review, userData}) => {
     const {user, isLogged, token} = useAuthContext();
     const {id} = useParams();

@@ -6,7 +6,14 @@ import {useMutation} from "react-query";
 import {doSignUp} from "../../api/fetchAuth.js";
 import {useState} from "react";
 import {FormError} from "../../components/common/formError/index.js";
-
+/**
+ * SignUp component is responsible for rendering the sign up page.
+ * It handles the form submission and validation using Formik and Yup.
+ * It also handles the sign up mutation using react-query.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The SignUp component.
+ */
 export const SignUp = (props) => {
 
     const signUpSchema = Yup.object().shape({

@@ -1,7 +1,17 @@
 import {createContext, useReducer} from "react";
 import {notificationReducer} from "../reducers/notificationReducer.js";
 import {NotificationContainer} from "../components/common/notificationContainer/index.js";
+/**
+ * @file This file contains the NotificationContext and NotificationProvider components.
+ */
 
+/**
+ * NotificationProvider component provides the notification context to its children.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component, including children components.
+ * @returns {JSX.Element} NotificationContext.Provider wrapping the children components.
+ */
 export const NotificationContext = createContext(null);
 
 const initialState = {

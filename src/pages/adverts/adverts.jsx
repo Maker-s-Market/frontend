@@ -1,10 +1,15 @@
 import {useAuthContext} from "../../contexts/auth.jsx";
-import {Hero} from "../../components/home/hero/index.js";
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {editProductAvailability, fetchUserProducts} from "../../api/fetchProducts.js";
 import {useNotification} from "../../hooks/useNotification.js";
 import {Loading} from "../../components/common/loading/index.js";
-
+/**
+ * Adverts component is used to display the user's advertisements.
+ * It uses react-query for server state management and the auth context for authentication.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const Adverts = (props) => {
 
     const {token} = useAuthContext()

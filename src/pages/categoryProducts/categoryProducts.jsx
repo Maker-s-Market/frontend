@@ -1,10 +1,15 @@
-import {Hero} from "../../components/home/hero/index.js";
 import {fetchProductsByCategory} from "../../api/fetchProducts.js";
 import {useQuery} from "react-query";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Link, useParams} from "react-router-dom";
-
+/**
+ * CategoryProducts component is used to display the products of a specific category.
+ * It uses react-query for server state management and react-router-dom for navigation.
+ *
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered JSX element.
+ */
 export const CategoryProducts = (props) => {
     const {id} = useParams()
     const {

@@ -1,1 +1,1 @@
-export * from "./commingSoon";
+export * from "./comingSoon.jsx";

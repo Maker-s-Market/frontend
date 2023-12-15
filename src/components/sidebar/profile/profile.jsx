@@ -1,6 +1,12 @@
 import {useAuthContext} from "../../../contexts/auth.jsx";
 import {Link} from "react-router-dom";
-
+/**
+ * Profile component that displays user's profile information if the user is logged in.
+ *
+ * @component
+ * @param {Object} props - The properties passed to the component.
+ * @returns {JSX.Element} User's profile information or nothing.
+ */
 export const Profile = (props) => {
     const {isLogged, user} = useAuthContext();
     return <div>

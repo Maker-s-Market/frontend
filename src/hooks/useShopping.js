@@ -1,5 +1,9 @@
 import {useState} from 'react';
-
+/**
+ * useShopping is a custom hook that provides shopping-related data and operations.
+ * @hook
+ * @returns {Object} An object containing cart, wishlist, orders data and related functions.
+ */
 export const useShopping = () => {
     const [cart, setCart] = useState([]);
     const [wishlist, setWishlist] = useState([]);
