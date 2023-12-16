@@ -17,7 +17,7 @@ export const PremiumCheckout = () => {
     const handleSucessfulCheckout = async () => {
         const response = await changeRoleStatus(token, "Premium");
         await queryClient.refetchQueries(["user"],{inactive: true})
-        setUser((prevState) => (queryClient.getQueryData(["user"])))
+        setUser((prevState) => ({...prevState, role: "Premium"}))
     }
 
     return (
