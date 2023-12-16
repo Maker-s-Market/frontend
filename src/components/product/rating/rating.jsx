@@ -39,16 +39,10 @@ export const Rating = ({rating}) => {
             queryClient.invalidateQueries(['product', id])
         }
     })
-
-    const ratingChanged = (newRating) => {
-        if (isLogged()) {
-            ratingMutation.mutate(newRating)
-        }
-    }
     return <ReactStars
         count={5}
-        onChange={ratingChanged}
         size={26}
+        edit={false}
         activeColor="#ffd700"
         value={isSuccess && ratingData.rating !== -1 ? ratingData.rating : rating}
     />
