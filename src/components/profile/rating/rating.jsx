@@ -51,7 +51,7 @@ export const Rating = ({avgRating}) => {
         count={5}
         onChange={ratingChanged}
         size={26}
-        edit={user.id !== id}
+        edit={user?.id !== id}
         activeColor="#ffd700"
         value={isSuccess && ratingData.rating !== -1 ? ratingData.rating : avgRating}
     />

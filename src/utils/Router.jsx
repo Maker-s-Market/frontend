@@ -29,7 +29,7 @@ import {ProductReviews} from "../pages/productReviews/index.js";
  * It uses the createBrowserRouter function from react-router-dom to create the router.
  * It defines routes for various pages like Home, Search, ProductForm, CategoryProducts, ProductEdit, SignIn, SignUp, Confirmation, ForgotPassword, Profile, EditProfile, Cart, PrivateRoute, ViewProduct, Wishlist, Orders, PremiumCheckout, Adverts, Stats, Checkout, AuthLayout, SignUpIdp, ProductReviews.
  * @function Router
- * @returns {React.Component} - The RouterProvider component with the created router.
+ * @returns {JSX.Element} - The RouterProvider component with the created router.
  */
 export default function Router() {
 
