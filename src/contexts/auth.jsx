@@ -26,36 +26,24 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
     const {
-        login,
-        logout,
-        user,
-        isLogged,
-        setUser,
-        setToken,
-        token,
-        setFollowing,
-        following
+        login, logout, user, isLogged, setUser, setToken, token, setFollowing, following
     } = useAuth();
 
-    //Do login if token is present in the localStorage
     useEffect(() => {
         const tkn = localStorage.getItem("token")
         if (tkn) {
-            setToken(tkn)
+            setToken(() => tkn)
         }
-
     }, [])
 
-    useQuery("user",
-        ()=>fetchUser(token), {enabled: !!token,
-            onSuccess: (data) => {
-                login(data,token)
-            },
-            onError: () => {
-                notification.info("Error")
-                localStorage.removeItem("token")
-            }
-        })
+    useQuery("user", () => fetchUser(token), {
+        enabled: !!token, onSuccess: (data) => {
+            login(data, token)
+        }, onError: () => {
+            notification.info("Error")
+            localStorage.removeItem("token")
+        }
+    })
 
     const notification = useNotification();
 
@@ -75,13 +63,11 @@ export const AuthProvider = ({children}) => {
 
 
     const signInMutation = useMutation({
-        mutationFn: ({identifier, password}) => doSignIn({identifier, password}),
-        onSuccess: (data) => {
+        mutationFn: ({identifier, password}) => doSignIn({identifier, password}), onSuccess: (data) => {
             notification.info("Welcome")
             setToken(() => data.token)
             localStorage.setItem("token", data.token)
-        },
-        onError: () => {
+        }, onError: () => {
             notification.info("Failed to sign in. Invalid credentials")
         }
     })

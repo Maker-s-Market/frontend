@@ -85,9 +85,9 @@ export const Profile = (props) => {
                 <div className={"flex flex-row items-center gap-2"}><span
                     className={"font-semibold text-2xl"}>Rating: </span><span
                     className={"font-light text-xl"}><Rating avgRating={profile.average_rating}/></span></div>
-                {id === user.id ? <Link to={"/profile/edit"} className={"btn btn-accent"}>Edit Profile
+                {id === user?.id ? <Link to={"/profile/edit"} className={"btn btn-accent"}>Edit Profile
                 </Link> : <FollowFollowingButton userId={id}/>}
-                {id === user.id ? <Link to={"/profile/reviews"} className={"btn btn-accent"}>See My Product's Reviews
+                {id === user?.id ? <Link to={"/profile/reviews"} className={"btn btn-accent"}>See My Product's Reviews
                 </Link> : <></>}
             </div>
 
@@ -103,7 +103,7 @@ export const Profile = (props) => {
                 {toggleFollow ? <>
                     {isLoadingFollowers && <Loading/>}
                     <div className={"flex flex-col flex-1"}>
-                        {user.id === id && <>
+                        {user?.id === id && <>
                             <div className={"flex flex-col  items-center gap-2"}>
                                 <select className="select select-accent w-full max-w-xs" ref={sortFollowersRef}
                                         onChange={handleSortFollowers}>
