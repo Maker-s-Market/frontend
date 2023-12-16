@@ -7,7 +7,6 @@ import {ShoppingProvider} from "./contexts/shopping.jsx";
 
 import {fab} from '@fortawesome/free-brands-svg-icons';
 import {fas} from '@fortawesome/free-solid-svg-icons';
-import {ReactQueryDevtools} from "react-query/devtools";
 
 library.add(fab, fas);
 
@@ -23,7 +22,6 @@ function App() {
                 </ShoppingProvider>
             </AuthProvider>
         </NotificationProvider>
-        <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>)
 }
 

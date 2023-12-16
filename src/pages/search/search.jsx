@@ -56,7 +56,7 @@ export const Search = (props) => {
                     <label className="label">
                         <span className="label-text">Categories</span>
                     </label>
-                    <select className="select select-bordered" ref={categoryRef}>
+                    <select className="select select-bordered" ref={categoryRef} onChange={handleSearch}>
                         <option defaultChecked value={""}>Categories</option>
                         {categoriesIsLoading && <Loading/>}
                         {categoriesIsSuccess && categories.map((category) => {
@@ -70,7 +70,7 @@ export const Search = (props) => {
                     <label className="label">
                         <span className="label-text">Sort</span>
                     </label>
-                    <select className="select select-bordered select-accent" ref={priceRef}>
+                    <select className="select select-bordered select-accent" ref={priceRef}  onChange={handleSearch}>
                         <option value={"price_desc"}>Desc</option>
                         <option value={"price_asc"}>Asc</option>
                         <option value={"newest"}>Newest</option>
@@ -82,7 +82,7 @@ export const Search = (props) => {
                 <div className="form-control w-full max-w-xs justify-end">
                     <label className="label cursor-pointer max-w-fit ">
                         <span className="label-text pr-2">Discount</span>
-                        <input name={"discount"} type={"checkbox"} className={"toggle toggle-accent"} ref={discountRef}/>
+                        <input name={"discount"} type={"checkbox"} className={"toggle toggle-accent"} ref={discountRef}  onChange={handleSearch}/>
                     </label>
                 </div>
             </div>

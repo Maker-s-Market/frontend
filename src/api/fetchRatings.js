@@ -88,7 +88,7 @@ export const fetchUserRatingById = async (id, token) => {
 export const addUserRating = async (rating, seller, token) => {
     const response = await api.post("/rating-user", {
         rating: rating,
-        seller_id: seller
+        rated_user_id: seller
     }, {headers: {Authorization: `Bearer ${token}`}});
     if (response.status !== 201) {
         throw new Error("Something went wrong!");

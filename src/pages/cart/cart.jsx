@@ -25,7 +25,7 @@ export const Cart = (props) => {
                                 <img src={item.product.image} alt={item.product.name} className="w-24 h-24"/>
                                 <div className="flex flex-col ml-4">
                                     <h2 className="text-xl font-bold">{item.product.name}</h2>
-                                    <p className="text-lg">{item.product.price}€</p>
+                                    <p className="text-lg">Price: {Number.parseFloat(item.product.price).toFixed(2)}€</p>
                                     <p className="text-lg">Quantity: {item.quantity}</p>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@ export const Cart = (props) => {
 
             <div className={"md:col-span-2 lg:col-span-1 bg-stone-200 rounded-lg p-4"}>
                 <h1 className="text-4xl font-bold">Total</h1>
-                <p className="text-lg">Total price: {cart.reduce((acc, item) => acc + item.product.price, 0)}€</p>
+                <p className="text-lg">Total price: {Number.parseFloat(cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0)).toFixed(2)}€</p>
                 {cart.length === 0 ? (
                     <button className="btn btn-disabled btn-block" disabled>
                         Checkout

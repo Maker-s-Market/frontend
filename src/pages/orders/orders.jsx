@@ -1,6 +1,8 @@
 import {useShoppingContext} from "../../contexts/shopping.jsx";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import moment from "moment";
+import {Rating} from "../../components/orders/rating/index.js";
+
 /**
  * Orders component is used to display the user's orders.
  * It uses the shopping context to fetch the orders.
@@ -10,12 +12,20 @@ import moment from "moment";
  */
 export const Orders = (props) => {
     const {orders} = useShoppingContext();
+    const [statusRating, setStatusRating] = useState(-1);
 
     useEffect(() => {
         console.log(orders)
     }, []);
+
+    const checkStatus = (status, order_status) => {
+        const statusIndex = status.indexOf(order_status);
+
+        return statusIndex !== -1 ? statusIndex : 0;
+    }
+
     return <div>
-        
+
 
         <div className="flex flex-col m-8 gap-4">
             <div id="item-info" className="col-span-4 bg-stone-200 rounded-lg p-4">
@@ -24,37 +34,59 @@ export const Orders = (props) => {
 
             {orders.length === 0 && <p className="text-lg">You have no orders</p>}
 
-            {orders.length !== 0 && orders.map((order) => {
-                return <div key={order.id}>
-                    <h1 className="text-2xl font-bold">Order {moment(order.created_at).format("DD/MM/YYYY")}</h1>
+            {orders.length !== 0 && orders.map((order, index) => {
+                return <div key={order.id} className={"flex flex-row gap-2"}>
                     <div className={"flex flex-col gap-x-3"}>
+                        <h1 className="text-3xl font-bold">Order #{index + 1}</h1>
 
-                        <p className="text-lg"><span className={"font-bold"}>Total price:</span> {order.total_price}€
+                        <p className="text-lg"><span
+                            className={"font-bold"}>Total price:</span> {Number.parseFloat(order.total_price).toFixed(2)}€
                         </p>
-                        <div className="flex flex-row gap-2 text-lg items-center"><span
-                            className={"font-bold"}>Status:</span>
-                            <div className="badge badge-accent badge-outline">{order.status}</div>
-                        </div>
                         <p className={"text-lg"}><span
                             className={"font-bold"}>Last Update:</span> {moment(order.updated_at).format("DD/MM/YYYY HH:mm")}
                         </p>
-                        <div className={"flex flex-row gap-4"}>
+                        <div className={"divider"}></div>
+                        <div className={"flex flex-col gap-2"}>
                             {order.order_items.map((item) => {
-                                return <div className="flex flex-row items-center" key={item.id}>
+                                return <div className="flex flex-row" key={item.id}>
                                     <img src={item.product.image} alt={item.product.name} className="w-16 h-16"/>
                                     <div className="flex flex-col ml-4">
                                         <h2 className="text-md font-bold">{item.product.name}</h2>
-                                        <p className="text-md">{item.product.price}€</p>
+                                        <p className="text-md">{Number.parseFloat(item.product.price).toFixed(2)}€</p>
                                         <p className="text-md">Quantity: {item.quantity}</p>
+                                        {order.status === "Delivered" && statusRating === order.id && <Rating id={item.product.id}/>}
                                     </div>
                                 </div>
                             })}
                         </div>
                     </div>
-                    <div className={"divider"}></div>
+                    <div className={"divider-horizontal"}></div>
+                    <div className={"flex flex-col gap-x-3"}>
+                        <ul className="steps steps-vertical">
+                            <li className={`step ${checkStatus("Accepted", order.status) === 0 ? "step-accent" : ""}`}>Accepted</li>
+                            <li className={`step ${checkStatus("In Expedition", order.status) === 1 ? "step-accent" : ""}`}>In
+                                Expedition
+                            </li>
+                            <li className={`step ${checkStatus("Delivered", order.status) === 2 ? "step-accent" : ""}`}>Delivered</li>
+                        </ul>
+
+                        {order.status === "Delivered" && statusRating !== order.id &&
+                            <button className={"btn btn-accent"}
+                                    onClick={() => setStatusRating(order.id)}
+                            >
+                                Rate Products!
+                            </button>}
+
+                        {order.status === "Delivered" && statusRating === order.id &&
+                            <button className={"btn btn-content"}
+                                    onClick={() => setStatusRating(-1)}
+                            >
+                                Cancel
+                            </button>}
+                    </div>
                 </div>
             })}
         </div>
-    </div>;
-}
+    </div>
 
+};

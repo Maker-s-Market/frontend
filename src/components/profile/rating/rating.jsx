@@ -15,7 +15,7 @@ import { addUserRating, editUserRating, fetchUserRatingById} from "../../../api/
 export const Rating = ({avgRating}) => {
 
     const {id} = useParams()
-    const {isLogged, token} = useAuthContext()
+    const {isLogged, token,user} = useAuthContext()
     const notification = useNotification();
     const [isRated, setIsRated] = useState(false)
     const queryClient = useQueryClient()
@@ -51,6 +51,7 @@ export const Rating = ({avgRating}) => {
         count={5}
         onChange={ratingChanged}
         size={26}
+        edit={user?.id !== id}
         activeColor="#ffd700"
         value={isSuccess && ratingData.rating !== -1 ? ratingData.rating : avgRating}
     />

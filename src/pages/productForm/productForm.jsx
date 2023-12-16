@@ -46,7 +46,7 @@ export const ProductForm = (props) => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Required"),
         price: Yup.number().required("Required"),
-        discount: Yup.number().required("Required"),
+        discount: Yup.number().required("Required").min(0).max(100),
         description: Yup.string().required("Required"),
         image:Yup.mixed(),
         categories: Yup.array().required("Required"),
@@ -120,7 +120,7 @@ export const ProductForm = (props) => {
                             </label>
                             <ErrorMessage name={"discount"} component={FormError}/>
                         </div>
-                        <Field name={"discount"} type={"number"} placeholder={"00.00€"}
+                        <Field name={"discount"} type={"number"} placeholder={"25%"}
                                className={"input input-bordered input-accent w-full max-w-fit"}/>
 
                         <div>

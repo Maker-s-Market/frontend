@@ -12,6 +12,24 @@ export const fetchProductById = async (id) => {
     }
     return response.data;
 }
+
+/**
+ * Fetch a product by id with token.
+ * @param id
+ * @param token
+ * @returns {Promise<any>}
+ */
+export const fetchProductByIdWithToken = async (id,token) => {
+    const response = await api.get("/product/" + id,{
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
 /**
  * Fetch top products.
  * @param {number} limit - The number of top products to fetch.
