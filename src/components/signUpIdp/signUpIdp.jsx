@@ -1,9 +1,8 @@
-import {useCookies} from "react-cookie";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useAuthContext} from "../../contexts/auth.jsx";
-import {useEffect, useState} from "react";
-import {useMutation} from "react-query";
-import {signUpIdp} from "../../api/fetchAuth.js";
+import {useState} from "react";
+import {useMutation, useQuery} from "react-query";
+import {fetchTokenAuth, signUpIdp} from "../../api/fetchAuth.js";
 import {FormError} from "../common/formError/index.js";
 import {useNavigate, useParams} from "react-router-dom";
 import {Loading} from "../common/loading/index.js";
@@ -15,7 +14,6 @@ import {Loading} from "../common/loading/index.js";
  * @returns {JSX.Element} A form for the user to fill in missing values to conclude the sign up.
  */
 export const SignUpIdp = (props) => {
-    const [cookies, setCookies, removeCookies] = useCookies(['name','email', 'username', 'picture', 'Authorization']);
     //Get variable from GET url ?
     const urlParameters = new URLSearchParams(window.location.search);
     const signType = urlParameters.get('signType');
@@ -23,36 +21,27 @@ export const SignUpIdp = (props) => {
     const [tempToken, setTempToken] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (signType === "signIn") {
-            setToken(cookies.Authorization);
-        } else if (signType === "signUp") {
-            setToken(tempToken);
+    const {data: signUpData,isSuccess, isError} = useQuery("token-auth",()=>fetchTokenAuth(), {
+        onSuccess: (data) => {
+            if (signType === "signIn") {
+                setToken(data.authorization);
+                localStorage.setItem("token", data.authorization);
+                navigate("/")
+            } else {
+                setTempToken(data.authorization);
+            }
         }
-    }, [signType]);
-
-    useEffect(() => {
-        setTempToken(cookies.Authorization);
-    }, [cookies.Authorization]);
-
-    useEffect(() => {
-        if (user) {
-            localStorage.setItem("token", tempToken);
-            removeCookies('email', {path: '/'});
-            removeCookies('username', {path: '/'});
-            removeCookies('picture', {path: '/'});
-            removeCookies('Authorization', {path: '/'});
-            navigate("/");
-        }
-    }, [user]);
+    });
 
     const signUpIdpMutation = useMutation({
         mutationFn: async ({
                                city,
                                region
-                           }) => signUpIdp(cookies.name, cookies.username, cookies.email, city, region, cookies.picture),
-        onSuccess: (data) => {
+                           }) => signUpIdp(signUpData.name, signUpData.username, signUpData.email, city, region, signUpData.picture),
+        onSuccess: () => {
             setToken(tempToken);
+            localStorage.setItem("token", tempToken);
+            navigate("/")
         }
     })
     const signUpIdpHandler = (values) => signUpIdpMutation.mutate(values);

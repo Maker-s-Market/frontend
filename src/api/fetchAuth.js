@@ -275,3 +275,15 @@ export const signUpIdp = async (name,username,email,city,region,photo) => {
     }
     return response.data;
 }
+
+/**
+ * Fetch the token auth.
+ * @returns {Promise<any>}
+ */
+export const fetchTokenAuth = async () => {
+    const response = await api.get("/auth/token-read",{withCredentials: true});
+    if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+    }
+    return response.data;
+}
