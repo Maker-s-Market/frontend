@@ -1,5 +1,5 @@
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {fetchProductById} from "../../api/fetchProducts.js";
+import {fetchProductById, fetchProductByIdWithToken} from "../../api/fetchProducts.js";
 import {Loading} from "../../components/common/loading/index.js";
 import {ErrorMessage} from "../../components/common/error/index.js";
 import {Rating} from "../../components/product/rating/index.js";
@@ -35,7 +35,7 @@ export const ViewProduct = (props) => {
 
     const {
         data: productData, isLoading, isError, isSuccess
-    } = useQuery(['product', id], () => fetchProductById(id), {
+    } = useQuery(['product', id], () => isLogged() ? fetchProductByIdWithToken(id,token) : fetchProductById(id), {
         refetchOnWindowFocus: false
     })
 
