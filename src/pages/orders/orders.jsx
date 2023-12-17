@@ -15,9 +15,10 @@ export const Orders = (props) => {
     const [statusRating, setStatusRating] = useState(-1);
 
     const checkStatus = (status, order_status) => {
-        const statusIndex = status.indexOf(order_status);
+        console.log(order_status);
+        const oStatus = order_status.find((order) => order.status === status);
 
-        return statusIndex !== -1 ? statusIndex : 0;
+        return oStatus ? 0 : 1;
     }
 
     return <div>
@@ -59,11 +60,11 @@ export const Orders = (props) => {
                     <div className={"divider-horizontal"}></div>
                     <div className={"flex flex-col gap-x-3"}>
                         <ul className="steps steps-vertical">
-                            <li className={`step ${checkStatus("Accepted", order.status) === 0 ? "step-accent" : ""}`}>Accepted</li>
-                            <li className={`step ${checkStatus("In Expedition", order.status) === 0 ? "step-accent" : ""}`}>In
+                            <li className={`step ${checkStatus("Accepted", order.order_history) === 0 ? "step-accent" : ""}`}>Accepted</li>
+                            <li className={`step ${checkStatus("In Expedition", order.order_history) === 0 ? "step-accent" : ""}`}>In
                                 Expedition
                             </li>
-                            <li className={`step ${checkStatus("Delivered", order.status) === 0 ? "step-accent" : ""}`}>Delivered</li>
+                            <li className={`step ${checkStatus("Delivered", order.order_history) === 0 ? "step-accent" : ""}`}>Delivered</li>
                         </ul>
 
                         {order.status === "Delivered" && statusRating !== order.id &&
