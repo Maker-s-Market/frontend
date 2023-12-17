@@ -98,11 +98,10 @@ export const ShoppingProvider = ({children}) => {
     })
 
     const placeOrderMutation = useMutation((order) => placeOrder(token, order), {
-        onSuccess: (data) => {
-            notification.info("Order placed successfully");
+        onSuccess: async (data) => {
             setCart((prevState) => [])
             localStorage.removeItem(`${user.id}_cart`)
-            queryClient.invalidateQueries(['orders'])
+            await queryClient.invalidateQueries(['orders'])
             setOrders(() => queryClient.getQueryData("orders"))
         },
         onError: (error) => {
