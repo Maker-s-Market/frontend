@@ -43,7 +43,7 @@ export const Sidebar = ({children}) => {
                 <Categories/>
 
                 <div className="divider"></div>
-                <p className="text-start">Maker&apos;s Market © 2023</p>
+                <p className="text-start">Maker&apos;s Market © 2023 v5.6.0</p>
             </ul>
 
         </div>

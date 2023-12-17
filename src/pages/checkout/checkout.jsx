@@ -12,7 +12,7 @@ export const Checkout = () => {
     const {cart, placeOrderMutation} = useShoppingContext();
 
     // TO-DO: get cart value
-    const amount = cart.reduce((acc, item) => acc + item.product.price, 0);
+    const amount = cart.reduce((acc, item) => acc + item.product.price * item.quantity, 0)
 
     const handleSucessfulCheckout = () => {
         const orders = cart.map((item) => {
@@ -31,7 +31,7 @@ export const Checkout = () => {
                     <CheckoutForm amount={amount} handleSucessfulCheckout={handleSucessfulCheckout}/>
 
                     <div className={"flex-grow bg-stone-200 p-3 rounded-md"}>
-                        <h1 className="text-2xl font-bold">Detalhes de Compra</h1>
+                        <h1 className="text-2xl font-bold">Details</h1>
                         {cart.map((item) => {
                                 return <div key={item.product.id}
                                             className="flex flex-row justify-between items-center p-4">

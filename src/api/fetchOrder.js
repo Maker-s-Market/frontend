@@ -25,7 +25,7 @@ export const fetchOrder = async (token) => {
  * @throws {Error} If the response status is not 201.
  */
 export const placeOrder = async (token, order) => {
-    const response = await api.post("/order/", order,
+    const response = await api.post("/order", order,
         {
             headers: {
                 Authorization: `Bearer ${token}`

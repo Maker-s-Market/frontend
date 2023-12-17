@@ -29,9 +29,20 @@ export const ShoppingContext = createContext({});
 
 export const ShoppingProvider = ({children}) => {
 
-    const {cart, addToCart, removeFromCart, clearCart,setCart, wishlist,setWishlist,isProductInWishlist,orders,setOrders} = useShopping();
+    const {
+        cart,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        setCart,
+        wishlist,
+        setWishlist,
+        isProductInWishlist,
+        orders,
+        setOrders
+    } = useShopping();
     const notification = useNotification();
-    const {user, isLogged,token} = useAuthContext();
+    const {user, isLogged, token} = useAuthContext();
     const queryClient = useQueryClient()
 
 
@@ -39,32 +50,32 @@ export const ShoppingProvider = ({children}) => {
         if (isLogged()) {
             const localCart = JSON.parse(localStorage.getItem(`${user.id}_cart`));
             if (localCart) {
-                setCart(()=> localCart)
+                setCart(() => localCart)
             }
         }
     }, [isLogged])
 
 
     useQuery(["wishlist"], () => fetchWishlist(token), {
-        refetchOnWindowFocus: false,enabled:isLogged(), onSuccess: (data) => {
+        refetchOnWindowFocus: false, enabled: isLogged(), onSuccess: (data) => {
             setWishlist(() => data.products)
         }
     })
 
     useQuery(["orders"], () => fetchOrder(token), {
-        refetchOnWindowFocus: false,enabled:isLogged(), onSuccess: (data) => {
+        refetchOnWindowFocus: false, enabled: isLogged(), onSuccess: (data) => {
             setOrders(() => data)
         }
     })
 
 
-    const addToCartShopping = (product,user) => {
+    const addToCartShopping = (product, user) => {
         const newCart = addToCart(product);
         setLocalStorage(`${user}_cart`, newCart)
         notification.info("Product added to cart");
     }
 
-    const removeFromCartShopping = (product,user) => {
+    const removeFromCartShopping = (product, user) => {
         const newCart = removeFromCart(product);
         setLocalStorage(`${user}_cart`, newCart)
         notification.info("Product removed from cart");
@@ -73,7 +84,7 @@ export const ShoppingProvider = ({children}) => {
     const addToWishlistMutation = useMutation((id) => addToWishlist(id, token), {
         onSuccess: (data) => {
             notification.info("Product added to wishlist");
-            setWishlist((prevState)=> data.products)
+            setWishlist((prevState) => data.products)
             queryClient.invalidateQueries(['wishlist'])
         }
     })
@@ -81,17 +92,17 @@ export const ShoppingProvider = ({children}) => {
     const removeFromWishlistMutation = useMutation((id) => deleteFromWishlist(id, token), {
         onSuccess: (data) => {
             notification.info("Product removed from wishlist");
-            setWishlist((prevState)=> data.products ? data.products : [])
+            setWishlist((prevState) => data.products ? data.products : [])
             queryClient.invalidateQueries(['wishlist'])
         }
     })
 
-    const placeOrderMutation = useMutation((order) => placeOrder(token,order), {
-        onSuccess: (data) => {
-            notification.info("Order placed successfully");
-            setCart((prevState)=> [])
-            localStorage.setItem(`${user.id}_cart`, JSON.stringify([]))
-            queryClient.invalidateQueries(['orders'])
+    const placeOrderMutation = useMutation((order) => placeOrder(token, order), {
+        onSuccess: async (data) => {
+            setCart((prevState) => [])
+            localStorage.removeItem(`${user.id}_cart`)
+            await queryClient.invalidateQueries(['orders'])
+            setOrders(() => queryClient.getQueryData("orders"))
         },
         onError: (error) => {
             notification.error(error.response.data.message);
