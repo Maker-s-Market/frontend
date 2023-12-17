@@ -14,10 +14,6 @@ export const Orders = (props) => {
     const {orders} = useShoppingContext();
     const [statusRating, setStatusRating] = useState(-1);
 
-    useEffect(() => {
-        console.log(orders)
-    }, []);
-
     const checkStatus = (status, order_status) => {
         const statusIndex = status.indexOf(order_status);
 
@@ -27,7 +23,7 @@ export const Orders = (props) => {
     return <div>
 
 
-        <div className="flex flex-col m-8 gap-4">
+        <div className="flex flex-col m-8 gap-4 w-full">
             <div id="item-info" className="col-span-4 bg-stone-200 rounded-lg p-4">
                 <h1 className="text-4xl font-bold">Orders</h1>
             </div>
@@ -35,7 +31,7 @@ export const Orders = (props) => {
             {orders.length === 0 && <p className="text-lg">You have no orders</p>}
 
             {orders.length !== 0 && orders.map((order, index) => {
-                return <div key={order.id} className={"flex flex-row gap-2"}>
+                return <div key={order.id} className={"flex flex-row gap-2 w-1/2 justify-between"}>
                     <div className={"flex flex-col gap-x-3"}>
                         <h1 className="text-3xl font-bold">Order #{index + 1}</h1>
 
@@ -64,10 +60,10 @@ export const Orders = (props) => {
                     <div className={"flex flex-col gap-x-3"}>
                         <ul className="steps steps-vertical">
                             <li className={`step ${checkStatus("Accepted", order.status) === 0 ? "step-accent" : ""}`}>Accepted</li>
-                            <li className={`step ${checkStatus("In Expedition", order.status) === 1 ? "step-accent" : ""}`}>In
+                            <li className={`step ${checkStatus("In Expedition", order.status) === 0 ? "step-accent" : ""}`}>In
                                 Expedition
                             </li>
-                            <li className={`step ${checkStatus("Delivered", order.status) === 2 ? "step-accent" : ""}`}>Delivered</li>
+                            <li className={`step ${checkStatus("Delivered", order.status) === 0 ? "step-accent" : ""}`}>Delivered</li>
                         </ul>
 
                         {order.status === "Delivered" && statusRating !== order.id &&
