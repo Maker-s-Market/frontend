@@ -25,7 +25,7 @@ export const doSignUp = async (user,photo) => {
     const formData = new FormData();
     if (photo !== null) formData.append('file', photo)
 
-    const photoResponse = await api.post("/uploadfile", formData);
+    const photoResponse = await api.post("/uploadfile/", formData);
 
     if (photoResponse.status !== 201) {
         throw new Error("Something went wrong!");
@@ -139,7 +139,7 @@ export const editProfile = async (token, id, name, username, email, city, region
     const formData = new FormData();
     if (photo !== null) formData.append('file', photo)
 
-    const photoResponse = await api.post("/uploadfile", formData, {
+    const photoResponse = await api.post("/uploadfile/", formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }
