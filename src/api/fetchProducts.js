@@ -89,7 +89,7 @@ export const addProduct = async (token, product,photo) => {
     const formData = new FormData();
     if (photo !== null) formData.append('file', photo)
 
-    const photoResponse = await api.post("/uploadfile", formData, {
+    const photoResponse = await api.post("/uploadfile/", formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -137,7 +137,7 @@ export const editProduct = async (token,id, product,photo) => {
     const formData = new FormData();
     if (photo !== null) formData.append('file', photo)
 
-    const photoResponse = await api.post("/uploadfile", formData, {
+    const photoResponse = await api.post("/uploadfile/", formData, {
         headers: {
             Authorization: `Bearer ${token}`
         }

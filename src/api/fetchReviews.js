@@ -9,7 +9,7 @@ import {api} from "./axios.js";
  */
 export const addReview = async (id, review, token) => {
 
-    const response = await api.post("/review/", {
+    const response = await api.post("/review", {
             product_id: id,
             text: review
         },
